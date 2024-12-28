@@ -1,0 +1,3288 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<meta name="google-site-verification" content="iNsukhb11NMdCRFSQgeVVV977cshxuJxa21JNlnw0eo" />
+	<meta name="yandex-verification" content="431f0a9ca6f60eb4" />
+	<link rel="icon" href="../images/favicon.png" type="image/png" />
+	<title>Номинанты Премии BLOBIK-AWARD 2024, голосование за участников</title>
+
+	<meta property="og:type" content="website" />
+	<meta name="title" content="" />
+	<meta property="og:title" content="" />
+	<meta name="description" content="" />
+	<meta property="og:description" content="" />
+
+		<link rel="image_src" href="https://muz-tv.ru/static/img/fb_cover.png" />
+		<meta property="og:image" content="https://muz-tv.ru/static/img/fb_cover.png" />
+
+	<script src="../styles/20240221/new2024/js/jquery-3.7.1.min.js"></script>
+	<script src="../styles/20240221/new2024/js/burger.js"></script>
+	<script src="../styles/20240221/new2024/js/swiper.min.js"></script>
+	<script src="../styles/new2/js/jquery.jqmodal.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jsrender/1.0.13/jsrender.min.js" integrity="sha512-T93uOawQ+FrEdyCPaWrQtppurbLm8SISu2QnHyddM0fGXKX9Amyirwibe1wGYbsW2F8lLzhOM/2+d3Zo94ljRQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tooltipster/4.2.8/js/tooltipster.bundle.min.js"></script>
+	<script src="../styles/20240221/new2024/js/base.js"></script>
+	<link href="../styles/20240221/new2024/css/base.css@3.css" media="screen" rel="stylesheet" />
+</head>
+<body>
+<style>
+button[disabled] {
+	opacity: 0.5;
+	pointer-events: none;
+}
+</style>
+<script>
+window.p = {}; // 'p' is a common namespace
+
+window.p.declension = function(n, w1, w2, w3) { // число => минута, минуты, минут
+	var d = n % 10;
+	var d2 = n % 100;
+	if(d == 0 || (d > 4 && d <= 9) || (d2 > 10 && d2 < 15)){
+		return w3;
+	}else if(d == 1){
+		return w1;
+	}else{
+		return w2;
+	}
+};
+window.p.zeropad = function(n) {
+	if(n < 10) {
+		n = '0' + n;
+	}
+	return n;
+};
+
+function url_plus(add, url, hash) {
+	var args = {};
+	if(!add) {
+		add = '';
+	}
+	if(!url) {
+		url = window.location.toString();
+	}
+	url = url.replace(/#.+/, ''); // remove hash from url
+
+	var parts = url.split('?');
+	var res = parts[0] + '?';
+	var a_args = (parts[1] || '&').split('&');
+	for(var p in a_args) {
+		var a = a_args[p].split('=');
+		if(a[0] && a[1]) {
+			args[a[0]] = a[1];
+		}
+	}
+	a_args = add.split('&');
+	for(var p in a_args) {
+		var a = a_args[p].split('=');
+		if(a[0] && a[1]) {
+			args[a[0]] = a[1];
+		}
+	}
+	for(var p in args) {
+		res += p + '=' + args[p] + '&';
+	}
+	res = res.slice(0, -1);
+	if(hash) {
+		res += '#' + hash;
+	}
+	return res;
+}
+function getCookie (name) {
+	var prefix = name + "=";
+	var cookieStartIndex = document.cookie.indexOf(prefix);
+	if (cookieStartIndex == -1) return null;
+	var cookieEndIndex = document.cookie.indexOf(";", cookieStartIndex + prefix.length);
+	if (cookieEndIndex == -1) cookieEndIndex = document.cookie.length;
+	return unescape(document.cookie.substring(cookieStartIndex + prefix.length, cookieEndIndex));
+}
+function setCookie(name, value, path, domain, expire) {
+	if (path) {
+		path = "; path=" + path;
+	} else {
+		path = "; path=/";
+	}
+	domain = "; domain=" + domain;
+	var expiresDate = new Date();
+	expiresDate.setTime(expiresDate.getTime() + (expire * 24*60*60*1000));
+	expire = "; expires=" + expiresDate.toGMTString();
+	document.cookie = name + "=" + escape(value) + path + domain + expire + ";";
+}
+$(function() {
+	var $window = $(window);
+	var $document = $(document);
+	var $body = $('body');
+
+	// countdown plugin
+	(function($){
+		var montharray = new Array("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"),
+			now = 1000 * 1733930485,
+			tdiff = (new Date()).getTime() - now;
+		function zeropad(n) {
+			if(n < 10) {
+				n = '0' + n;
+			}
+			return n;
+		}
+		$.fn.countdown = function(until) {
+			return this.each(function() {
+				var $this = $(this),
+					$dd = $this.find('.x-countdown_days'),
+					$hh = $this.find('.x-countdown_hours'),
+					$mm = $this.find('.x-countdown_minutes'),
+					$ss = $this.find('.x-countdown_seconds');
+				function countdown(dt) {
+					var dh = dt.split(" ");
+					var dmy = dh[0].split("-");
+					var hms = dh[1].split(":");
+					var d = dmy[2];
+					var m = dmy[1];
+					var y = dmy[0];
+					var hour = hms[0];
+					var min = hms[1];
+					var sec = hms[2];
+
+					var today = new Date((new Date()).getTime() - tdiff); // MSK time
+					var todayy = today.getYear();
+					if (todayy < 1000) {
+						todayy += 1900;
+					}
+					var todaym = today.getMonth();
+					var todayd = today.getDate();
+					var todayh = today.getHours();
+					var todaymin = today.getMinutes();
+					var todaysec = today.getSeconds();
+					var todaystring = montharray[todaym] + " " + todayd + ", " + todayy + " " + todayh + ":" + todaymin + ":" + todaysec;
+					var futurestring = montharray[m-1] + " " + d + ", " + y + " " + hour +":"+ min +":"+ sec;
+					var dd = Date.parse(futurestring) - Date.parse(todaystring);
+					var dday = Math.floor(dd/(60*60*1000*24)*1);
+					var dhour = Math.floor((dd%(60*60*1000*24))/(60*60*1000)*1);
+					var dmin = Math.floor(((dd%(60*60*1000*24))%(60*60*1000))/(60*1000)*1);
+					var dsec = Math.floor((((dd%(60*60*1000*24))%(60*60*1000))%(60*1000))/1000*1);
+
+					if(dday <= 0 && dhour <= 0 && dmin <= 0 && dsec <= 0) {
+						$this.css('display', 'none');
+					} else {
+						$dd.html(zeropad(dday));
+						$hh.html(zeropad(dhour));
+						$mm.html(zeropad(dmin));
+						$ss.html(zeropad(dsec));
+					}
+				}
+				countdown(until);
+				setInterval(function() {
+					countdown(until);
+				}, 1000);
+			});
+		};
+	})(jQuery);
+	$('#countdown').countdown('2024-06-14 19:00:00');
+
+	// попапы
+	(function() {
+		var $popup = $('#popup');
+		var $popupContent = $popup.find('.x-popup-window-block');
+		var bodyClass = 'x-modal-fade x-modal-opened';
+
+		$popup.jqm({
+			onShow: function(h) {
+				var selector = $(h.t).attr('data-selector');
+				var url = $(h.t).attr('data-url');
+
+				h.c.data = {};
+				h.c.data.popupClass = h.t.getAttribute('data-popup-class') || 'x-popup-text';
+				$popup.addClass(h.c.data.popupClass);
+
+				$body.addClass(bodyClass);
+				h.w.show();
+
+				if(url) {
+					$popupContent.html('Загрузка...').load(url);
+				} else {
+					$popupContent.html($(selector)[0].content.cloneNode(true));
+				}
+			},
+			onHide: function(h) {
+				h.w.hide();
+				$popup.removeClass(h.c.data.popupClass);
+				//$(document).trigger('jqmHide.jqModal', {popup: $popup});
+
+				$popupContent.html('');
+				$body.removeClass(bodyClass);
+			},
+			overlay: 0 // отключаем оверлей
+		});
+		$popup.on('click', '.xx-popup-close', function() {
+			$popup.jqmHide();
+			return false;
+		});
+		$document.on('click', '.x-open-popup', function() {
+			$popup.jqmShow(this);
+			return false;
+		});
+		window.openModal = function(selector, popupClass) {
+			var $trigger = $('<a href="index.html#" class="x-popup" data-selector="#' + selector + '" data-popup-class="' + (popupClass || '') + '"></a>');
+			$popup.jqmShow($trigger[0]);
+		};
+	})();
+
+	// форма подписки
+	(function() {
+		$document.on('submit', '#email-form', function() {
+			var $form = $(this);
+			var $button = $form.find('button');
+			var $email = $form.find('input[name="email"]');
+
+			$button.attr({disabled: true});
+			$.post('/ajax/?f=add_premia2024_subscriber', {email: $email.val()})
+				.done(function(data) {
+					if(data.status == 0) {
+						window.oko('track', {entity_type: 'premia:buy_tickets_prm2024', event: 'usertag', metadata: {email: $email.val()}});
+						$form.hide();
+						$('.notice').show();
+					} else {
+						$form.find('.x-error-text').show();
+					}
+				})
+				.fail(function() {
+					$form.find('.x-error-text').show();
+				})
+				.always(function() {
+					$button.attr({disabled: false});
+				});
+
+			return false;
+		});
+	})();
+
+	(function() {
+		$document.on('click', '.x-ring-login-link', function() {
+			window.localStorage.setItem('ring_login_return', window.location.toString());
+			$(this).attr('href', 'https://onering.media1.ru/premia/login/');
+		});
+		$document.on('click', '.x-ring-logout-link', function() {
+			$(this).attr('href', '/auth/logout/?back=' + encodeURIComponent(window.location.toString()));
+		});
+	})();
+
+	$.views.converters({
+		uri: function(value) {
+			return encodeURIComponent(value);
+		}
+	});
+
+	// шеринг
+	(function() {
+		// нативный шеринг
+		$document.on('click', '.x-share-native', function() {
+			var $this = $(this);
+			var shareData = {url: $this.attr('href')};
+			try {
+				if(window.navigator.canShare(shareData)) {
+					window.navigator.share(shareData);
+				} else {
+					throw new Error();
+				}
+			} catch (err) {
+				$this.tooltipster({
+					content: 'Ссылка скопирована',
+					trigger: 'custom'
+				});
+
+				window.navigator.clipboard.writeText(shareData.url);
+
+				$this.tooltipster('open');
+				setTimeout(function() {
+					$this.tooltipster('close');
+				}, 2000);
+			}
+
+			return false;
+		});
+		// шеринг результата голосования
+		window.renderVotingShareTemplate = function(votesData) {
+			var shareUrl = "https://premia.muz-tv.ru/voting/";
+			var shareTitle = 'Результаты моего голосования на Премии МУЗ-ТВ 2024 #премиямузтв';
+			var shareImageUrlSearchParams = new URLSearchParams();
+			Object.keys(votesData).forEach(function(nominationId) {
+				const nomineeId = votesData[nominationId];
+				shareImageUrlSearchParams.append('n' + nominationId, nomineeId);
+			});
+			var shareImageVK = "https://premia.muz-tv.ru/voting/share_image/?" + shareImageUrlSearchParams.toString();
+			var shareImageOK = shareImageVK;
+			var now = new Date();
+
+			var tmpl = $.templates('#shareVotingTemplate');
+			var html = tmpl.render({
+				shareUrl: shareUrl,
+				shareTitle: shareTitle,
+				shareImageVK: shareImageVK,
+				shareImageOK: shareImageOK,
+				cacheBurst: now.getTime()
+			});
+
+			$('#share_voting').html(html);
+		};
+	})();
+});
+</script>
+
+<div class="x-popup" id="popup" style="display: none;">
+	<div class="x-popup-window"><div class="x-popup-close xx-popup-close"></div>
+		<div class="x-popup-window-wrapper">
+			<div class="x-popup-window-block"></div>
+		</div>
+	</div>
+</div>
+
+<template id="email-form-modal">
+	<div class="notice" style="display: none;">
+		<div class="notice-pic">
+			<i class="icon-done"></i>
+		</div>
+		<h2 class="title-h1">Спасибо за Вашу заявку!</h2>
+		<div class="text">Скоро Вам будет отправлено письмо с информацией о старте продаж билетов.<br>До встречи на Премии МУЗ-ТВ 2024!</div>
+		<div class="notice-control"><a href="https://muz-tv.ru/news/premiya-muz-tv-ot-2003-do-2021/" class="button button-md" target="_blank">Как это было</a></div>
+	</div>
+	<form class="form" id="email-form">
+		<div class="form-row">
+			<div class="text">
+				Уважаемый зритель МУЗ-ТВ, <br/>
+				Рады сообщить, что <b>Национальная Премия в области популярной музыки «Премия МУЗ-ТВ» в 2024 году состоится</b>.<br/>
+				Стань Первым, кто узнает о дате, месте её проведения и старте продаж билетов. <br/>
+				<b>Зарегистрируйся на сайте</b> MUZ-TV.RU и мы <b>пришлём тебе сообщение</b> с подробной информацией.
+			</div>
+		</div>
+		<div class="form-row">
+			<div class="form-field-name">E-mail <span class="text-mark">*</span></div>
+			<div class="form-field">
+				<input class="form-field-input" name="email" type="email" placeholder="ivanov@mail.ru" required />
+			</div>
+			<div class="form-field-text"><span class="text-mark">*</span> — обязательное для заполнения поле</div>
+		</div>
+		<div class="form-row">
+			<div class="options">
+				<label class="option">
+					<div class="form-checkbox"><input type="checkbox" class="form-checkbox-field" name="agree" checked required /><div class="form-checkbox-style"></div></div>
+					<div class="option-text">Я даю согласие на обработку персональных данных</div>
+				</label>
+			</div>
+		</div>
+		<div class="form-bottom x-error-text" style="display: none;">
+			<div class="message message-error">
+				<i class="icon-error"></i>
+				<div class="message-text">Ой, что-то пошло не так! Проверь, что ты верно заполнил все поля</div>
+			</div>
+		</div>
+		<div class="form-bottom">
+			<button class="button button-md">отправить</button>
+		</div>
+	</div>
+</template>
+
+<template id="no-auth">
+	<div class="popup-text">
+		<h2 class="title-h1">Необходимо авторизоваться</h2>
+		<div class="popup-text-control">
+			<a class="button button-md button-color-accent x-ring-login-link" href="index.html#">Войти</a>
+		</div>
+	</div>
+</template>
+
+<template id="need-all-nomination-votes">
+	<div class="popup-text">
+		<h2 class="title-h1">Необходимо проголосовать во всех номинациях</h2>
+		<div class="popup-text-control">
+			<button class="button button-md button-color-accent xx-popup-close">Закрыть</button>
+		</div>
+	</div>
+</template>
+
+<template id="success-voting">
+	<div class="popup-text">
+		<div class="popup-text-pic">
+			<img src="../styles/20240221/new2024/trash/1233.jpg" alt="">
+		</div>
+		<h2 class="title-h1">Спасибо за твой голос!</h2>
+		<div class="text">
+			Он очень важен для нас и, возможно, именно он станет определяющим!<br>
+			Ждём тебя на Премии МУЗ-ТВ 2024 14 июня в СК «ЦСКА Арена».<br>
+			Информация о билетах на <a href="../index.html">premia.muz-tv.ru</a>
+		</div>
+		<div class="popup-text-control"><button class="button button-md button-color-accent xx-popup-close">вернуться на сайт</button></div>
+		<div class="share">
+			<div class="share-text">
+				<h3 class="title-h2 title-h2-sp">Поделись голосованием:</h3>
+			</div>
+			<div class="elements-list" id="share_voting"></div>
+		</div>
+	</div>
+</template>
+
+<template id="finished-voting">
+	<div class="popup-text">
+		<div class="popup-text-pic">
+			<img src="../styles/20240221/new2024/trash/1233.jpg" alt="">
+		</div>
+		<h2 class="title-h1">Голосование закрыто</h2>
+		<div class="text">
+			Ждём тебя на Премии МУЗ-ТВ 2024 14 июня в СК «ЦСКА Арена».<br>
+			Информация о билетах на <a href="../index.html">premia.muz-tv.ru</a>
+		</div>
+		<div class="popup-text-control"><button class="button button-md button-color-accent xx-popup-close">вернуться на сайт</button></div>
+	</div>
+</template>
+
+<script id="shareVotingTemplate" type="text/x-jsrender">
+	<div class="elements-list-item">
+		<a
+			class="button button-share x-share-native"
+			target="_blank"
+			href="https://premia.muz-tv.ru/voting/{{:shareUrl}}">
+			<i class="icon-copy"></i> <span class="button-text">ссылка</span>
+		</a>
+	</div>
+	<div class="elements-list-item">
+		<a
+			class="button button-share"
+			target="_blank"
+			href="https://vk.com/share.php?url={{uri:shareUrl}}&title={{uri:shareTitle}}&image={{uri:shareImageVK}}&description={{uri:shareTitle}}">
+			<i class="icon-vk"></i>
+		</a>
+	</div>
+	<div class="elements-list-item">
+		<a
+			class="button button-share"
+			target="_blank"
+			href="https://connect.ok.ru/offer?url={{uri:shareUrl}}&title={{uri:shareTitle}}&imageUrl={{uri:shareImageOK}}&description={{uri:shareTitle}}">
+			<i class="icon-ok"></i>
+		</a>
+	</div>
+	<div class="elements-list-item">
+		<a
+			class="button button-share"
+			target="_blank"
+			href="https://t.me/share/url?url={{uri:shareUrl}}&text={{uri:shareTitle}}">
+			<i class="icon-tg"></i>
+		</a>
+	</div>
+</script>
+
+<div class="counter">
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-T7N7SDW');</script>
+<!-- End Google Tag Manager -->
+
+<!-- oko -->
+<script>
+!function(s,a,u,r,o,n){s[r]=s[r]||function(){(s[r].q=s[r].q||[]).push(arguments)},s[r].l=1*new Date;o=a.createElement(u),n=a.getElementsByTagName(u)[0];o.async=1;o.src="https://oko.muz-tv.ru/t.js";n.parentNode.insertBefore(o,n)}(window,document,"script","oko");
+oko('init', 'OC-1003-01');
+</script>
+
+</div>
+
+<style>
+/* смещение якорей из-за фикс.шапки */
+a[name] {
+	display: block;
+	position: relative;
+	top: -60px;
+	visibility: hidden;
+}
+</style>
+
+<style>
+.main-head {
+  background-image: url(../styles/20240221/new2024/images/bg-main-2.png);
+}
+@media screen and (min-width: 768px) and (max-width: 1259px) {
+  .main-head {
+    background-image: url(../styles/20240221/new2024/images/bg-main-2-tablet.png);
+  }
+}
+@media screen and (max-width: 767px) {
+  .main-head {
+    background-image: url(../styles/20240221/new2024/images/bg-main-2-mobile.png);
+  }
+}
+</style>
+
+	<div class="wrapper">
+		<header class="header">
+            <div class="section-wrapper">
+				<div class="header-frame">
+					<nav class="header-menu">
+						<div class="header-left">
+							<div class="burger-menu">
+								<i class="burger"><i></i></i>
+								<ul class="menu">
+									<li class="menu-item">
+										<a href="https://muz-tv.ru/news/" class="menu-item-url" target="_blank">новости</a>
+									</li>
+									<li class="menu-item">
+										<a href="https://muz-tv.ru/charts/" class="menu-item-url" target="_blank">чарты</a>
+									</li>
+									<li class="menu-item">
+										<a href="https://muz-tv.ru/stream/eksklyuzivy/" class="menu-item-url" target="_blank">эксклюзивы</a>
+									</li>
+									<li class="menu-item">
+										<a href="https://muz-tv.ru/online/" class="menu-item-url" target="_blank">прямой эфир</a>
+									</li>
+									<li class="menu-item">
+										<a href="https://muz-tv.ru/tvguide/" class="menu-item-url" target="_blank">тв программа</a>
+									</li>
+									<li class="menu-item">
+										<a href="https://muz-tv.ru/look/" class="menu-item-url" target="_blank">шоу</a>
+									</li>
+									<li class="menu-item">
+										<a href="https://muz-tv.ru/music/" class="menu-item-url" target="_blank">музыка</a>
+									</li>
+									<li class="menu-item">
+										<a href="https://muz-tv.ru/events/" class="menu-item-url" target="_blank">события</a>
+									</li>
+								</ul>
+							</div>
+							<a href="https://muz-tv.ru" class="logo" target="_blank">
+								<svg width="98" height="19" viewBox="0 0 98 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<g clip-path="url(#clip0_2101_2284)">
+										<path
+											class="logo-muztv-crown-1"
+											d="M8.98069 7.7893L1.3394 0.235023C1.22967 0.126535 1.08986 0.0526534 0.937662 0.0227201C0.78546 -0.00721316 0.627699 0.00814626 0.484328 0.066858C0.340957 0.12557 0.218418 0.224995 0.132207 0.35256C0.0459968 0.480126 -1.11955e-05 0.6301 2.04347e-09 0.783518V15.8921C-1.11955e-05 16.0455 0.0459968 16.1955 0.132207 16.323C0.218418 16.4506 0.340957 16.55 0.484328 16.6087C0.627699 16.6674 0.78546 16.6828 0.937662 16.6529C1.08986 16.6229 1.22967 16.5491 1.3394 16.4406L8.98069 8.88629C9.12767 8.74074 9.21023 8.54347 9.21023 8.3378C9.21023 8.13213 9.12767 7.93486 8.98069 7.7893Z"
+											fill="url(#paint0_linear_2101_2284)" />
+										<path
+											class="logo-muztv-crown-2"		
+											d="M10.9442 10.1217C10.797 9.97639 10.5975 9.89478 10.3894 9.89478C10.1814 9.89478 9.98185 9.97639 9.83462 10.1217L2.19333 17.676C2.08359 17.7845 2.00886 17.9227 1.97858 18.0731C1.9483 18.2236 1.96384 18.3796 2.02323 18.5213C2.08261 18.663 2.18319 18.7842 2.31222 18.8694C2.44126 18.9546 2.59296 19.0001 2.74814 19.0001H18.0307C18.1859 19.0001 18.3376 18.9546 18.4666 18.8694C18.5957 18.7842 18.6963 18.663 18.7556 18.5213C18.815 18.3796 18.8306 18.2236 18.8003 18.0731C18.77 17.9227 18.6953 17.7845 18.5855 17.676L10.9442 10.1217Z"
+											fill="url(#paint1_linear_2101_2284)" />
+										<path
+											class="logo-muztv-crown-3"
+											d="M19.6606 0.227212L12.0109 7.7898C11.9379 7.86178 11.8801 7.94728 11.8406 8.0414C11.8011 8.13551 11.7808 8.23641 11.7808 8.3383C11.7808 8.44019 11.8011 8.54108 11.8406 8.6352C11.8801 8.72932 11.9379 8.81481 12.0109 8.88679L19.6606 16.4515C19.7703 16.5599 19.9101 16.6338 20.0623 16.6638C20.2145 16.6937 20.3723 16.6783 20.5156 16.6196C20.659 16.5609 20.7816 16.4615 20.8678 16.3339C20.954 16.2064 21 16.0564 21 15.903V0.775707C21 0.62229 20.954 0.472315 20.8678 0.344749C20.7816 0.217184 20.659 0.117759 20.5156 0.0590471C20.3723 0.000335327 20.2145 -0.0150262 20.0623 0.0149071C19.9101 0.0448403 19.7703 0.118724 19.6606 0.227212Z"
+											fill="url(#paint2_linear_2101_2284)" />
+									</g>
+									<defs>
+										<linearGradient id="paint0_linear_2101_2284" x1="0" y1="0.0078125" x2="11.857" y2="2.17288"
+											gradientUnits="userSpaceOnUse">
+											<stop stop-color="#FFB991" />
+											<stop offset="0.490348" stop-color="#FF1BA4" />
+											<stop offset="1" stop-color="#B400E6" />
+										</linearGradient>
+										<linearGradient id="paint1_linear_2101_2284" x1="1.9635" y1="9.89478" x2="18.2831" y2="19.8709"
+											gradientUnits="userSpaceOnUse">
+											<stop stop-color="#FFB991" />
+											<stop offset="0.490348" stop-color="#FF1BA4" />
+											<stop offset="1" stop-color="#B400E6" />
+										</linearGradient>
+										<linearGradient id="paint2_linear_2101_2284" x1="11.7808" y1="0" x2="23.6494" y2="2.16688"
+											gradientUnits="userSpaceOnUse">
+											<stop stop-color="#FFB991" />
+											<stop offset="0.490348" stop-color="#FF1BA4" />
+											<stop offset="1" stop-color="#B400E6" />
+										</linearGradient>
+										<clipPath id="clip0_2101_2284">
+											<rect width="21" height="19" fill="white" />
+										</clipPath>
+									</defs>
+									<path
+										d="M52.8267 0.542555H50.2347C49.7079 0.54217 49.1893 0.669783 48.7262 0.913782C48.2631 1.15778 47.87 1.51043 47.5829 1.93966L42.6819 9.27585C42.6227 9.36422 42.5417 9.43682 42.4463 9.48707C42.3509 9.53733 42.2441 9.56365 42.1356 9.56365C42.0271 9.56365 41.9203 9.53733 41.8249 9.48707C41.7295 9.43682 41.6485 9.36422 41.5893 9.27585L36.6804 1.93966C36.3931 1.51056 36 1.158 35.5369 0.91402C35.0738 0.670036 34.5553 0.542346 34.0285 0.542555H31.4365C31.3133 0.542555 31.1951 0.590126 31.108 0.674797C31.0209 0.759467 30.9719 0.874307 30.9719 0.994049V18.1758C30.9719 18.2955 31.0209 18.4104 31.108 18.4951C31.1951 18.5797 31.3133 18.6273 31.4365 18.6273H35.5299C35.5911 18.6275 35.6517 18.616 35.7083 18.5935C35.7649 18.5709 35.8164 18.5377 35.8597 18.4957C35.9031 18.4538 35.9375 18.4039 35.9609 18.349C35.9844 18.2941 35.9965 18.2353 35.9965 18.1758V9.46963L39.3861 14.1802C39.6948 14.6099 40.1057 14.9609 40.5838 15.2032C41.062 15.4455 41.5933 15.5721 42.1326 15.5721C42.6719 15.5721 43.2032 15.4455 43.6814 15.2032C44.1596 14.9609 44.5705 14.6099 44.8792 14.1802L48.2687 9.46963V18.1758C48.2687 18.2955 48.3177 18.4104 48.4048 18.4951C48.4919 18.5797 48.6101 18.6273 48.7333 18.6273H52.8267C52.8879 18.6275 52.9485 18.616 53.0051 18.5935C53.0617 18.5709 53.1132 18.5377 53.1565 18.4957C53.1999 18.4538 53.2343 18.4039 53.2577 18.349C53.2812 18.2941 53.2933 18.2353 53.2933 18.1758V0.994049C53.2933 0.934595 53.2812 0.875723 53.2577 0.820819C53.2343 0.765915 53.1999 0.716055 53.1565 0.674105C53.1132 0.632155 53.0617 0.598942 53.0051 0.576367C52.9485 0.553791 52.8879 0.5423 52.8267 0.542555ZM78.0213 0.542555H73.4354C73.2743 0.54316 73.1161 0.584363 72.9763 0.662139C72.8366 0.739915 72.7199 0.8516 72.6378 0.986288L67.9104 8.75849H67.5614C67.406 8.75871 67.253 8.72103 67.1165 8.64893C66.98 8.57682 66.8642 8.47258 66.7798 8.34575L61.8829 0.955294C61.7984 0.828589 61.6826 0.724449 61.5461 0.652359C61.4096 0.58027 61.2567 0.542518 61.1013 0.542555H56.4795C56.3953 0.542215 56.3126 0.56412 56.2402 0.60593C56.1678 0.647739 56.1085 0.707882 56.0686 0.779925C56.0286 0.851968 56.0096 0.9332 56.0135 1.01494C56.0174 1.09669 56.0441 1.17587 56.0907 1.24401L62.832 11.1748C63.0764 11.5347 63.4094 11.8295 63.8007 12.0325C64.1921 12.2355 64.6294 12.3404 65.0731 12.3375H65.6712L61.8829 17.9297C61.8363 17.9985 61.81 18.0784 61.8068 18.1607C61.8035 18.243 61.8235 18.3246 61.8646 18.3966C61.9057 18.4687 61.9663 18.5285 62.0398 18.5694C62.1133 18.6104 62.1969 18.6311 62.2817 18.6292H66.8516C67.0111 18.6299 67.1681 18.5908 67.3077 18.5159C67.4473 18.4409 67.5648 18.3325 67.6492 18.201L78.432 1.23433C78.4771 1.16479 78.5018 1.08461 78.5034 1.00245C78.505 0.920282 78.4835 0.83925 78.4413 0.768071C78.399 0.696892 78.3376 0.638276 78.2636 0.598536C78.1895 0.558796 78.1058 0.539437 78.0213 0.542555ZM93.8845 9.02588C96.0139 8.05702 97.0607 6.75294 97.0607 5.04775C97.0607 3.67778 96.3848 2.47253 95.033 1.50367C93.715 0.499928 90.8458 0 88.4532 0C86.1224 0 83.0558 0.434044 80.9642 1.33315C80.8327 1.38989 80.7211 1.48257 80.6429 1.59989C80.5646 1.71721 80.5232 1.85411 80.5236 1.99391V5.61938C80.5232 5.68448 80.5407 5.74849 80.5744 5.80477C80.608 5.86104 80.6566 5.90754 80.715 5.93938C80.7734 5.97123 80.8396 5.98729 80.9065 5.98588C80.9735 5.98446 81.0389 5.96564 81.0958 5.93136C82.645 4.9625 85.6119 4.48001 87.6417 4.48001C89.9725 4.48001 92.09 5.04969 92.09 6.05149C92.09 7.12305 89.7691 7.52222 87.8451 7.52222H86.2161C86.0929 7.52222 85.9747 7.56979 85.8876 7.65446C85.8004 7.73913 85.7515 7.85396 85.7515 7.97371V10.7873C85.7515 10.907 85.8004 11.0219 85.8876 11.1065C85.9747 11.1912 86.0929 11.2388 86.2161 11.2388H87.8451C90.3095 11.2388 92.732 11.8472 92.732 12.8432C92.732 13.9806 90.2098 14.5154 87.6756 14.5154C85.4265 14.5154 82.2921 13.9206 80.6153 12.7056C80.56 12.6649 80.4941 12.6399 80.4249 12.6336C80.3558 12.6272 80.2863 12.6398 80.2241 12.6698C80.162 12.6998 80.1096 12.7461 80.0731 12.8034C80.0365 12.8608 80.0171 12.9269 80.0171 12.9943V17.0635C80.0161 17.2045 80.0579 17.3426 80.1374 17.4605C80.2168 17.5784 80.3304 17.6709 80.4637 17.7262C82.5174 18.5653 85.7156 18.9993 88.3515 18.9993C90.9435 18.9993 94.0161 18.5304 95.6032 17.5615C97.1903 16.5927 97.9719 15.3118 97.9719 13.7404C97.9719 11.5004 96.6201 9.92886 93.8845 9.02588Z"
+										fill="url(#paint0_linear_1775_2618)" class="logo-muztv-cut" />
+									<defs>
+										<linearGradient id="paint0_linear_1775_2618" x1="30.9719" y1="0" x2="68.792" y2="44.0515"
+											gradientUnits="userSpaceOnUse">
+											<stop stop-color="#FFB991" />
+											<stop offset="0.490348" stop-color="#FF1BA4" />
+											<stop offset="1" stop-color="#B400E6" />
+										</linearGradient>
+									</defs>
+								</svg>
+							</a>
+						</div>
+						<ul class="menu">
+							<li class="menu-item">
+								<a href="../index.html" class="menu-item-url">главная</a>
+							</li>
+
+								<li class="menu-item">
+									<a href="index.html" class="menu-item-url">победители</a>
+								</li>
+
+							<li class="menu-item">
+								<a href="../index.html#about" class="menu-item-url">о премии 2024</a>
+							</li>
+							<li class="menu-item">
+								<a href="../index.html#news" class="menu-item-url">новости премии</a>
+							</li>
+							<li class="menu-item">
+								<a href="../index.html#history" class="menu-item-url">история</a>
+							</li>
+						</ul>
+						<div class="header-right">
+							<!-- <div class="label label-online label-online-2"><div class="label-wrapper">в эфире</div></div> -->
+							<div class="counter" id="countdown">
+								<div class="counter-sec">
+									<div class="counter-int x-countdown_days"></div>
+									<div class="counter-sec-name">дней</div>
+								</div>
+								<div class="counter-sec">
+									<div class="counter-int x-countdown_hours"></div>
+									<div class="counter-sec-name">часов</div>
+								</div>
+								<div class="counter-sec">
+									<div class="counter-int x-countdown_minutes"></div>
+									<div class="counter-sec-name">минут</div>
+								</div>
+								<div class="counter-sec">
+									<div class="counter-int x-countdown_seconds"></div>
+									<div class="counter-sec-name">секунд</div>
+								</div>
+							</div>
+							<!--<button class="button button-ssm button-color-accent desktop-only x-tickets-widget-button">купить билет</button>-->
+							<a href="https://www.youtube.com/watch?v=yJ2D5ohbmxg" target="_blank" class="button button-ssm button-color-accent desktop-only">смотреть</a>
+						</div>
+					</nav>
+				</div>
+            </div>
+        </header>
+
+<script type="text/javascript" src="https://spb.showgogo.ru/widget/showgogo.js"></script>
+<script>
+$(function() {
+	$(document).on('click', '.x-tickets-widget-button', function() {
+		window.oko('track', {entity_type: '', entity_id: 0, event: 'open_ticket_widget', metadata: {}});
+		showgogo.run(
+			'4357614', //id события
+			'ticketsteam',
+			{
+				utm_source: 'siterr', //данные для маркетологов
+				utm_campaign:'slavaairfest' //данные для маркетологов
+			}
+		);
+		return false;
+	});
+	$(document).on('click', '#close-showgogo-div', function(event) {
+		window.oko('track', {entity_type: '', entity_id: 0, event: 'close_ticket_widget', metadata: {}});
+	});
+});
+</script>
+
+<main class="content">
+	<div class="content-cols">
+		<div class="section-wrapper">
+			<div class="content-cols-full">
+				<div class="path">
+					<div class="section-wrapper">
+						<div class="path-item">
+							<a href="../index.html" class="path-item-url">Главная</a>
+						</div>
+						<div class="path-item">
+							<a href="index.html" class="path-item-url">Номинации</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="content-cols-main">
+
+					<form id="vote-form">
+
+							<a name="36" class="x-nominees"></a>
+							<section class="section nominees">
+								<div class="section-head">
+									<h2 class="title-grand-m text-gradient">BLOBIK KING</h2>
+								</div>
+								<div class="media-list media-list-x2">
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_36"
+														value="825"
+														data-nominee-id="117"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/8/4/846686767a557cdc0a3335eb021fba0f.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														МОТ
+														 — СЛУЧАЙНОСТИ НЕ СЛУЧАЙНЫ
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_36"
+														value="826"
+														data-nominee-id="249"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/5/9/5972be7321a301f50aec7e471d82cc7f.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														МОЯ МИШЕЛЬ
+														 — ВЕТЕР МЕНЯЕТ НАПРАВЛЕНИЕ
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_36"
+														value="828"
+														data-nominee-id="270"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/1/2/12f5e8669ee2fb87a56f07368003d343.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														ВАНЯ ДМИТРИЕНКО
+														 — ПИЦЦА
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_36"
+														value="830"
+														data-nominee-id="277"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/f/c/fc6acf00ae9bf24735d6d2bd67f016f0.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														ВЛАДИМИР ПРЕСНЯКОВ
+														 — ЖИВИ
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_36"
+														value="829"
+														data-nominee-id="201"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/0/b/0b37552ca79fc4826347de120c52eb9a.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														HAMMALI &amp; NAVAI
+														 — ПТИЧКА
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_36"
+														value="824"
+														data-nominee-id="14"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/5/c/5cc3410b55f141dd82aad8e10acbafd8.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														ДИМА БИЛАН
+														 — ОСТРОЙ БРИТВОЙ
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_36"
+														value="827"
+														data-nominee-id="200"
+														checked
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/5/9/59ca897446c3e36b33591cbead744d2b.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														МАРИ КРАЙМБРЕРИ
+														 — СЛУЧИЛАСЬ ОСЕНЬ
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_36"
+														value="831"
+														data-nominee-id="263"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/8/0/80ae2fb96792db910cab7782cdf121f2.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														ANNA ASTI
+														 — ВЕРЮ В ТЕБЯ
+													</h4>
+												</div>
+											</div>
+										</label>
+
+								</div>
+							</section>
+
+<style>.adfox:empty { margin-bottom: 0; }</style>
+<!--AdFox START-->
+<!--yandex_utvadfox-->
+<!--Площадка: МУЗ / Медийная реклама / МУЗ Баннер Номинация Desktop-->
+<!--Категория: <не задана>-->
+<!--Тип баннера: Media banner-->
+<div id="adfox_171404049947717805" class="section adfox"></div>
+<!--AdFox START-->
+<!--yandex_utvadfox-->
+<!--Площадка: МУЗ / Медийная реклама / МУЗ Баннер Номинация Mobile-->
+<!--Категория: <не задана>-->
+<!--Тип баннера: Media banner-->
+<div id="adfox_171404063733617805" class="section adfox"></div>
+<script>
+$(window).on('load', function() {
+	try {
+		var cb;
+		if($(window).width() > 767) { // desktop
+			cb = ()=>{
+				Ya.adfoxCode.create({
+					ownerId: 1461715,
+					containerId: 'adfox_171404049947717805',
+					params: {
+						p1: 'dcana',
+						p2: 'p'
+					}
+				})
+			};
+		} else { // mobile
+			cb = ()=>{
+				Ya.adfoxCode.create({
+					ownerId: 1461715,
+					containerId: 'adfox_171404063733617805',
+					params: {
+						p1: 'dcanf',
+						p2: 'p'
+					}
+				})
+			};
+		}
+		window.yaContextCb = window.yaContextCb || [];
+		window.yaContextCb.push(cb);
+	} catch(e) {}
+});
+</script>
+
+							<a name="26" class="x-nominees"></a>
+							<section class="section nominees">
+								<div class="section-head">
+									<h2 class="title-grand-m text-gradient">BLOBIK QUEEN</h2>
+								</div>
+								<div class="media-list media-list-x2">
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_26"
+														value="801"
+														data-nominee-id="263"
+														checked
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/8/0/80ae2fb96792db910cab7782cdf121f2.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														ANNA ASTI
+
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_26"
+														value="802"
+														data-nominee-id="200"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/5/9/59ca897446c3e36b33591cbead744d2b.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														МАРИ КРАЙМБРЕРИ
+
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_26"
+														value="808"
+														data-nominee-id="272"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/0/b/0b276a34c43e3a753d32086277418ddf.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														INSTASAMKA
+
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_26"
+														value="803"
+														data-nominee-id="195"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/0/d/0d255725043289a7fe1a8d0946908c7c.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														ZIVERT
+
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_26"
+														value="807"
+														data-nominee-id="49"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/a/6/a6da49f4c393cd940b98de3642d69381.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														ПОЛИНА ГАГАРИНА
+
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_26"
+														value="804"
+														data-nominee-id="285"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/b/6/b62e8a54473227911f983ef66b9fa223.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														ЛОЛИТА
+
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_26"
+														value="805"
+														data-nominee-id="286"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/2/6/265f916d0ba618c9a0a8a099c0b661db.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														ЛЮСЯ ЧЕБОТИНА
+
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_26"
+														value="806"
+														data-nominee-id="232"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/c/6/c6c98d6336569e5e20aef26852977d37.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														КЛАВА КОКА
+
+													</h4>
+												</div>
+											</div>
+										</label>
+
+								</div>
+							</section>
+
+							<a name="37" class="x-nominees"></a>
+							<section class="section nominees">
+								<div class="section-head">
+									<h2 class="title-grand-m text-gradient">Человек-мем года</h2>
+								</div>
+								<div class="media-list media-list-x2">
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_37"
+														value="839"
+														data-nominee-id="286"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/2/6/265f916d0ba618c9a0a8a099c0b661db.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														ЛЮСЯ ЧЕБОТИНА
+														 — ИМПЕРАТРИЦА
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_37"
+														value="838"
+														data-nominee-id="279"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/7/2/72cc0fc3b17a82c1079ba78427579b29.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														XOLIDAYBOY
+														 — ОКЕАНЫ
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_37"
+														value="832"
+														data-nominee-id="257"
+														checked
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/e/5/e557f8e449e1d2cbe7dd0e14eeb243e3.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														INSTASAMKA, ЛОЛИТА
+														 — НА ТИТАНИКЕ
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_37"
+														value="835"
+														data-nominee-id="281"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/7/2/72e1bf691b3595a5dabcd645f28953e5.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														AMIRCHIK
+														 — РОЗОВЫЙ ВЕЧЕР
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_37"
+														value="837"
+														data-nominee-id="290"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/f/b/fb31cd41312b1c2d4806eb787e225c9a.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														ZIVERT &amp; THERR MAITZ
+														 — ТВОРИ ДОБРО
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_37"
+														value="834"
+														data-nominee-id="211"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/5/0/50222dde9dcdad088e5767f30a6e54b4.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														ЛЕША СВИК 
+														 — ЗАМОК ИЗ ДОЖДЯ
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_37"
+														value="833"
+														data-nominee-id="288"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/a/9/a98872aa4997ffc5fcdd812c5971df5b.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														БАСТА, МАКSИМ
+														 — НАШЕ ЛЕТО 2.0
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_37"
+														value="836"
+														data-nominee-id="289"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/9/e/9e4737a1ac9c8fb20b754b13ab38142a.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														НИКИТА &amp; ДИМА БИЛАН
+														 — УЛЕТЕЛИ НАВСЕГДА
+													</h4>
+												</div>
+											</div>
+										</label>
+
+								</div>
+							</section>
+
+							<a name="38" class="x-nominees"></a>
+							<section class="section nominees">
+								<div class="section-head">
+									<h2 class="title-grand-m text-gradient">Фейл года</h2>
+								</div>
+								<div class="media-list media-list-x2">
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_38"
+														value="842"
+														data-nominee-id="263"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/8/0/80ae2fb96792db910cab7782cdf121f2.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														ANNA ASTI
+														 — MTС LIVE HALL
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_38"
+														value="845"
+														data-nominee-id="285"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/b/6/b62e8a54473227911f983ef66b9fa223.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														ЛОЛИТА
+														 — КРОКУС СИТИ ХОЛЛ
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_38"
+														value="846"
+														data-nominee-id="49"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/a/6/a6da49f4c393cd940b98de3642d69381.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														ПОЛИНА ГАГАРИНА
+														 — МЕГАСПОРТ АРЕНА
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_38"
+														value="844"
+														data-nominee-id="77"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/8/9/89aff67483a35c9067ef929e656fed9b.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														ЛЕОНИД АГУТИН
+														 — ВТБ АРЕНА
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_38"
+														value="843"
+														data-nominee-id="14"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/5/c/5cc3410b55f141dd82aad8e10acbafd8.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														ДИМА БИЛАН
+														 — КРОКУС СИТИ ХОЛЛ
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_38"
+														value="847"
+														data-nominee-id="15"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/b/a/ba91b98550aa612a9d45e84554acb210.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														СЕРГЕЙ ЛАЗАРЕВ
+														 — КРОКУС СИТИ ХОЛЛ
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_38"
+														value="840"
+														data-nominee-id="152"
+														checked
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/d/1/d17412a196ab25a2b47b6964197709a3.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														РУКИ ВВЕРХ!
+														 — СТАДИОН ЛУЖНИКИ
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_38"
+														value="841"
+														data-nominee-id="200"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/5/9/59ca897446c3e36b33591cbead744d2b.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														МАРИ КРАЙМБРЕРИ
+														 — ВТБ АРЕНА
+													</h4>
+												</div>
+											</div>
+										</label>
+
+								</div>
+							</section>
+
+							<a name="34" class="x-nominees"></a>
+							<section class="section nominees">
+								<div class="section-head">
+									<h2 class="title-grand-m text-gradient">Пара года</h2>
+								</div>
+								<div class="media-list media-list-x2">
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_34"
+														value="722"
+														data-nominee-id="249"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/5/9/5972be7321a301f50aec7e471d82cc7f.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														Вера  &amp; Лиза
+													</h4>
+												</div>
+											</div>
+										</label>																													
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_34"
+														value="724"
+														data-nominee-id="252"
+														checked
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="alexANDlika.jpeg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														Александр  &amp; Лика
+													</h4>
+												</div>
+											</div>
+										</label>
+								</div>
+							</section>
+
+							<a name="39" class="x-nominees"></a>
+							<section class="section nominees">
+								<div class="section-head">
+									<h2 class="title-grand-m text-gradient">Сквад года</h2>
+								</div>
+								<div class="media-list media-list-x2">
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_39"
+														value="852"
+														data-nominee-id="16"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/7/5/752a19f5684c80dd69248f9db776eeca.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														ФИЛИПП КИРКОРОВ
+
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_39"
+														value="853"
+														data-nominee-id="286"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/2/6/265f916d0ba618c9a0a8a099c0b661db.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														ЛЮСЯ ЧЕБОТИНА
+
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_39"
+														value="848"
+														data-nominee-id="232"
+														checked
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/c/6/c6c98d6336569e5e20aef26852977d37.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														КЛАВА КОКА
+
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_39"
+														value="849"
+														data-nominee-id="291"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/5/d/5d1804eb2bccd0d07132b8f9123f9813.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														Милана Хаметова
+
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_39"
+														value="855"
+														data-nominee-id="281"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/7/2/72e1bf691b3595a5dabcd645f28953e5.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														AMIRCHIK
+
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_39"
+														value="854"
+														data-nominee-id="284"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/f/e/fe4ba2472d0f59828dc36ceb832f8767.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														SHAMAN
+
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_39"
+														value="851"
+														data-nominee-id="145"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/b/7/b78e39874995ffea4b5c9ce2863cf413.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														ОЛЬГА БУЗОВА
+
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_39"
+														value="850"
+														data-nominee-id="240"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/2/e/2ef1578f097a74095ee57d567caeddc3.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														ХАБИБ
+
+													</h4>
+												</div>
+											</div>
+										</label>
+
+								</div>
+							</section>
+
+							<a name="29" class="x-nominees"></a>
+							<section class="section nominees">
+								<div class="section-head">
+									<h2 class="title-grand-m text-gradient">Мисс/сэр ГДЗ</h2>
+								</div>
+								<div class="media-list media-list-x2">
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_29"
+														value="770"
+														data-nominee-id="195"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/0/d/0d255725043289a7fe1a8d0946908c7c.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														ZIVERT
+														 — В МИРЕ ВЕСЁЛЫХ
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_29"
+														value="776"
+														data-nominee-id="270"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/1/2/12f5e8669ee2fb87a56f07368003d343.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														ВАНЯ ДМИТРИЕНКО
+														 — ПАРАНОИК
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_29"
+														value="769"
+														data-nominee-id="263"
+														checked
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/8/0/80ae2fb96792db910cab7782cdf121f2.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														ANNA ASTI
+														 — ЦАРИЦА
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_29"
+														value="775"
+														data-nominee-id="114"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/9/b/9bd10bed4fea6044889032a820801082.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														ВАЛЕРИЯ
+														 — ТРИБЬЮТ ВАЛЕРИИ
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_29"
+														value="774"
+														data-nominee-id="45"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/e/a/ea88e7549ee77ac58359bd1622ba5018.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														ЕВА ПОЛЬНА
+														 — ОТКРЫТЫЙ КОСМОС
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_29"
+														value="772"
+														data-nominee-id="14"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/5/c/5cc3410b55f141dd82aad8e10acbafd8.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														ДИМА БИЛАН
+														 — 5 ХИТОВ
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_29"
+														value="773"
+														data-nominee-id="252"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/2/2/22b4d01bec93e37a048654953164240a.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														ТРИ ДНЯ ДОЖДЯ
+														 — MELANCHOLIA
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_29"
+														value="771"
+														data-nominee-id="200"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/5/9/59ca897446c3e36b33591cbead744d2b.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														Кончев Иван
+														 — 60%
+													</h4>
+												</div>
+											</div>
+										</label>
+
+								</div>
+							</section>
+
+							<a name="33" class="x-nominees"></a>
+							<section class="section nominees">
+								<div class="section-head">
+									<h2 class="title-grand-m text-gradient">Фейл года</h2>
+								</div>
+								<div class="media-list media-list-x2">
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_33"
+														value="761"
+														data-nominee-id="255"
+														checked
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/c/c/ccb597c83b53a8c98f2b6eb20154870d.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														ВИНТАЖ, ТРАВМА, SKIDRI, DVRKLXGHT
+														 — ПЛОХАЯ ДЕВОЧКА
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_33"
+														value="767"
+														data-nominee-id="261"
+														checked
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/f/8/f8b55772b443b48a5a29a63a4d84f008.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														ЛЮСЯ ЧЕБОТИНА &amp; ФИЛИПП КИРКОРОВ
+														 — КОРОЛЕВА
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_33"
+														value="762"
+														data-nominee-id="256"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/c/9/c9fcb51c5923c865a3f11ddec563d357.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														КРАВЦ, ГИО ПИКА
+														 — ГДЕ ПРОШЛА ТЫ
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_33"
+														value="763"
+														data-nominee-id="257"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/e/5/e557f8e449e1d2cbe7dd0e14eeb243e3.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														INSTASAMKA, ЛОЛИТА
+														 — НА ТИТАНИКЕ
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_33"
+														value="764"
+														data-nominee-id="258"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/d/b/db7456ea3f645df4b88991de94bb7cda.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														NILETTO , ОЛЕГ МАЙАМИ, ЛЁША СВИК
+														 — НЕ ВСПОМИНАЙ
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_33"
+														value="766"
+														data-nominee-id="260"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/e/e/ee2585c0af48b9958c4384175dc96c1e.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														ВАНЯ ДМИТРИЕНКО &amp; МОЯ МИШЕЛЬ
+														 — РЫБКА
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_33"
+														value="765"
+														data-nominee-id="259"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/f/c/fca6221abbe36ee971ffb4c247576b0a.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														ЗВОНКИЙ, ЕВА ПОЛЬНА
+														 — HASTA LA VISTA
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_33"
+														value="768"
+														data-nominee-id="262"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/d/e/de2832ea283f221c824217e7ba508c67.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														PIZZA &amp; ZIVERT
+														 — ЗАЛИПАТЕЛЬНО
+													</h4>
+												</div>
+											</div>
+										</label>
+
+								</div>
+							</section>
+
+							<a name="35" class="x-nominees"></a>
+							<section class="section nominees">
+								<div class="section-head">
+									<h2 class="title-grand-m text-gradient">Лучшее танцевальное видео</h2>
+								</div>
+								<div class="media-list media-list-x2">
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_35"
+														value="822"
+														data-nominee-id="287"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/5/c/5c64aa0b37d2b0736d5173347d2656fa.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														DJ SMASH &amp; КЛАВА КОКА
+														 — ПЯТНИЦА
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_35"
+														value="820"
+														data-nominee-id="200"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/5/9/59ca897446c3e36b33591cbead744d2b.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														Иван Кончев
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_35"
+														value="818"
+														data-nominee-id="272"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/0/b/0b276a34c43e3a753d32086277418ddf.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														INSTASAMKA
+														 — ЗА ДЕНЬГИ ДА
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_35"
+														value="817"
+														data-nominee-id="263"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/8/0/80ae2fb96792db910cab7782cdf121f2.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														Александр Демченко
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_35"
+														value="821"
+														data-nominee-id="257"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/e/5/e557f8e449e1d2cbe7dd0e14eeb243e3.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														INSTASAMKA, ЛОЛИТА
+														 — НА ТИТАНИКЕ
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_35"
+														value="819"
+														data-nominee-id="251"
+														checked
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/9/c/9c99c06a852580ec5345c9d6ebc4df88.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														FILATOV &amp; KARAS
+														 — МИМО МЕНЯ
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_35"
+														value="823"
+														data-nominee-id="258"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/d/b/db7456ea3f645df4b88991de94bb7cda.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														NILETTO , ОЛЕГ МАЙАМИ, ЛЁША СВИК
+														 — НЕ ВСПОМИНАЙ
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_35"
+														value="856"
+														data-nominee-id="232"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/c/6/c6c98d6336569e5e20aef26852977d37.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														КЛАВА КОКА
+														 — ЗАМУЖ
+													</h4>
+												</div>
+											</div>
+										</label>
+
+								</div>
+							</section>
+
+							<a name="25" class="x-nominees"></a>
+							<section class="section nominees">
+								<div class="section-head">
+									<h2 class="title-grand-m text-gradient">Лучший исполнитель</h2>
+								</div>
+								<div class="media-list media-list-x2">
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_25"
+														value="813"
+														data-nominee-id="117"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/8/4/846686767a557cdc0a3335eb021fba0f.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														МОТ
+
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_25"
+														value="809"
+														data-nominee-id="14"
+														checked
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/5/c/5cc3410b55f141dd82aad8e10acbafd8.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														ДИМА БИЛАН
+
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_25"
+														value="814"
+														data-nominee-id="77"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/8/9/89aff67483a35c9067ef929e656fed9b.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														ЛЕОНИД АГУТИН
+
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_25"
+														value="815"
+														data-nominee-id="277"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/f/c/fc6acf00ae9bf24735d6d2bd67f016f0.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														ВЛАДИМИР ПРЕСНЯКОВ
+
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_25"
+														value="810"
+														data-nominee-id="227"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/e/3/e3376c03d2fe3b4ef2b8925384454395.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														JONY
+
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_25"
+														value="812"
+														data-nominee-id="270"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/1/2/12f5e8669ee2fb87a56f07368003d343.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														ВАНЯ ДМИТРИЕНКО
+
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_25"
+														value="816"
+														data-nominee-id="15"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/b/a/ba91b98550aa612a9d45e84554acb210.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														СЕРГЕЙ ЛАЗАРЕВ
+
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_25"
+														value="811"
+														data-nominee-id="32"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/2/f/2f14ba8cd87ac581ce522cc71414142e.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														БАСТА
+
+													</h4>
+												</div>
+											</div>
+										</label>
+
+								</div>
+							</section>
+
+							<a name="32" class="x-nominees"></a>
+							<section class="section nominees">
+								<div class="section-head">
+									<h2 class="title-grand-m text-gradient">Прорыв года</h2>
+								</div>
+								<div class="media-list media-list-x2">
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_32"
+														value="794"
+														data-nominee-id="279"
+														checked
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/7/2/72cc0fc3b17a82c1079ba78427579b29.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														XOLIDAYBOY
+
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_32"
+														value="793"
+														data-nominee-id="252"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/2/2/22b4d01bec93e37a048654953164240a.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														ТРИ ДНЯ ДОЖДЯ
+
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_32"
+														value="799"
+														data-nominee-id="283"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/d/0/d0d8bda08095c0370a27da3e6ac97a8d.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														5УТРА
+
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_32"
+														value="800"
+														data-nominee-id="284"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/f/e/fe4ba2472d0f59828dc36ceb832f8767.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														SHAMAN
+
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_32"
+														value="798"
+														data-nominee-id="282"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/c/f/cf2b6da4b09a5b423f435ca81c9ac69b.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														ЕВА ВЛАСОВА
+
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_32"
+														value="795"
+														data-nominee-id="280"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/f/7/f756eb0aba040b5440e25eb1ed15af9b.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														ГИО ПИКА
+
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_32"
+														value="797"
+														data-nominee-id="272"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/0/b/0b276a34c43e3a753d32086277418ddf.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														INSTASAMKA
+
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_32"
+														value="796"
+														data-nominee-id="281"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/7/2/72e1bf691b3595a5dabcd645f28953e5.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														AMIRCHIK
+
+													</h4>
+												</div>
+											</div>
+										</label>
+
+								</div>
+							</section>
+
+							<a name="27" class="x-nominees"></a>
+							<section class="section nominees">
+								<div class="section-head">
+									<h2 class="title-grand-m text-gradient">Лучшее видео</h2>
+								</div>
+								<div class="media-list media-list-x2">
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_27"
+														value="778"
+														data-nominee-id="272"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/0/b/0b276a34c43e3a753d32086277418ddf.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														INSTASAMKA
+														 — ЗА ДЕНЬГИ ДА
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_27"
+														value="781"
+														data-nominee-id="249"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/5/9/5972be7321a301f50aec7e471d82cc7f.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														МОЯ МИШЕЛЬ
+														 — ВЕТЕР МЕНЯЕТ НАПРАВЛЕНИЕ
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_27"
+														value="782"
+														data-nominee-id="255"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/c/c/ccb597c83b53a8c98f2b6eb20154870d.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														ВИНТАЖ, ТРАВМА, SKIDRI, DVRKLXGHT
+														 — ПЛОХАЯ ДЕВОЧКА
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_27"
+														value="777"
+														data-nominee-id="14"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/5/c/5cc3410b55f141dd82aad8e10acbafd8.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														ДИМА БИЛАН
+														 — ОСТРОЙ БРИТВОЙ
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_27"
+														value="780"
+														data-nominee-id="263"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/8/0/80ae2fb96792db910cab7782cdf121f2.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														ANNA ASTI
+														 — ЦАРИЦА
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_27"
+														value="784"
+														data-nominee-id="117"
+														checked
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/8/4/846686767a557cdc0a3335eb021fba0f.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														МОТ
+														 — СЛУЧАЙНОСТИ НЕ СЛУЧАЙНЫ
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_27"
+														value="783"
+														data-nominee-id="277"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/f/c/fc6acf00ae9bf24735d6d2bd67f016f0.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														ВЛАДИМИР ПРЕСНЯКОВ
+														 — ЖИВИ
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_27"
+														value="779"
+														data-nominee-id="195"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/0/d/0d255725043289a7fe1a8d0946908c7c.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														ZIVERT
+														 — БЕРИ И БЕГИ
+													</h4>
+												</div>
+											</div>
+										</label>
+
+								</div>
+							</section>
+
+							<a name="28" class="x-nominees"></a>
+							<section class="section nominees">
+								<div class="section-head">
+									<h2 class="title-grand-m text-gradient">Лучшая песня</h2>
+								</div>
+								<div class="media-list media-list-x2">
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_28"
+														value="785"
+														data-nominee-id="263"
+														checked
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/8/0/80ae2fb96792db910cab7782cdf121f2.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														ANNA ASTI
+														 — ЦАРИЦА
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_28"
+														value="791"
+														data-nominee-id="255"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/c/c/ccb597c83b53a8c98f2b6eb20154870d.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														ВИНТАЖ, ТРАВМА, SKIDRI, DVRKLXGHT
+														 — ПЛОХАЯ ДЕВОЧКА
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_28"
+														value="787"
+														data-nominee-id="256"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/c/9/c9fcb51c5923c865a3f11ddec563d357.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														КРАВЦ, ГИО ПИКА
+														 — ГДЕ ПРОШЛА ТЫ
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_28"
+														value="790"
+														data-nominee-id="251"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/9/c/9c99c06a852580ec5345c9d6ebc4df88.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														FILATOV &amp; KARAS
+														 — МИМО МЕНЯ
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_28"
+														value="792"
+														data-nominee-id="200"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/5/9/59ca897446c3e36b33591cbead744d2b.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														МАРИ КРАЙМБРЕРИ
+														 —  СЛУЧИЛАСЬ ОСЕНЬ
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_28"
+														value="789"
+														data-nominee-id="14"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/5/c/5cc3410b55f141dd82aad8e10acbafd8.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														ДИМА БИЛАН
+														 — ОСТРОЙ БРИТВОЙ
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_28"
+														value="786"
+														data-nominee-id="200"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/5/9/59ca897446c3e36b33591cbead744d2b.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														МАРИ КРАЙМБРЕРИ
+														 —  МНЕ ТАК ПОВЕЗЛО
+													</h4>
+												</div>
+											</div>
+										</label>
+
+										<label class="media-card toogle-form x-radio-container">
+											<div class="about-card about-card-type2">
+												<div class="toogle-form-field">
+													<input
+														type="checkbox"
+														class="toogle-form-input"
+														name="nomination_28"
+														value="788"
+														data-nominee-id="117"
+
+														disabled>
+													<div class="toogle-form-input-style"></div>
+												</div>
+												<div class="about-card-pic"><img src="../pic/8/4/846686767a557cdc0a3335eb021fba0f.jpg"></div>
+												<div class="about-card-content">
+													<h4 class="title-h2">
+														МОТ
+														 — СЛУЧАЙНОСТИ НЕ СЛУЧАЙНЫ
+													</h4>
+												</div>
+											</div>
+										</label>
+
+								</div>
+							</section>
+
+					</form>
+
+			</div>
+			<div class="content-cols-right">
+				<div class="news-short">
+	
+
+	</div>
+</div>
+
+			</div>
+		</div>
+	</div>
+</main>
+
+<script>
+$(function() {
+	var $window = $(window);
+	var $document = $(document);
+	var $body = $('body');
+	var $form = $('#vote-form');
+	var $submitBtn = $('#submit-button');
+	var nominations = [
+		{
+			id: 36,
+			title: 'Лучшее лирическое видео'
+		},{
+			id: 26,
+			title: 'Лучшая исполнительница'
+		},{
+			id: 37,
+			title: 'Лучшая cover-версия'
+		},{
+			id: 38,
+			title: 'Лучшее концертное шоу'
+		},{
+			id: 34,
+			title: 'Лучшая группа'
+		},{
+			id: 39,
+			title: 'Лучший в сети'
+		},{
+			id: 29,
+			title: 'Лучший альбом'
+		},{
+			id: 33,
+			title: 'Лучшая коллаборация'
+		},{
+			id: 35,
+			title: 'Лучшее танцевальное видео'
+		},{
+			id: 25,
+			title: 'Лучший исполнитель'
+		},{
+			id: 32,
+			title: 'Прорыв года'
+		},{
+			id: 27,
+			title: 'Лучшее видео'
+		},{
+			id: 28,
+			title: 'Лучшая песня'
+		}
+	];
+
+});
+</script>
+
+		<footer class="footer">
+			<div class="section-wrapper">
+				<a href="https://muz-tv.ru" class="logo" target="_blank">
+					<svg width="98" height="19" viewBox="0 0 98 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<g clip-path="url(#clip0_2101_2284)">
+							<path
+								class="logo-muztv-crown-1"
+								d="M8.98069 7.7893L1.3394 0.235023C1.22967 0.126535 1.08986 0.0526534 0.937662 0.0227201C0.78546 -0.00721316 0.627699 0.00814626 0.484328 0.066858C0.340957 0.12557 0.218418 0.224995 0.132207 0.35256C0.0459968 0.480126 -1.11955e-05 0.6301 2.04347e-09 0.783518V15.8921C-1.11955e-05 16.0455 0.0459968 16.1955 0.132207 16.323C0.218418 16.4506 0.340957 16.55 0.484328 16.6087C0.627699 16.6674 0.78546 16.6828 0.937662 16.6529C1.08986 16.6229 1.22967 16.5491 1.3394 16.4406L8.98069 8.88629C9.12767 8.74074 9.21023 8.54347 9.21023 8.3378C9.21023 8.13213 9.12767 7.93486 8.98069 7.7893Z"
+								fill="url(#paint0_linear_2101_2284)" />
+							<path
+								class="logo-muztv-crown-2"		
+								d="M10.9442 10.1217C10.797 9.97639 10.5975 9.89478 10.3894 9.89478C10.1814 9.89478 9.98185 9.97639 9.83462 10.1217L2.19333 17.676C2.08359 17.7845 2.00886 17.9227 1.97858 18.0731C1.9483 18.2236 1.96384 18.3796 2.02323 18.5213C2.08261 18.663 2.18319 18.7842 2.31222 18.8694C2.44126 18.9546 2.59296 19.0001 2.74814 19.0001H18.0307C18.1859 19.0001 18.3376 18.9546 18.4666 18.8694C18.5957 18.7842 18.6963 18.663 18.7556 18.5213C18.815 18.3796 18.8306 18.2236 18.8003 18.0731C18.77 17.9227 18.6953 17.7845 18.5855 17.676L10.9442 10.1217Z"
+								fill="url(#paint1_linear_2101_2284)" />
+							<path
+								class="logo-muztv-crown-3"
+								d="M19.6606 0.227212L12.0109 7.7898C11.9379 7.86178 11.8801 7.94728 11.8406 8.0414C11.8011 8.13551 11.7808 8.23641 11.7808 8.3383C11.7808 8.44019 11.8011 8.54108 11.8406 8.6352C11.8801 8.72932 11.9379 8.81481 12.0109 8.88679L19.6606 16.4515C19.7703 16.5599 19.9101 16.6338 20.0623 16.6638C20.2145 16.6937 20.3723 16.6783 20.5156 16.6196C20.659 16.5609 20.7816 16.4615 20.8678 16.3339C20.954 16.2064 21 16.0564 21 15.903V0.775707C21 0.62229 20.954 0.472315 20.8678 0.344749C20.7816 0.217184 20.659 0.117759 20.5156 0.0590471C20.3723 0.000335327 20.2145 -0.0150262 20.0623 0.0149071C19.9101 0.0448403 19.7703 0.118724 19.6606 0.227212Z"
+								fill="url(#paint2_linear_2101_2284)" />
+						</g>
+						<defs>
+							<linearGradient id="paint0_linear_2101_2284" x1="0" y1="0.0078125" x2="11.857" y2="2.17288"
+								gradientUnits="userSpaceOnUse">
+								<stop stop-color="#FFB991" />
+								<stop offset="0.490348" stop-color="#FF1BA4" />
+								<stop offset="1" stop-color="#B400E6" />
+							</linearGradient>
+							<linearGradient id="paint1_linear_2101_2284" x1="1.9635" y1="9.89478" x2="18.2831" y2="19.8709"
+								gradientUnits="userSpaceOnUse">
+								<stop stop-color="#FFB991" />
+								<stop offset="0.490348" stop-color="#FF1BA4" />
+								<stop offset="1" stop-color="#B400E6" />
+							</linearGradient>
+							<linearGradient id="paint2_linear_2101_2284" x1="11.7808" y1="0" x2="23.6494" y2="2.16688"
+								gradientUnits="userSpaceOnUse">
+								<stop stop-color="#FFB991" />
+								<stop offset="0.490348" stop-color="#FF1BA4" />
+								<stop offset="1" stop-color="#B400E6" />
+							</linearGradient>
+							<clipPath id="clip0_2101_2284">
+								<rect width="21" height="19" fill="white" />
+							</clipPath>
+						</defs>
+						<path
+							d="M52.8267 0.542555H50.2347C49.7079 0.54217 49.1893 0.669783 48.7262 0.913782C48.2631 1.15778 47.87 1.51043 47.5829 1.93966L42.6819 9.27585C42.6227 9.36422 42.5417 9.43682 42.4463 9.48707C42.3509 9.53733 42.2441 9.56365 42.1356 9.56365C42.0271 9.56365 41.9203 9.53733 41.8249 9.48707C41.7295 9.43682 41.6485 9.36422 41.5893 9.27585L36.6804 1.93966C36.3931 1.51056 36 1.158 35.5369 0.91402C35.0738 0.670036 34.5553 0.542346 34.0285 0.542555H31.4365C31.3133 0.542555 31.1951 0.590126 31.108 0.674797C31.0209 0.759467 30.9719 0.874307 30.9719 0.994049V18.1758C30.9719 18.2955 31.0209 18.4104 31.108 18.4951C31.1951 18.5797 31.3133 18.6273 31.4365 18.6273H35.5299C35.5911 18.6275 35.6517 18.616 35.7083 18.5935C35.7649 18.5709 35.8164 18.5377 35.8597 18.4957C35.9031 18.4538 35.9375 18.4039 35.9609 18.349C35.9844 18.2941 35.9965 18.2353 35.9965 18.1758V9.46963L39.3861 14.1802C39.6948 14.6099 40.1057 14.9609 40.5838 15.2032C41.062 15.4455 41.5933 15.5721 42.1326 15.5721C42.6719 15.5721 43.2032 15.4455 43.6814 15.2032C44.1596 14.9609 44.5705 14.6099 44.8792 14.1802L48.2687 9.46963V18.1758C48.2687 18.2955 48.3177 18.4104 48.4048 18.4951C48.4919 18.5797 48.6101 18.6273 48.7333 18.6273H52.8267C52.8879 18.6275 52.9485 18.616 53.0051 18.5935C53.0617 18.5709 53.1132 18.5377 53.1565 18.4957C53.1999 18.4538 53.2343 18.4039 53.2577 18.349C53.2812 18.2941 53.2933 18.2353 53.2933 18.1758V0.994049C53.2933 0.934595 53.2812 0.875723 53.2577 0.820819C53.2343 0.765915 53.1999 0.716055 53.1565 0.674105C53.1132 0.632155 53.0617 0.598942 53.0051 0.576367C52.9485 0.553791 52.8879 0.5423 52.8267 0.542555ZM78.0213 0.542555H73.4354C73.2743 0.54316 73.1161 0.584363 72.9763 0.662139C72.8366 0.739915 72.7199 0.8516 72.6378 0.986288L67.9104 8.75849H67.5614C67.406 8.75871 67.253 8.72103 67.1165 8.64893C66.98 8.57682 66.8642 8.47258 66.7798 8.34575L61.8829 0.955294C61.7984 0.828589 61.6826 0.724449 61.5461 0.652359C61.4096 0.58027 61.2567 0.542518 61.1013 0.542555H56.4795C56.3953 0.542215 56.3126 0.56412 56.2402 0.60593C56.1678 0.647739 56.1085 0.707882 56.0686 0.779925C56.0286 0.851968 56.0096 0.9332 56.0135 1.01494C56.0174 1.09669 56.0441 1.17587 56.0907 1.24401L62.832 11.1748C63.0764 11.5347 63.4094 11.8295 63.8007 12.0325C64.1921 12.2355 64.6294 12.3404 65.0731 12.3375H65.6712L61.8829 17.9297C61.8363 17.9985 61.81 18.0784 61.8068 18.1607C61.8035 18.243 61.8235 18.3246 61.8646 18.3966C61.9057 18.4687 61.9663 18.5285 62.0398 18.5694C62.1133 18.6104 62.1969 18.6311 62.2817 18.6292H66.8516C67.0111 18.6299 67.1681 18.5908 67.3077 18.5159C67.4473 18.4409 67.5648 18.3325 67.6492 18.201L78.432 1.23433C78.4771 1.16479 78.5018 1.08461 78.5034 1.00245C78.505 0.920282 78.4835 0.83925 78.4413 0.768071C78.399 0.696892 78.3376 0.638276 78.2636 0.598536C78.1895 0.558796 78.1058 0.539437 78.0213 0.542555ZM93.8845 9.02588C96.0139 8.05702 97.0607 6.75294 97.0607 5.04775C97.0607 3.67778 96.3848 2.47253 95.033 1.50367C93.715 0.499928 90.8458 0 88.4532 0C86.1224 0 83.0558 0.434044 80.9642 1.33315C80.8327 1.38989 80.7211 1.48257 80.6429 1.59989C80.5646 1.71721 80.5232 1.85411 80.5236 1.99391V5.61938C80.5232 5.68448 80.5407 5.74849 80.5744 5.80477C80.608 5.86104 80.6566 5.90754 80.715 5.93938C80.7734 5.97123 80.8396 5.98729 80.9065 5.98588C80.9735 5.98446 81.0389 5.96564 81.0958 5.93136C82.645 4.9625 85.6119 4.48001 87.6417 4.48001C89.9725 4.48001 92.09 5.04969 92.09 6.05149C92.09 7.12305 89.7691 7.52222 87.8451 7.52222H86.2161C86.0929 7.52222 85.9747 7.56979 85.8876 7.65446C85.8004 7.73913 85.7515 7.85396 85.7515 7.97371V10.7873C85.7515 10.907 85.8004 11.0219 85.8876 11.1065C85.9747 11.1912 86.0929 11.2388 86.2161 11.2388H87.8451C90.3095 11.2388 92.732 11.8472 92.732 12.8432C92.732 13.9806 90.2098 14.5154 87.6756 14.5154C85.4265 14.5154 82.2921 13.9206 80.6153 12.7056C80.56 12.6649 80.4941 12.6399 80.4249 12.6336C80.3558 12.6272 80.2863 12.6398 80.2241 12.6698C80.162 12.6998 80.1096 12.7461 80.0731 12.8034C80.0365 12.8608 80.0171 12.9269 80.0171 12.9943V17.0635C80.0161 17.2045 80.0579 17.3426 80.1374 17.4605C80.2168 17.5784 80.3304 17.6709 80.4637 17.7262C82.5174 18.5653 85.7156 18.9993 88.3515 18.9993C90.9435 18.9993 94.0161 18.5304 95.6032 17.5615C97.1903 16.5927 97.9719 15.3118 97.9719 13.7404C97.9719 11.5004 96.6201 9.92886 93.8845 9.02588Z"
+							fill="url(#paint0_linear_1775_2618)" />
+						<defs>
+							<linearGradient id="paint0_linear_1775_2618" x1="30.9719" y1="0" x2="68.792" y2="44.0515"
+								gradientUnits="userSpaceOnUse">
+								<stop stop-color="#FFB991" />
+								<stop offset="0.490348" stop-color="#FF1BA4" />
+								<stop offset="1" stop-color="#B400E6" />
+							</linearGradient>
+						</defs>
+					</svg>
+				</a>
+				<div class="footer-text"><small> ООО «Муз ТВ Операционная компания» ИНН 7703679460<br> 105066, город Москва,<br> улица Ольховская, д. 4, корп. 2<br><br> info@muz-tv.ru<br> + 7(495) 213-18-68 </small> </div>
+				<div class="footer-menu">
+					<ul class="menu">
+						<li class="menu-item">
+							<a href="https://muz-tv.ru/static/contacts/" class="menu-item-url" target="_blank">контакты</a>
+						</li>
+						<li class="menu-item">
+							<a href="https://muz-tv.ru/news/" class="menu-item-url" target="_blank">новости</a>
+						</li>
+					</ul>
+					<ul class="menu">
+						<li class="menu-item">
+							<a href="https://muz-tv.ru/policy/" class="menu-item-url" target="_blank">ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ</a>
+						</li>
+						<li class="menu-item">
+							<a href="https://muz-tv.ru/useragreement/" class="menu-item-url" target="_blank">ПОЛЬЗОВАТЕЛЬСКОЕ СОГЛАШЕНИЕ</a>
+						</li>
+						<li class="menu-item">
+							<a href="https://muz-tv.ru/dataagreement/" class="menu-item-url" target="_blank">СОГЛАСИЕ НА ОБРАБОТКУ ПЕРС. ДАННЫХ</a>
+						</li>
+					</ul>
+				</div>
+				<div class="socials">
+					<div class="elements-list">
+						<div class="elements-list-item">
+							<a href="https://ok.ru/muztv" class="icon-ok" target="_blank"></a>
+						</div>
+						<div class="elements-list-item">
+							<a href="https://t.me/muztv" class="icon-tg" target="_blank"></a>
+						</div>
+						<div class="elements-list-item">
+							<a href="https://vk.com/muztv" class="icon-vk" target="_blank"></a>
+						</div>
+						<div class="elements-list-item">
+							<a href="https://zen.yandex.ru/muz-tv.ru" class="icon-dzen" target="_blank"></a>
+						</div>
+						<div class="elements-list-item">
+							<a href="https://www.youtube.com/user/muzTV" class="icon-yt" target="_blank"></a>
+						</div>
+						<div class="elements-list-item">
+							<a href="https://vb.me/muztv" class="icon-vb" target="_blank"></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+	</div>
+</body>
+</html>

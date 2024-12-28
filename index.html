@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<meta name="google-site-verification" content="iNsukhb11NMdCRFSQgeVVV977cshxuJxa21JNlnw0eo" />
+	<meta name="yandex-verification" content="431f0a9ca6f60eb4" />
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<title>Премия BLOBIK 2024 - официальный сайт. Номинанты, голосование, трансляция, билеты</title>
+
+	<meta property="og:type" content="website" />
+	<meta name="title" content="" />
+	<meta property="og:title" content="" />
+	<meta name="description" content="" />
+	<meta property="og:description" content="" />
+
+	<link rel="image_src" href="https://muz-tv.ru/static/img/fb_cover.png" />
+	<meta property="og:image" content="https://muz-tv.ru/static/img/fb_cover.png" />
+
+	<script src="styles/20240221/new2024/js/jquery-3.7.1.min.js"></script>
+	<script src="styles/20240221/new2024/js/burger.js"></script>
+	<script src="styles/20240221/new2024/js/swiper.min.js"></script>
+	<script src="styles/new2/js/jquery.jqmodal.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jsrender/1.0.13/jsrender.min.js" integrity="sha512-T93uOawQ+FrEdyCPaWrQtppurbLm8SISu2QnHyddM0fGXKX9Amyirwibe1wGYbsW2F8lLzhOM/2+d3Zo94ljRQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tooltipster/4.2.8/js/tooltipster.bundle.min.js"></script>
+	<script src="styles/20240221/new2024/js/base.js"></script>
+	<link href="styles/20240221/new2024/css/base.css" media="screen" rel="stylesheet" />
+</head>
+<body>
+<style>
+button[disabled] {
+	opacity: 0.5;
+	pointer-events: none;
+}
+</style>
+<script>
+window.p = {}; // 'p' is a common namespace
+
+window.p.declension = function(n, w1, w2, w3) { // число => минута, минуты, минут
+	var d = n % 10;
+	var d2 = n % 100;
+	if(d == 0 || (d > 4 && d <= 9) || (d2 > 10 && d2 < 15)){
+		return w3;
+	}else if(d == 1){
+		return w1;
+	}else{
+		return w2;
+	}
+};
+window.p.zeropad = function(n) {
+	if(n < 10) {
+		n = '0' + n;
+	}
+	return n;
+};
+
+function url_plus(add, url, hash) {
+	var args = {};
+	if(!add) {
+		add = '';
+	}
+	if(!url) {
+		url = window.location.toString();
+	}
+	url = url.replace(/#.+/, ''); // remove hash from url
+
+	var parts = url.split('?');
+	var res = parts[0] + '?';
+	var a_args = (parts[1] || '&').split('&');
+	for(var p in a_args) {
+		var a = a_args[p].split('=');
+		if(a[0] && a[1]) {
+			args[a[0]] = a[1];
+		}
+	}
+	a_args = add.split('&');
+	for(var p in a_args) {
+		var a = a_args[p].split('=');
+		if(a[0] && a[1]) {
+			args[a[0]] = a[1];
+		}
+	}
+	for(var p in args) {
+		res += p + '=' + args[p] + '&';
+	}
+	res = res.slice(0, -1);
+	if(hash) {
+		res += '#' + hash;
+	}
+	return res;
+}
+function getCookie (name) {
+	var prefix = name + "=";
+	var cookieStartIndex = document.cookie.indexOf(prefix);
+	if (cookieStartIndex == -1) return null;
+	var cookieEndIndex = document.cookie.indexOf(";", cookieStartIndex + prefix.length);
+	if (cookieEndIndex == -1) cookieEndIndex = document.cookie.length;
+	return unescape(document.cookie.substring(cookieStartIndex + prefix.length, cookieEndIndex));
+}
+function setCookie(name, value, path, domain, expire) {
+	if (path) {
+		path = "; path=" + path;
+	} else {
+		path = "; path=/";
+	}
+	domain = "; domain=" + domain;
+	var expiresDate = new Date();
+	expiresDate.setTime(expiresDate.getTime() + (expire * 24*60*60*1000));
+	expire = "; expires=" + expiresDate.toGMTString();
+	document.cookie = name + "=" + escape(value) + path + domain + expire + ";";
+}
+$(function() {
+	var $window = $(window);
+	var $document = $(document);
+	var $body = $('body');
+
+	// countdown plugin
+	(function($){
+		var montharray = new Array("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"),
+			now = 1000 * 1733930481,
+			tdiff = (new Date()).getTime() - now;
+		function zeropad(n) {
+			if(n < 10) {
+				n = '0' + n;
+			}
+			return n;
+		}
+		$.fn.countdown = function(until) {
+			return this.each(function() {
+				var $this = $(this),
+					$dd = $this.find('.x-countdown_days'),
+					$hh = $this.find('.x-countdown_hours'),
+					$mm = $this.find('.x-countdown_minutes'),
+					$ss = $this.find('.x-countdown_seconds');
+				function countdown(dt) {
+					var dh = dt.split(" ");
+					var dmy = dh[0].split("-");
+					var hms = dh[1].split(":");
+					var d = dmy[2];
+					var m = dmy[1];
+					var y = dmy[0];
+					var hour = hms[0];
+					var min = hms[1];
+					var sec = hms[2];
+
+					var today = new Date((new Date()).getTime() - tdiff); // MSK time
+					var todayy = today.getYear();
+					if (todayy < 1000) {
+						todayy += 1900;
+					}
+					var todaym = today.getMonth();
+					var todayd = today.getDate();
+					var todayh = today.getHours();
+					var todaymin = today.getMinutes();
+					var todaysec = today.getSeconds();
+					var todaystring = montharray[todaym] + " " + todayd + ", " + todayy + " " + todayh + ":" + todaymin + ":" + todaysec;
+					var futurestring = montharray[m-1] + " " + d + ", " + y + " " + hour +":"+ min +":"+ sec;
+					var dd = Date.parse(futurestring) - Date.parse(todaystring);
+					var dday = Math.floor(dd/(60*60*1000*24)*1);
+					var dhour = Math.floor((dd%(60*60*1000*24))/(60*60*1000)*1);
+					var dmin = Math.floor(((dd%(60*60*1000*24))%(60*60*1000))/(60*1000)*1);
+					var dsec = Math.floor((((dd%(60*60*1000*24))%(60*60*1000))%(60*1000))/1000*1);
+
+					if(dday <= 0 && dhour <= 0 && dmin <= 0 && dsec <= 0) {
+						$this.css('display', 'none');
+					} else {
+						$dd.html(zeropad(dday));
+						$hh.html(zeropad(dhour));
+						$mm.html(zeropad(dmin));
+						$ss.html(zeropad(dsec));
+					}
+				}
+				countdown(until);
+				setInterval(function() {
+					countdown(until);
+				}, 1000);
+			});
+		};
+	})(jQuery);
+	$('#countdown').countdown('2024-06-14 19:00:00');
+
+	// попапы
+	(function() {
+		var $popup = $('#popup');
+		var $popupContent = $popup.find('.x-popup-window-block');
+		var bodyClass = 'x-modal-fade x-modal-opened';
+
+		$popup.jqm({
+			onShow: function(h) {
+				var selector = $(h.t).attr('data-selector');
+				var url = $(h.t).attr('data-url');
+
+				h.c.data = {};
+				h.c.data.popupClass = h.t.getAttribute('data-popup-class') || 'x-popup-text';
+				$popup.addClass(h.c.data.popupClass);
+
+				$body.addClass(bodyClass);
+				h.w.show();
+
+				if(url) {
+					$popupContent.html('Загрузка...').load(url);
+				} else {
+					$popupContent.html($(selector)[0].content.cloneNode(true));
+				}
+			},
+			onHide: function(h) {
+				h.w.hide();
+				$popup.removeClass(h.c.data.popupClass);
+				//$(document).trigger('jqmHide.jqModal', {popup: $popup});
+
+				$popupContent.html('');
+				$body.removeClass(bodyClass);
+			},
+			overlay: 0 // отключаем оверлей
+		});
+		$popup.on('click', '.xx-popup-close', function() {
+			$popup.jqmHide();
+			return false;
+		});
+		$document.on('click', '.x-open-popup', function() {
+			$popup.jqmShow(this);
+			return false;
+		});
+		window.openModal = function(selector, popupClass) {
+			var $trigger = $('<a href="index.html#" class="x-popup" data-selector="#' + selector + '" data-popup-class="' + (popupClass || '') + '"></a>');
+			$popup.jqmShow($trigger[0]);
+		};
+	})();
+
+	// форма подписки
+	(function() {
+		$document.on('submit', '#email-form', function() {
+			var $form = $(this);
+			var $button = $form.find('button');
+			var $email = $form.find('input[name="email"]');
+
+			$button.attr({disabled: true});
+			$.post('/ajax/?f=add_premia2024_subscriber', {email: $email.val()})
+				.done(function(data) {
+					if(data.status == 0) {
+						window.oko('track', {entity_type: 'premia:buy_tickets_prm2024', event: 'usertag', metadata: {email: $email.val()}});
+						$form.hide();
+						$('.notice').show();
+					} else {
+						$form.find('.x-error-text').show();
+					}
+				})
+				.fail(function() {
+					$form.find('.x-error-text').show();
+				})
+				.always(function() {
+					$button.attr({disabled: false});
+				});
+
+			return false;
+		});
+	})();
+
+	(function() {
+		$document.on('click', '.x-ring-login-link', function() {
+			window.localStorage.setItem('ring_login_return', window.location.toString());
+			$(this).attr('href', 'https://onering.media1.ru/premia/login/');
+		});
+		$document.on('click', '.x-ring-logout-link', function() {
+			$(this).attr('href', '/auth/logout/?back=' + encodeURIComponent(window.location.toString()));
+		});
+	})();
+
+	$.views.converters({
+		uri: function(value) {
+			return encodeURIComponent(value);
+		}
+	});
+
+	// шеринг
+	(function() {
+		// нативный шеринг
+		$document.on('click', '.x-share-native', function() {
+			var $this = $(this);
+			var shareData = {url: $this.attr('href')};
+			try {
+				if(window.navigator.canShare(shareData)) {
+					window.navigator.share(shareData);
+				} else {
+					throw new Error();
+				}
+			} catch (err) {
+				$this.tooltipster({
+					content: 'Ссылка скопирована',
+					trigger: 'custom'
+				});
+
+				window.navigator.clipboard.writeText(shareData.url);
+
+				$this.tooltipster('open');
+				setTimeout(function() {
+					$this.tooltipster('close');
+				}, 2000);
+			}
+
+			return false;
+		});
+		// шеринг результата голосования
+		window.renderVotingShareTemplate = function(votesData) {
+			var shareUrl = "https://premia.muz-tv.ru/voting/";
+			var shareTitle = 'Результаты моего голосования на Премии МУЗ-ТВ 2024 #премиямузтв';
+			var shareImageUrlSearchParams = new URLSearchParams();
+			Object.keys(votesData).forEach(function(nominationId) {
+				const nomineeId = votesData[nominationId];
+				shareImageUrlSearchParams.append('n' + nominationId, nomineeId);
+			});
+			var shareImageVK = "https://premia.muz-tv.ru/voting/share_image/?" + shareImageUrlSearchParams.toString();
+			var shareImageOK = shareImageVK;
+			var now = new Date();
+
+			var tmpl = $.templates('#shareVotingTemplate');
+			var html = tmpl.render({
+				shareUrl: shareUrl,
+				shareTitle: shareTitle,
+				shareImageVK: shareImageVK,
+				shareImageOK: shareImageOK,
+				cacheBurst: now.getTime()
+			});
+
+			$('#share_voting').html(html);
+		};
+	})();
+});
+</script>
+
+<div class="x-popup" id="popup" style="display: none;">
+	<div class="x-popup-window"><div class="x-popup-close xx-popup-close"></div>
+		<div class="x-popup-window-wrapper">
+			<div class="x-popup-window-block"></div>
+		</div>
+	</div>
+</div>
+
+<template id="email-form-modal">
+	<div class="notice" style="display: none;">
+		<div class="notice-pic">
+			<i class="icon-done"></i>
+		</div>
+		<h2 class="title-h1">Спасибо за Вашу заявку!</h2>
+		<div class="text">Скоро Вам будет отправлено письмо с информацией о старте продаж билетов.<br>До встречи на Премию BLOBIK AWARDS 2024!</div>
+		<div class="notice-control"><a href="https://live.vkvideo.ru/strim_vf" class="button button-md" target="_blank">Как это было</a></div>
+	</div>
+	<form class="form" id="email-form">
+		<div class="form-row">
+			<div class="text">
+				Уважаемый зритель BLOBIK AWARDS, <br/>
+				Рады сообщить, что <b>Национальная Премия «BLOBIK AWARDS» в 2024 году состоится</b>.<br/>
+				Стань Первым, кто узнает о дате, месте её проведения и старте продаж билетов. <br/>
+				<b>Зарегистрируйся на сайте</b> BLOBIK AWARDS.RU и мы <b>пришлём тебе сообщение</b> с подробной информацией.
+			</div>
+		</div>
+		<div class="form-row">
+			<div class="form-field-name">E-mail <span class="text-mark">*</span></div>
+			<div class="form-field">
+				<input class="form-field-input" name="email" type="email" placeholder="ivanov@mail.ru" required />
+			</div>
+			<div class="form-field-text"><span class="text-mark">*</span> — обязательное для заполнения поле</div>
+		</div>
+		<div class="form-row">
+			<div class="options">
+				<label class="option">
+					<div class="form-checkbox"><input type="checkbox" class="form-checkbox-field" name="agree" checked required /><div class="form-checkbox-style"></div></div>
+					<div class="option-text">Я даю согласие на обработку персональных данных</div>
+				</label>
+			</div>
+		</div>
+		<div class="form-bottom x-error-text" style="display: none;">
+			<div class="message message-error">
+				<i class="icon-error"></i>
+				<div class="message-text">Ой, что-то пошло не так! Проверь, что ты верно заполнил все поля</div>
+			</div>
+		</div>
+		<div class="form-bottom">
+			<button class="button button-md">отправить</button>
+		</div>
+	</div>
+</template>
+
+<template id="no-auth">
+	<div class="popup-text">
+		<h2 class="title-h1">Необходимо авторизоваться</h2>
+		<div class="popup-text-control">
+			<a class="button button-md button-color-accent x-ring-login-link" href="index.html#">Войти</a>
+		</div>
+	</div>
+</template>
+
+<template id="need-all-nomination-votes">
+	<div class="popup-text">
+		<h2 class="title-h1">Необходимо проголосовать во всех номинациях</h2>
+		<div class="popup-text-control">
+			<button class="button button-md button-color-accent xx-popup-close">Закрыть</button>
+		</div>
+	</div>
+</template>
+
+<template id="success-voting">
+	<div class="popup-text">
+		<div class="popup-text-pic">
+			<img src="styles/20240221/new2024/trash/1233.jpg" alt="">
+		</div>
+		<h2 class="title-h1">Спасибо за твой голос!</h2>
+		<div class="text">
+			Он очень важен для нас и, возможно, именно он станет определяющим!<br>
+			Ждём тебя на Премии МУЗ-ТВ 2024 14 июня в СК «ЦСКА Арена».<br>
+			Информация о билетах на <a href="index.html">premia.muz-tv.ru</a>
+		</div>
+		<div class="popup-text-control"><button class="button button-md button-color-accent xx-popup-close">вернуться на сайт</button></div>
+		<div class="share">
+			<div class="share-text">
+				<h3 class="title-h2 title-h2-sp">Поделись голосованием:</h3>
+			</div>
+			<div class="elements-list" id="share_voting"></div>
+		</div>
+	</div>
+</template>
+
+<template id="finished-voting">
+	<div class="popup-text">
+		<div class="popup-text-pic">
+			<img src="styles/20240221/new2024/trash/1233.jpg" alt="">
+		</div>
+		<h2 class="title-h1">Голосование закрыто</h2>
+		<div class="text">
+			Ждём тебя на Премии МУЗ-ТВ 2024 14 июня в СК «ЦСКА Арена».<br>
+			Информация о билетах на <a href="index.html">premia.muz-tv.ru</a>
+		</div>
+		<div class="popup-text-control"><button class="button button-md button-color-accent xx-popup-close">вернуться на сайт</button></div>
+	</div>
+</template>
+
+<script id="shareVotingTemplate" type="text/x-jsrender">
+	<div class="elements-list-item">
+		<a
+			class="button button-share x-share-native"
+			target="_blank"
+			href="https://premia.muz-tv.ru/{{:shareUrl}}">
+			<i class="icon-copy"></i> <span class="button-text">ссылка</span>
+		</a>
+	</div>
+	<div class="elements-list-item">
+		<a
+			class="button button-share"
+			target="_blank"
+			href="https://vk.com/share.php?url={{uri:shareUrl}}&title={{uri:shareTitle}}&image={{uri:shareImageVK}}&description={{uri:shareTitle}}">
+			<i class="icon-vk"></i>
+		</a>
+	</div>
+	<div class="elements-list-item">
+		<a
+			class="button button-share"
+			target="_blank"
+			href="https://connect.ok.ru/offer?url={{uri:shareUrl}}&title={{uri:shareTitle}}&imageUrl={{uri:shareImageOK}}&description={{uri:shareTitle}}">
+			<i class="icon-ok"></i>
+		</a>
+	</div>
+	<div class="elements-list-item">
+		<a
+			class="button button-share"
+			target="_blank"
+			href="https://t.me/share/url?url={{uri:shareUrl}}&text={{uri:shareTitle}}">
+			<i class="icon-tg"></i>
+		</a>
+	</div>
+</script>
+
+<div class="counter">
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-T7N7SDW');</script>
+<!-- End Google Tag Manager -->
+
+<!-- oko -->
+<script>
+!function(s,a,u,r,o,n){s[r]=s[r]||function(){(s[r].q=s[r].q||[]).push(arguments)},s[r].l=1*new Date;o=a.createElement(u),n=a.getElementsByTagName(u)[0];o.async=1;o.src="https://oko.muz-tv.ru/t.js";n.parentNode.insertBefore(o,n)}(window,document,"script","oko");
+oko('init', 'OC-1003-01');
+</script>
+
+</div>
+
+<style>
+/* смещение якорей из-за фикс.шапки */
+a[name] {
+	display: block;
+	position: relative;
+	top: -60px;
+	visibility: hidden;
+}
+</style>
+
+<style>
+.main-head {
+  background-image: url(BLOBIK_AWARD.png);
+}
+@media screen and (min-width: 768px) and (max-width: 1259px) {
+  .main-head {
+    background-image: url(styles/20240221/new2024/images/bg-main-2-tablet.png);
+  }
+}
+@media screen and (max-width: 767px) {
+  .main-head {
+    background-image: url(styles/20240221/new2024/images/bg-main-2-mobile.png);
+  }
+}
+</style>
+
+	<div class="wrapper">
+		<header class="header">
+            <div class="section-wrapper">
+				<div class="header-frame">
+					<nav class="header-menu">
+						<ul class="menu">
+							<li class="menu-item">
+								<a href="index.html" class="menu-item-url">главная</a>
+							</li>
+							<li class="menu-item">
+								<a href="index.html#about" class="menu-item-url">о премии 2024</a>
+							</li>
+							<li class="menu-item">
+								<a href="index.html#news" class="menu-item-url">новости премии</a>
+							</li>
+							<li class="menu-item">
+								<a href="index.html#history" class="menu-item-url">история</a>
+							</li>
+						</ul>
+						<div class="header-right">
+							<!-- <div class="label label-online label-online-2"><div class="label-wrapper">в эфире</div></div> -->
+							<div class="counter" id="countdown">
+								<div class="counter-sec">
+									<div class="counter-int x-countdown_days"></div>
+									<div class="counter-sec-name">дней</div>
+								</div>
+								<div class="counter-sec">
+									<div class="counter-int x-countdown_hours"></div>
+									<div class="counter-sec-name">часов</div>
+								</div>
+								<div class="counter-sec">
+									<div class="counter-int x-countdown_minutes"></div>
+									<div class="counter-sec-name">минут</div>
+								</div>
+								<div class="counter-sec">
+									<div class="counter-int x-countdown_seconds"></div>
+									<div class="counter-sec-name">секунд</div>
+								</div>
+							</div>
+							<!--<button class="button button-ssm button-color-accent desktop-only x-tickets-widget-button">купить билет</button>-->
+						</div>
+					</nav>
+				</div>
+            </div>
+        </header>
+
+<script type="text/javascript" src="https://spb.showgogo.ru/widget/showgogo.js"></script>
+<script>
+$(function() {
+	$(document).on('click', '.x-tickets-widget-button', function() {
+		window.oko('track', {entity_type: '', entity_id: 0, event: 'open_ticket_widget', metadata: {}});
+		showgogo.run(
+			'4357614', //id события
+			'ticketsteam',
+			{
+				utm_source: 'siterr', //данные для маркетологов
+				utm_campaign:'slavaairfest' //данные для маркетологов
+			}
+		);
+		return false;
+	});
+	$(document).on('click', '#close-showgogo-div', function(event) {
+		window.oko('track', {entity_type: '', entity_id: 0, event: 'close_ticket_widget', metadata: {}});
+	});
+});
+</script>
+
+<style>
+.tabs-item {
+	width: 140px;
+}
+</style>
+<main class="content">
+	<section class="section main-head">
+		<div class="section-wrapper">
+			<div class="main-head-logo">
+				<img src="logo-22.png" />
+			</div>
+			<div class="main-head-detail">
+				<div class="title-h1 title-h1-up">23 декабря 14:00</div>
+				<div class="main-head-detail-pic">
+					<img src="logo-cska.png"/>
+				</div>
+			</div>
+			<div class="main-head-control">
+				<!--<button class="button button-color-accent x-tickets-widget-button">купить билет</button>-->
+				<a href="https://live.vkvideo.ru/strim_vf" target="_blank" class="button button-color-accent">смотреть</a>
+			</div>
+		</div>
+	</section>
+
+	<div class="content-cols">
+		<div class="section-wrapper">
+			<div class="content-cols-main">
+
+				<section class="section mix-section">
+					<div class="section-head">
+						<h2 class="title-grand text-gradient">Премия BLOBIK 2024</h2>
+					</div>
+					<div class="online-player online-player-max">
+						<!--<div class="label label-online">прямой эфир</div>-->
+						<!--<iframe width="640" height="360" src="https://rutube.ru/play/embed/df6fe73494a26f74da51573fd97b9baa" frameBorder="0" allow="clipboard-write; autoplay" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>-->
+						<iframe src="https://live.vkvideo.ru/app/embed/strim_vf" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>
+					</div>
+				</section>
+
+				<section class="section mix-section">
+					
+					
+				</section>
+
+					<section class="section mix-section">
+						<div class="section-head">
+							<h2 class="title-grand text-gradient">
+								победители
+							</h2>
+						</div>
+						<div class="swiper-block nominies-slider">
+							<div class="swiper swiper-basic-sq swiper-centered x-swiper-centered">
+								<div class="swiper-button-container">
+									<div class="swiper-button-prev"><i class="icon-arrow-left"></i></div>
+									<div class="swiper-button-next"><i class="icon-arrow-right"></i></div>
+								</div>	
+								<div class="swiper-wrapper">
+										<div class="swiper-slide">
+											<a href="voting/index.html" class="media-card">
+												<div class="media-card-pic">
+													<img src="Squad2024.jpeg" />
+												</div>
+												<div class="media-card-content">
+													<h4 class="title-h3">Сквад года</h4>
+												</div>
+											</a>
+										</div>
+
+										<div class="swiper-slide">
+											<a href="voting/index.html" class="media-card">
+												<div class="media-card-pic">
+													<img src="IvanKonchev.jpeg" />
+												</div>
+												<div class="media-card-content">
+													<h4 class="title-h3">BLOBIK KING</h4>
+												</div>
+											</a>
+										</div>
+
+										<div class="swiper-slide">
+											<a href="voting/index.html" class="media-card">
+												<div class="media-card-pic">
+													<img src="BLOBIK_QUEEN_2024.jpeg" />
+												</div>
+												<div class="media-card-content">
+													<h4 class="title-h3">BLOBIK QUEEN</h4>
+												</div>
+											</a>
+										</div>
+
+										<div class="swiper-slide">
+											<a href="voting/index.html" class="media-card">
+												<div class="media-card-pic">
+													<img src="yearmem.jpeg" />
+												</div>
+												<div class="media-card-content">
+													<h4 class="title-h3">Человек-мем года</h4>
+												</div>
+											</a>
+										</div>
+
+										<div class="swiper-slide">
+											<a href="voting/index.html" class="media-card">
+												<div class="media-card-pic">
+													<img src="fail2024.jpeg" />
+												</div>
+												<div class="media-card-content">
+													<h4 class="title-h3">Фейл года</h4>
+												</div>
+											</a>
+										</div>
+
+										<div class="swiper-slide">
+											<a href="voting/index.html" class="media-card">
+												<div class="media-card-pic">
+													<img src="alexANDlika.jpeg" />
+												</div>
+												<div class="media-card-content">
+													<h4 class="title-h3">Пара года</h4>
+												</div>
+											</a>
+										</div>
+										<div class="swiper-slide">
+											<a href="voting/index.html" class="media-card">
+												<div class="media-card-pic">
+													<img src="stifled2024.jpeg" />
+												</div>
+												<div class="media-card-content">
+													<h4 class="title-h3">Душнила года</h4>
+												</div>
+											</a>
+										</div>
+
+										<div class="swiper-slide">
+											<a href="voting/index.html" class="media-card">
+												<div class="media-card-pic">
+													<img src="yearGDZ.jpeg" />
+												</div>
+												<div class="media-card-content">
+													<h4 class="title-h3">Мисс/сер ГДЗ</h4>
+												</div>
+											</a>
+										</div>
+								</div>	
+							</div>
+						</div>
+					</section>
+
+				<a name="about"></a>
+				<section class="section mix-section">
+					<div class="section-head">
+						<h2 class="title-grand text-gradient">О премии <nobr>BLOBIK AWARDS</nobr></h2>
+					</div>
+					<div class="article">
+						<div class="article-wrapper">
+							<p>Ежегодная премия, на которой
+								собираются легенды
+								нашего класса.
+								Стань частью истории и выбери
+								тех, кто по-настоящему достоин
+								стать победителем BLOBIK 2024.
+								
+								</p>
+							<p><a href="https://live.vkvideo.ru/strim_vf" class="button button-color-accent" target="_blank">как это было</a></p>
+						</div>
+					</div>
+				</section>
+
+				<a name="masters"></a>
+				<section class="section mix-section">
+					<div class="section-head">
+						<h2 class="title-grand text-gradient">ведущие</h2>
+					</div>
+					<div class="block">
+						<div class="media-card-pic">
+
+								<img src="VeraJuri.jpeg" />
+
+						</div>
+					</div>
+				</section>
+
+<style>.adfox:empty { margin-bottom: 0; }</style>
+<!--AdFox START-->
+<!--yandex_utvadfox-->
+<!--Площадка: МУЗ / Медийная реклама / DESKTOP Страница Премии под Ведущими-->
+<!--Категория: <не задана>-->
+<!--Тип баннера: Media banner-->
+<div id="adfox_171744112037147805" class="section adfox"></div>
+<!--AdFox START-->
+<!--yandex_utvadfox-->
+<!--Площадка: МУЗ / Медийная реклама / MOBILE Страница Премии под Ведущими-->
+<!--Категория: <не задана>-->
+<!--Тип баннера: Media banner-->
+<div id="adfox_171744112306997805" class="section adfox"></div>
+<script>
+$(window).on('load', function() {
+	try {
+		var cb;
+		if($(window).width() > 767) { // desktop
+			cb = ()=>{
+				Ya.adfoxCode.create({
+					ownerId: 1461715,
+					containerId: 'adfox_171744112037147805',
+					params: {
+						p1: 'dcnvt',
+						p2: 'p'
+					}
+				})
+			};
+		} else { // mobile
+			cb = ()=>{
+				Ya.adfoxCode.create({
+					ownerId: 1461715,
+					containerId: 'adfox_171744112306997805',
+					params: {
+						p1: 'dcnvu',
+						p2: 'p'
+					}
+				})
+			};
+		}
+		window.yaContextCb = window.yaContextCb || [];
+		window.yaContextCb.push(cb);
+	} catch(e) {}
+});
+</script>
+
+				<a name="lineup"></a>
+
+				<a name="news"></a>
+				<section class="section mix-section">
+					<div class="section-head">
+						<h2 class="title-grand text-gradient">новости премии</h2>
+					</div>
+
+						<div class="block">
+							<a href="https://telegra.ph/EHta-premiya-dlya-menya-pobeda--eshchyo-odna-prichina-ne-opuskat-ruki-i-prodolzhat-uchastvovat-12-18" class="media-card media-card-full" target="_blank">
+								<div class="media-card-pic">
+									<img src="Winner2024.jpeg" />
+								</div>
+								<div class="media-card-content">
+									<div class="content-type">
+										<i class="icon-type-3"></i>
+									</div>
+									<h3 class="title-h2">Эксклюзив BLOBIK: IVAN — о победе на Премии BLOBIK-AWARDS 2024 </h3>
+									<div class="more">читать <i class="icon-arrow-more icon-arrow-more-short"></i></div>
+								</div>
+							</a>
+						</div>
+
+						<div class="swiper-block">
+							<div class="swiper swiper-basic swiper-basic-mob-static-full x-swiper-basic-mob-static">
+								<div class="swiper-button-container">
+									<div class="swiper-button-prev"><i class="icon-arrow-left"></i></div>
+									<div class="swiper-button-next"><i class="icon-arrow-right"></i></div>
+								</div>	
+								<div class="swiper-wrapper">
+
+										
+
+								</div>	
+								<a href="https://muz-tv.ru/news/" class="more more-mobile" target="_blank">смотреть все <i class="icon-arrow-more icon-arrow-more"></i></a>
+							</div>
+						</div>
+
+				</section>
+
+				<a name="history"></a>
+				<section class="section">
+					<div class="section-head">
+						<h2 class="title-grand text-gradient">ИСТОРИЯ</h2>
+					</div>
+					<div class="tabs-slider">
+						<div class="swiper swiper-basic x-swiper-basic-tabs">
+							<div class="swiper-button-container">
+								<div class="swiper-button-prev"><i class="icon-arrow-left"></i></div>
+								<div class="swiper-button-next"><i class="icon-arrow-right"></i></div>
+							</div>	
+							<div class="swiper-wrapper">
+								<div class="swiper-slide">
+									<div class="tabs-item">Этап 1</div>
+								</div>
+								<div class="swiper-slide">
+									<div class="tabs-item">Этап 2</div>
+								</div>
+								<div class="swiper-slide">
+									<div class="tabs-item">Этап 3</div>
+								</div>
+								<div class="swiper-slide">
+									<div class="tabs-item">Этап 4</div>
+								</div>
+								<div class="swiper-slide">
+									<div class="tabs-item">GRAND FINAL</div>
+								</div>
+							</div>	
+						</div>
+					</div>
+					<div class="swiper-block">
+						<div class="swiper swiper-basic swiper-basic-about x-swiper-basic-tabs-content">
+							<div class="swiper-button-container">
+								<div class="swiper-button-prev"><i class="icon-arrow-left"></i></div>
+								<div class="swiper-button-next"><i class="icon-arrow-right"></i></div>
+							</div>
+							<div class="swiper-wrapper">
+								<div class="swiper-slide">
+									<span class="media-card">
+										<div class="media-card-content">
+											<h4 class="title-h2">Официальный Пресс-завтрак</h4>
+											<div class="text">Объявление номинаций и имён ведущих Премии. Запуск голосования экспертного жюри.</div>
+										</div>
+									</span>
+								</div>
+								<div class="swiper-slide">
+									<span class="media-card">
+										<div class="media-card-content">
+											<h4 class="title-h2">Экспертное голосование</h4>
+											<div class="text">Определение шорт-листов в каждой номинации путём голосования экспертным сообществом. Экспертное жюри формируется оргкомитетом Премии BLOBIK-AWARDS</div>
+										</div>
+									</span>
+								</div>
+								<div class="swiper-slide">
+									<span class="media-card">
+										<div class="media-card-content">
+											<h4 class="title-h2">Гала-ужин</h4>
+											<div class="text">Подведение итогов голосования экспертного жюри и объявление шорт-листов в каждой номинации. Запуск зрительского голосования.</div>
+										</div>
+									</span>
+								</div>
+								<div class="swiper-slide">
+									<span class="media-card">
+										<div class="media-card-content">
+											<h4 class="title-h2">Зрительское голосование</h4>
+											<div class="text">Зрительское голосование на сайте для зрителей BLOBIK-AWARD. В этот же период проводится второй этап закрытого экспертного голосования в шорт-листах в каждой номинации.</div>
+										</div>
+									</span>
+								</div>
+								<div class="swiper-slide">
+									<span class="media-card">
+										<div class="media-card-content">
+											<h4 class="title-h2">Церемония Вручения Премии BLOBIK-AWARD 2024</h4>
+											<div class="text">Торжественное вручение Премии. Прямая трансляция масштабного шоу на телеканале BLOBIK-AWARD.</div>
+										</div>
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<section class="section mix-section">
+					<div class="section-head">
+						<h2 class="title-grand text-gradient">эксперты</h2>
+					</div>
+					<div class="article">
+						<div class="article-wrapper">
+							<p>Эксперты Премии – это признанные специалисты , чья высокая квалификация и опыт помогают объективно оценить участников и выявить самых лучших.</p>
+						</div>
+					</div>
+					<div class="swiper-block">
+						<div class="swiper swiper-basic swiper-2x swiper-comment x-swiper-2х">
+							<div class="swiper-button-container">
+								<div class="swiper-button-prev"><i class="icon-arrow-left"></i></div>
+								<div class="swiper-button-next"><i class="icon-arrow-right"></i></div>
+							</div>	
+							<div class="swiper-wrapper">
+								<div class="swiper-slide">
+									<span class="media-card">
+										<div class="about-card about-card-type2">
+											<div class="about-card-pic"><img src="juri1.jpeg"></div>
+											<div class="about-card-content">
+												<h4 class="title-h2">Тулаева Вера</h4>
+												<div class="text">жюри, продюсер,</div>
+											</div>
+										</div>
+										<div class="blockquote">
+											<div class="blockquote-text">Премия BLOBIK – поистине грандиозное и важное событие для нашего класса. Я очень рада, что стою у истоков Премии и до сих пор являюсь частью этого проекта!</div>
+										</div>
+									</span>
+								</div>
+								<div class="swiper-slide">
+									<span class="media-card">
+										<div class="about-card about-card-type2">
+											<div class="about-card-pic"><img src="IvanKonchev.jpeg"></div>
+											<div class="about-card-content">
+												<h4 class="title-h2">Иван Кончев</h4>
+												<div class="text">организатор Премии</div>
+											</div>
+										</div>
+										<div class="blockquote">
+											<div class="blockquote-text"> Мы создали премию BLOBIK для того, чтобы запечатлеть самые лучшие моменты из школьной жизни.
+
+												Наша цель — увековечить лучшие времена нашей жизни.</div>
+										</div>
+									</span>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+				</section>
+
+				
+			</div>
+			<div class="content-cols-right">
+				<div class="news-short">
+	
+					</div>
+				</a>
+			</div>
+
+	</div>
+</div>
+
+			</div>
+		</div>
+	</div>
+</main>
+
+		<footer class="footer">
+			<div class="section-wrapper">
+				<div class="footer-text"><small> ООО «BLOBIK - AWARDS» <br><br> konchev.ivan@vk.com<br> + 7(977) 884-07-84 </small> </div>
+				<div class="footer-menu">
+					<ul class="menu">
+						<li class="menu-item">
+							<a href="https://muz-tv.ru/static/contacts/" class="menu-item-url" target="_blank">контакты</a>
+						</li>
+						<li class="menu-item">
+							<a href="https://muz-tv.ru/news/" class="menu-item-url" target="_blank">новости</a>
+						</li>
+					</ul>
+					<ul class="menu">
+						<li class="menu-item">
+							<a href="https://telegra.ph/POLITIKA-KONFIDENCIALNOSTI-BLOBIK---AWARDS-12-11" class="menu-item-url" target="_blank">ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ</a>
+						</li>
+						<li class="menu-item">
+							<a href="https://telegra.ph/POLZOVATELSKOE-SOGLASHENIE-BLOBIK---AWARDS-12-11" class="menu-item-url" target="_blank">ПОЛЬЗОВАТЕЛЬСКОЕ СОГЛАШЕНИЕ</a>
+						</li>
+						<li class="menu-item">
+							<a href="https://telegra.ph/SOGLASIE-NA-OBRABOTKU-PERS-DANNYH-BLOBIK---AWARDS-12-11" class="menu-item-url" target="_blank">СОГЛАСИЕ НА ОБРАБОТКУ ПЕРС. ДАННЫХ</a>
+						</li>
+					</ul>
+				</div>
+				<div class="socials">
+					<div class="elements-list">
+						<div class="elements-list-item">
+							<a href="https://telegra.ph/Ups-404-12-19" class="icon-ok" target="_blank"></a>
+						</div>
+						<div class="elements-list-item">
+							<a href="https://t.me/BLOBIKAWARDS" class="icon-tg" target="_blank"></a>
+						</div>
+						<div class="elements-list-item">
+							<a href="https://telegra.ph/Ups-404-12-19" class="icon-vk" target="_blank"></a>
+						</div>
+						<div class="elements-list-item">
+							<a href="https://telegra.ph/Ups-404-12-19" class="icon-dzen" target="_blank"></a>
+						</div>
+						<div class="elements-list-item">
+							<a href="https://telegra.ph/Ups-404-12-19" class="icon-yt" target="_blank"></a>
+						</div>
+						<div class="elements-list-item">
+							<a href="https://telegra.ph/Ups-404-12-19" class="icon-vb" target="_blank"></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+	</div>
+</body>
+</html>
