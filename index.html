@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- Важное исправление для мобильных: добавили viewport-fit=cover -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <!-- Актуальные мета-теги для BLOBIK AWARDS -->
     <meta name="description" content="Официальный сайт Национальной Премии BLOBIK AWARDS 2024. Победители, история, новости, трансляция.">
     <meta name="keywords" content="BLOBIK AWARDS, премия, школьная премия, победители 2024">
@@ -19,8 +20,8 @@
     <meta property="og:type" content="website">
     <meta property="og:title" content="Премия BLOBIK AWARDS 2024">
     <meta property="og:description" content="Официальный сайт Национальной Премии BLOBIK AWARDS 2024. Победители, история, новости.">
-    <meta property="og:image" content="https://muz-tv.ru/static/img/fb_cover.png"> <!-- ВАЖНО: Замените на свой URL изображения -->
-    <meta property="og:url" content="https://your-site.ru"> <!-- ВАЖНО: Укажите адрес своего сайта -->
+    <meta property="og:image" content="https://muz-tv.ru/static/img/fb_cover.png">
+    <meta property="og:url" content="https://your-site.ru">
 
     <!-- Подключение скриптов -->
     <script src="styles/20240221/new2024/js/jquery-3.7.1.min.js"></script>
@@ -34,16 +35,176 @@
 </head>
 <body>
 <style>
+    /* Ключевые исправления для мобильных устройств */
+    
+    /* 1. Убираем горизонтальный скролл на всех устройствах */
+    html, body {
+        overflow-x: hidden !important;
+        width: 100% !important;
+        max-width: 100vw !important;
+        position: relative;
+    }
+    
+    /* 2. Запрещаем горизонтальный скролл для всего контента */
+    .wrapper {
+        overflow-x: hidden !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    /* 3. Фиксируем шапку на мобильных */
+    .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        background: rgba(0, 0, 0, 0.9);
+        width: 100vw;
+        box-sizing: border-box;
+    }
+    
+    /* 4. Добавляем отступ для контента под фиксированной шапкой */
+    .content {
+        margin-top: 60px; /* Высота шапки */
+    }
+    
+    /* 5. Исправляем смещение якорей */
+    a[name] {
+        display: block;
+        position: relative;
+        top: -80px; /* Увеличили из-за фиксированной шапки */
+        visibility: hidden;
+    }
+    
+    /* 6. Общие стили для всех секций */
+    .section {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    
+    .section-wrapper {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    
+    /* 7. Исправляем медиа-элементы */
+    img, iframe, video {
+        max-width: 100% !important;
+        height: auto !important;
+        display: block;
+    }
+    
+    /* 8. Особое внимание к слайдерам */
+    .swiper {
+        width: 100% !important;
+        overflow: hidden !important;
+    }
+    
+    .swiper-wrapper {
+        width: 100% !important;
+    }
+    
+    .swiper-slide {
+        width: auto !important;
+    }
+    
+    /* 9. Главный баннер на мобильных */
+    .main-head {
+        width: 100vw !important;
+        margin-left: calc(-50vw + 50%) !important;
+        background-size: cover !important;
+        background-position: center !important;
+    }
+    
+    /* 10. Исправляем проблему с кнопками disabled */
     button[disabled] {
         opacity: 0.5;
         pointer-events: none;
     }
-    /* Смещение для фиксированного заголовка */
-    a[name] {
-        display: block;
-        position: relative;
-        top: -60px;
-        visibility: hidden;
+    
+    /* 11. Медиа-запросы для мобильных */
+    @media screen and (max-width: 767px) {
+        body {
+            -webkit-text-size-adjust: 100%;
+            -moz-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+        
+        .header-menu {
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .menu {
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .menu-item {
+            margin: 5px 10px;
+        }
+        
+        /* Корректируем отступы для контента на маленьких экранах */
+        .content {
+            margin-top: 50px;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+        
+        /* Фикс для iframe трансляции */
+        .online-player iframe {
+            width: 100% !important;
+            max-width: 100% !important;
+            height: 250px !important;
+        }
+        
+        /* Корректируем карточки победителей */
+        .media-card {
+            width: 100% !important;
+            margin: 0 auto 15px !important;
+        }
+        
+        /* Фикс для истории (табы) */
+        .tabs-item {
+            min-width: 100px !important;
+            font-size: 14px !important;
+        }
+        
+        /* Исправляем подвал */
+        .footer-menu {
+            flex-direction: column;
+        }
+        
+        .footer-menu .menu {
+            margin-bottom: 20px;
+        }
+    }
+    
+    /* 12. Для очень маленьких экранов */
+    @media screen and (max-width: 480px) {
+        .title-h1, .title-h2, .title-h3 {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        
+        .main-head-control .button {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        
+        .online-player iframe {
+            height: 200px !important;
+        }
     }
 </style>
 <script>
@@ -70,8 +231,23 @@
     $(function() {
         var $document = $(document);
         var $body = $('body');
+        var $window = $(window);
 
-        // УДАЛЕНО: Скрипт обратного отсчета до 14 июня 2024. Он неактуален и вызывает ошибки.
+        // Дополнительный фикс для мобильных: предотвращаем zoom на инпутах
+        $('input, select, textarea').on('focus blur', function() {
+            $('meta[name=viewport]').attr('content', 'width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no');
+            setTimeout(function() {
+                $('meta[name=viewport]').attr('content', 'width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover');
+            }, 500);
+        });
+
+        // Фикс для iOS: предотвращаем скачки при скролле
+        if (navigator.userAgent.match(/(iPod|iPhone|iPad)/)) {
+            document.documentElement.style.height = '100%';
+            document.documentElement.style.overflow = 'hidden';
+            document.body.style.height = '100%';
+            document.body.style.overflow = 'auto';
+        }
 
         // Инициализация попапов (модальных окон)
         (function() {
@@ -115,7 +291,7 @@
             });
         })();
 
-        // Форма подписки (оставлена как основа, но проверьте endpoint '/ajax/?f=add_premia2024_subscriber')
+        // Форма подписки
         (function() {
             $document.on('submit', '#email-form', function() {
                 var $form = $(this);
@@ -142,9 +318,7 @@
             });
         })();
 
-        // УДАЛЕНО: Обработчики ссылок для входа/выхода (.x-ring-login-link), ведущие на внешний неработающий сервис.
-
-        // Шеринг (оставлена базовая структура, но функция renderVotingShareTemplate закомментирована)
+        // Шеринг
         (function() {
             $document.on('click', '.x-share-native', function() {
                 var $this = $(this);
@@ -170,13 +344,20 @@
                 }
                 return false;
             });
-            // ЗАКОММЕНТИРОВАНО: Функция для шеринга результатов голосования, так как она ссылается на premia.muz-tv.ru
-            /*
-            window.renderVotingShareTemplate = function(votesData) {
-                // ... код функции ...
-            };
-            */
         })();
+        
+        // Фикс для мобильных: переинициализация Swiper при изменении размера
+        $window.on('resize', function() {
+            setTimeout(function() {
+                if (typeof Swiper !== 'undefined') {
+                    $('.swiper').each(function() {
+                        if ($(this)[0].swiper) {
+                            $(this)[0].swiper.update();
+                        }
+                    });
+                }
+            }, 300);
+        });
     });
 </script>
 
@@ -190,8 +371,7 @@
     </div>
 </div>
 
-<!-- ШАБЛОНЫ для модальных окон (ОЧИЩЕНЫ от контента МУЗ-ТВ) -->
-<!-- Форма подписки на рассылку -->
+<!-- ШАБЛОНЫ для модальных окон -->
 <template id="email-form-modal">
     <div class="notice" style="display: none;">
         <div class="notice-pic">
@@ -237,7 +417,6 @@
     </form>
 </template>
 
-<!-- Пустые или базовые шаблоны для устранения ошибок JS -->
 <template id="no-auth">
     <div class="popup-text">
         <h2 class="title-h1">Функция временно недоступна</h2>
@@ -270,9 +449,8 @@
         </div>
     </div>
 </template>
-<!-- УДАЛЕН шаблон #shareVotingTemplate, так как он не используется -->
 
-<!-- Счетчики аналитики (оставлены без изменений) -->
+<!-- Счетчики аналитики -->
 <div class="counter">
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -301,20 +479,16 @@
                         <li class="menu-item"><a href="#history" class="menu-item-url">история</a></li>
                     </ul>
                     <div class="header-right">
-                        <!-- УДАЛЕН обратный отсчет (div#countdown) -->
-                        <!-- Кнопка покупки билетов закомментирована, так как виджет не работает -->
-                        <!-- <button class="button button-ssm button-color-accent desktop-only x-tickets-widget-button">купить билет</button> -->
+                        <!-- Пустое место для будущих элементов -->
                     </div>
                 </nav>
             </div>
         </div>
     </header>
 
-    <!-- УДАЛЕН скрипт и код виджета showgogo для продажи билетов, так как он не работает -->
-
     <main class="content">
         <!-- Главный баннер -->
-        <section class="section main-head" style="background-image: url('BLOBIK_AWARD.png');">
+        <section class="section main-head">
             <div class="section-wrapper">
                 <div class="main-head-logo">
                     <img src="logo-22.png" alt="Логотип BLOBIK AWARDS">
@@ -326,8 +500,6 @@
                     </div>
                 </div>
                 <div class="main-head-control">
-                    <!-- Кнопка покупки билетов закомментирована -->
-                    <!-- <button class="button button-color-accent x-tickets-widget-button">купить билет</button> -->
                     <a href="https://live.vkvideo.ru/strim_vf" target="_blank" class="button button-color-accent">смотреть</a>
                 </div>
             </div>
@@ -342,11 +514,11 @@
                             <h2 class="title-grand text-gradient">Премия BLOBIK 2024</h2>
                         </div>
                         <div class="online-player online-player-max">
-                            <iframe src="https://live.vkvideo.ru/app/embed/strim_vf" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="100%"></iframe>
+                            <iframe src="https://live.vkvideo.ru/app/embed/strim_vf" frameborder="0" allowfullscreen="true" scrolling="no" height="378"></iframe>
                         </div>
                     </section>
 
-                    <!-- Секция "ПОБЕДИТЕЛИ" - ИСПРАВЛЕНА: удалены битые ссылки -->
+                    <!-- Секция "ПОБЕДИТЕЛИ" -->
                     <section class="section mix-section">
                         <div class="section-head">
                             <h2 class="title-grand text-gradient">победители</h2>
@@ -358,9 +530,8 @@
                                     <div class="swiper-button-next"><i class="icon-arrow-right"></i></div>
                                 </div>
                                 <div class="swiper-wrapper">
-                                    <!-- Карточки победителей БЕЗ ссылки на неработающее голосование -->
                                     <div class="swiper-slide">
-                                        <div class="media-card"> <!-- Заменен тег <a> на <div> -->
+                                        <div class="media-card">
                                             <div class="media-card-pic">
                                                 <img src="Squad2024.jpeg" alt="Сквад года">
                                             </div>
@@ -470,8 +641,6 @@
                             </div>
                         </div>
                     </section>
-
-                    <!-- УДАЛЕНЫ рекламные блоки AdFox, так как они не загружаются -->
 
                     <!-- Новости премии -->
                     <a name="news"></a>
@@ -618,12 +787,11 @@
                         </div>
                     </section>
                 </div>
-                <!-- Закрыт .content-cols-right, который был пустым или содержал неработающий код -->
             </div>
         </div>
     </main>
 
-    <!-- Подвал сайта - ИСПРАВЛЕН: оставлены только рабочие ссылки -->
+    <!-- Подвал сайта -->
     <footer class="footer">
         <div class="section-wrapper">
             <div class="footer-text">
@@ -639,7 +807,6 @@
                     <li class="menu-item"><a href="https://telegra.ph/Novosti-premii-01-18" target="_blank">новости</a></li>
                 </ul>
                 <ul class="menu">
-                    <!-- Оставлены ссылки на документацию, так как они ведут на Telegraph -->
                     <li class="menu-item"><a href="https://telegra.ph/POLITIKA-KONFIDENCIALNOSTI-BLOBIK---AWARDS-12-11" target="_blank">ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ</a></li>
                     <li class="menu-item"><a href="https://telegra.ph/POLZOVATELSKOE-SOGLASHENIE-BLOBIK---AWARDS-12-11" target="_blank">ПОЛЬЗОВАТЕЛЬСКОЕ СОГЛАШЕНИЕ</a></li>
                     <li class="menu-item"><a href="https://telegra.ph/SOGLASIE-NA-OBRABOTKU-PERS-DANNYH-BLOBIK---AWARDS-12-11" target="_blank">СОГЛАСИЕ НА ОБРАБОТКУ ПЕРС. ДАННЫХ</a></li>
@@ -647,7 +814,6 @@
             </div>
             <div class="socials">
                 <div class="elements-list">
-                    <!-- Соцсети: оставлена только рабочая ссылка на Telegram, остальные ведут на заглушку 404 -->
                     <div class="elements-list-item"><a href="https://telegra.ph/Ups-404-12-19" class="icon-ok" target="_blank" title="Одноклассники"></a></div>
                     <div class="elements-list-item"><a href="https://t.me/BLOBIKAWARDS" class="icon-tg" target="_blank" title="Telegram"></a></div>
                     <div class="elements-list-item"><a href="https://telegra.ph/Ups-404-12-19" class="icon-vk" target="_blank" title="ВКонтакте"></a></div>
