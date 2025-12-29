@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- Актуальные мета-теги для BLOBIK AWARDS -->
+    <meta name="description" content="Новости Национальной Премии BLOBIK AWARDS 2025. Все последние события, анонсы и интервью.">
+    <meta name="keywords" content="BLOBIK AWARDS, новости премии, события 2025, интервью">
+    <meta name="google-site-verification" content="iNsukhb11NMdCRFSQgeVVV977cshxuJxa21JNlnw0eo">
+    <meta name="yandex-verification" content="431f0a9ca6f60eb4">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <title>Новости Премии BLOBIK AWARDS 2025</title>
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Новости Премии BLOBIK AWARDS 2025">
+    <meta property="og:description" content="Все последние новости и события Национальной Премии BLOBIK AWARDS 2025.">
+    <meta property="og:image" content="BLOBIK_AWARD.png">
+    <meta property="og:url" content="https://kivanort.github.io/BLOBIK_AWARDS_28.12.24/news.html">
+
+    <!-- Подключение скриптов -->
+    <script src="styles/20240221/new2024/js/jquery-3.7.1.min.js"></script>
+    <script src="styles/20240221/new2024/js/burger.js"></script>
+    <script src="styles/20240221/new2024/js/swiper.min.js"></script>
+    <script src="styles/new2/js/jquery.jqmodal.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrender/1.0.13/jsrender.min.js" integrity="sha512-T93uOawQ+FrEdyCPaWrQtppurbLm8SISu2QnHyddM0fGXKX9Amyirwibe1wGYbsW2F8lLzhOM/2+d3Zo94ljRQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tooltipster/4.2.8/js/tooltipster.bundle.min.js"></script>
+    <script src="styles/20240221/new2024/js/base.js"></script>
+    <link href="styles/20240221/new2024/css/base.css" media="screen" rel="stylesheet">
+    <style>
+        /* ТОЧНО ТАКИЕ ЖЕ СТИЛИ КАК НА ГЛАВНОЙ СТРАНИЦЕ */
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100%;
+            position: relative;
+        }
+        
+        .wrapper {
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100%;
+        }
+        
+        button[disabled] {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+        
+        a[name] {
+            display: block;
+            position: relative;
+            top: -60px;
+            visibility: hidden;
+        }
+        
+        .section-wrapper {
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .online-player iframe {
+            max-width: 100%;
+        }
+        
+        .swiper-wrapper, .swiper-slide {
+            max-width: 100%;
+        }
+        
+        /* Минимальные дополнительные стили для новостей */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .news-date {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .back-to-main {
+            display: inline-block;
+            margin-top: 40px;
+            text-align: center;
+            width: 100%;
+        }
+        
+        @media (max-width: 768px) {
+            .news-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+        
+        .voting-info {
+            background: rgba(255, 51, 102, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .voting-info strong {
+            color: #ff3366;
+        }
+        
+        /* Стили для таблицы результатов */
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        .results-table th {
+            text-align: left;
+            padding: 10px;
+            background: rgba(255, 51, 102, 0.2);
+            color: #ff3366;
+            font-weight: bold;
+        }
+        
+        .results-table td {
+            padding: 8px 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .results-table tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .nomination-title {
+            color: #ff3366;
+            font-weight: bold;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        
+        .vote-count {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .result-item {
+            margin: 8px 0;
+            padding: 5px 0;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+        }
+        
+        .result-name {
+            display: inline-block;
+            width: 60%;
+        }
+        
+        .result-votes {
+            display: inline-block;
+            width: 20%;
+            text-align: right;
+            color: #fff;
+        }
+        
+        .result-percent {
+            display: inline-block;
+            width: 20%;
+            text-align: right;
+            color: #ff3366;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<script>
+    $(function() {
+        var $document = $(document);
+        var $body = $('body');
+
+        // Инициализация попапов (модальных окон)
+        (function() {
+            var $popup = $('#popup');
+            var $popupContent = $popup.find('.x-popup-window-block');
+            var bodyClass = 'x-modal-fade x-modal-opened';
+
+            $popup.jqm({
+                onShow: function(h) {
+                    var selector = $(h.t).attr('data-selector');
+                    var url = $(h.t).attr('data-url');
+
+                    h.c.data = {};
+                    h.c.data.popupClass = h.t.getAttribute('data-popup-class') || 'x-popup-text';
+                    $popup.addClass(h.c.data.popupClass);
+
+                    $body.addClass(bodyClass);
+                    h.w.show();
+
+                    if(url) {
+                        $popupContent.html('Загрузка...').load(url);
+                    } else {
+                        $popupContent.html($(selector)[0].content.cloneNode(true));
+                    }
+                },
+                onHide: function(h) {
+                    h.w.hide();
+                    $popup.removeClass(h.c.data.popupClass);
+                    $popupContent.html('');
+                    $body.removeClass(bodyClass);
+                },
+                overlay: 0
+            });
+            $popup.on('click', '.xx-popup-close', function() {
+                $popup.jqmHide();
+                return false;
+            });
+            $document.on('click', '.x-open-popup', function() {
+                $popup.jqmShow(this);
+                return false;
+            });
+        })();
+    });
+</script>
+
+<!-- Контейнер для модальных окон -->
+<div class="x-popup" id="popup" style="display: none;">
+    <div class="x-popup-window">
+        <div class="x-popup-close xx-popup-close"></div>
+        <div class="x-popup-window-wrapper">
+            <div class="x-popup-window-block"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Счетчики аналитики -->
+<div class="counter">
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-T7N7SDW');</script>
+    <!-- End Google Tag Manager -->
+    <!-- oko -->
+    <script>
+    !function(s,a,u,r,o,n){s[r]=s[r]||function(){(s[r].q=s[r].q||[]).push(arguments)},s[r].l=1*new Date;o=a.createElement(u),n=a.getElementsByTagName(u)[0];o.async=1;o.src="https://oko.muz-tv.ru/t.js";n.parentNode.insertBefore(o,n)}(window,document,"script","oko");
+    oko('init', 'OC-1003-01');
+    </script>
+</div>
+
+<!-- Основная разметка сайта -->
+<div class="wrapper">
+    <header class="header">
+        <div class="section-wrapper">
+            <div class="header-frame">
+                <nav class="header-menu">
+                    <ul class="menu">
+                        <li class="menu-item"><a href="index.html" class="menu-item-url">главная</a></li>
+                        <li class="menu-item"><a href="index.html#about" class="menu-item-url">о премии 2025</a></li>
+                        <li class="menu-item"><a href="news.html" class="menu-item-url">новости премии</a></li>
+                        <li class="menu-item"><a href="index.html#history" class="menu-item-url">история</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="content">
+        <!-- Заголовок страницы новостей -->
+        <section class="section main-head" style="background-image: url('BLOBIK_AWARD.png'); background-position: center; min-height: 300px;">
+            <div class="section-wrapper">
+                <div style="text-align: center; padding-top: 80px;">
+                    <h1 class="title-grand text-gradient">НОВОСТИ ПРЕМИИ</h1>
+                    <div class="text" style="color: #fff; max-width: 600px; margin: 20px auto; font-size: 18px;">
+                        Все последние события, анонсы и эксклюзивные интервью BLOBIK AWARDS 2025
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="content-cols">
+            <div class="section-wrapper">
+                <div class="content-cols-main">
+                    <!-- Информация о системе голосования -->
+                    <section class="section mix-section">
+                        <div class="voting-info">
+                            <h3 class="title-h3" style="margin-top: 0; color: #ff3366;">📢 Как определяются победители?</h3>
+                            <div class="text">
+                                <p><strong>Основной принцип:</strong> Победители BLOBIK AWARDS определяются <strong>народным голосованием</strong>! Каждый голос имеет значение.</p>
+                                <p><strong>Роль жюри:</strong> Экспертное жюри выступает в роли <strong>«решающего голоса»</strong> только в том случае, если у двух или более номинантов в одной категории оказывается <strong>одинаковое количество голосов</strong>.</p>
+                                <p><strong>Ваш голос решает!</strong> Участвуйте в голосовании и поддерживайте своих фаворитов.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Сетка новостей -->
+                    <section class="section mix-section">
+                        <div class="section-head">
+                            <h2 class="title-grand text-gradient">все новости</h2>
+                        </div>
+                        
+                        <div class="news-grid">
+                            <!-- Новость 1 -->
+                            <div class="media-card">
+                                <a href="https://telegra.ph/EHta-premiya-dlya-menya-pobeda--eshchyo-odna-prichina-ne-opuskat-ruki-i-prodolzhat-uchastvovat-12-18" target="_blank" style="text-decoration: none; color: inherit;">
+                                    <div class="media-card-pic">
+                                        <img src="Winner2024.jpeg" alt="Интервью с победителем">
+                                    </div>
+                                    <div class="media-card-content">
+                                        <span class="news-date">18 декабря 2024</span>
+                                        <h4 class="title-h3">IVAN: "Победа в BLOBIK AWARDS — это голос нашего класса!"</h4>
+                                        <div class="text">
+                                            Победитель номинации "BLOBIK King" делится эмоциями: "Это не моя личная победа, а победа всех, кто за меня голосовал!"
+                                        </div>
+                                        <div class="more">читать интервью <i class="icon-arrow-more icon-arrow-more-short"></i></div>
+                                    </div>
+                                </a>
+                            </div>
+                            
+                            <!-- Новость 2 -->
+                            <div class="media-card">
+                                <a href="https://telegra.ph/Novosti-premii-01-18" target="_blank" style="text-decoration: none; color: inherit;">
+                                    <div class="media-card-pic">
+                                        <img src="BLOBIK_AWARD.png" alt="Анонс премии">
+                                    </div>
+                                    <div class="media-card-content">
+                                        <span class="news-date">28 декабря 2025</span>
+                                        <h4 class="title-h3">Голосование открыто: ваш голос решит всё!</h4>
+                                        <div class="text">
+                                            Официальный старт онлайн-голосования за номинантов BLOBIK AWARDS 2025. Проголосуйте за своих фаворитов!
+                                        </div>
+                                        <div class="more">голосовать <i class="icon-arrow-more icon-arrow-more-short"></i></div>
+                                    </div>
+                                </a>
+                            </div>
+                            
+                            <!-- Новость 3 -->
+                            <div class="media-card">
+                                <a href="#" class="x-open-popup" data-selector="#news-expert" style="text-decoration: none; color: inherit;">
+                                    <div class="media-card-pic">
+                                        <img src="juri1.jpeg" alt="Эксперты жюри">
+                                    </div>
+                                    <div class="media-card-content">
+                                        <span class="news-date">10 января 2025</span>
+                                        <h4 class="title-h3">Жюри 2025: кто будет решать при равенстве голосов?</h4>
+                                        <div class="text">
+                                            Представляем экспертов, чей голос станет решающим в случае равного счёта между номинантами.
+                                        </div>
+                                        <div class="more">состав жюри <i class="icon-arrow-more icon-arrow-more-short"></i></div>
+                                    </div>
+                                </a>
+                            </div>
+                            
+                            <!-- Новость 4 -->
+                            <div class="media-card">
+                                <a href="https://live.vkvideo.ru/strim_vf" target="_blank" style="text-decoration: none; color: inherit;">
+                                    <div class="media-card-pic">
+                                        <img src="logo-cska.png" alt="Трансляция">
+                                    </div>
+                                    <div class="media-card-content">
+                                        <span class="news-date">5 января 2025</span>
+                                        <h4 class="title-h3">Прямая трансляция: смотрите, как ваши голоса становятся победой!</h4>
+                                        <div class="text">
+                                            Церемония вручения, где будут объявлены победители, выбранные ВАМИ. Не пропустите исторический момент!
+                                        </div>
+                                        <div class="more">смотреть трансляцию <i class="icon-arrow-more icon-arrow-more-short"></i></div>
+                                    </div>
+                                </a>
+                            </div>
+                            
+                            <!-- Новость 5 -->
+                            <div class="media-card">
+                                <a href="#" class="x-open-popup" data-selector="#news-nominations" style="text-decoration: none; color: inherit;">
+                                    <div class="media-card-pic">
+                                        <img src="BLOBIK25.jpg" alt="Номинации">
+                                    </div>
+                                    <div class="media-card-content">
+                                        <span class="news-date">28 декабря 2024</span>
+                                        <h4 class="title-h3">Текущие лидеры голосования по номинациям</h4>
+                                        <div class="text">
+                                            Обновляемая статистика: кто лидирует в каждой категории по итогам текущего голосования.
+                                        </div>
+                                        <div class="more">все результаты <i class="icon-arrow-more icon-arrow-more-short"></i></div>
+                                    </div>
+                                </a>
+                            </div>
+                            
+                            <!-- Новость 6 -->
+                            <div class="media-card">
+                                <a href="https://telegra.ph/Kak-eto-bylo-12-18" target="_blank" style="text-decoration: none; color: inherit;">
+                                    <div class="media-card-pic">
+                                        <img src="BLOBIK_AWARD.png" alt="Как это было">
+                                    </div>
+                                    <div class="media-card-content">
+                                        <span class="news-date">20 декабря 2024</span>
+                                        <h4 class="title-h3">BLOBIK 2024: когда жюри действительно понадобилось</h4>
+                                        <div class="text">
+                                            Вспоминаем случай 2024 года, когда в номинации "Пара года" голоса разделились ровно пополам.
+                                        </div>
+                                        <div class="more">история голосования <i class="icon-arrow-more icon-arrow-more-short"></i></div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Кнопка возврата на главную -->
+                        <div class="back-to-main">
+                            <a href="index.html" class="button button-color-accent">
+                                <i class="icon-arrow-left" style="margin-right: 8px;"></i> Вернуться на главную
+                            </a>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Подвал сайта -->
+    <footer class="footer">
+        <div class="section-wrapper">
+            <div class="footer-text">
+                <small>
+                    ООО «BLOBIK - AWARDS» <br><br>
+                    konchev.ivan@vk.com<br>
+                    + 7(977) 884-07-84
+                </small>
+            </div>
+            <div class="footer-menu">
+                <ul class="menu">
+                    <li class="menu-item"><a href="https://telegra.ph/Kontakty-BLOBIK-AWARDS-01-18" target="_blank">контакты</a></li>
+                    <li class="menu-item"><a href="news.html">новости</a></li>
+                </ul>
+                <ul class="menu">
+                    <li class="menu-item"><a href="https://telegra.ph/POLITIKA-KONFIDENCIALNOSTI-BLOBIK---AWARDS-12-11" target="_blank">ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ</a></li>
+                    <li class="menu-item"><a href="https://telegra.ph/POLZOVATELSKOE-SOGLASHENIE-BLOBIK---AWARDS-12-11" target="_blank">ПОЛЬЗОВАТЕЛЬСКОЕ СОГЛАШЕНИЕ</a></li>
+                    <li class="menu-item"><a href="https://telegra.ph/SOGLASIE-NA-OBRABOTKU-PERS-DANNYH-BLOBIK---AWARDS-12-11" target="_blank">СОГЛАСИЕ НА ОБРАБОТКУ ПЕРС. ДАННЫХ</a></li>
+                </ul>
+            </div>
+            <div class="socials">
+                <div class="elements-list">
+                    <div class="elements-list-item"><a href="https://telegra.ph/Ups-404-12-19" class="icon-ok" target="_blank" title="Одноклассники"></a></div>
+                    <div class="elements-list-item"><a href="https://t.me/BLOBIKAWARDS" class="icon-tg" target="_blank" title="Telegram"></a></div>
+                    <div class="elements-list-item"><a href="https://telegra.ph/Ups-404-12-19" class="icon-vk" target="_blank" title="ВКонтакте"></a></div>
+                    <div class="elements-list-item"><a href="https://telegra.ph/Ups-404-12-19" class="icon-dzen" target="_blank" title="Яндекс.Дзен"></a></div>
+                    <div class="elements-list-item"><a href="https://telegra.ph/Ups-404-12-19" class="icon-yt" target="_blank" title="YouTube"></a></div>
+                    <div class="elements-list-item"><a href="https://telegra.ph/Ups-404-12-19" class="icon-vb" target="_blank" title="Viber"></a></div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<!-- Шаблоны для модальных окон на странице новостей -->
+<template id="news-expert">
+    <div class="popup-text">
+        <h2 class="title-h1">Экспертное жюри BLOBIK AWARDS 2025</h2>
+        <div class="text" style="text-align: left;">
+            <div class="voting-info">
+                <p><strong>Главная задача жюри:</strong> выступить в роли <strong>«решающего голоса»</strong> только в том случае, если у двух или более номинантов в одной категории оказывается <strong>одинаковое количество голосов</strong> от зрителей.</p>
+                <p>Во всех остальных ситуациях победителей определяет исключительно народное голосование!</p>
+            </div>
+            
+            <p><strong>Состав жюри:</strong></p>
+            <ul style="margin: 15px 0; padding-left: 20px;">
+                <li><strong>Тулаева Вера</strong> - главный организатор, продюсер</li>
+                <li><strong>Иван Кончев</strong> - основатель премии</li>
+                <li><strong>Ароян Гагик</strong> - ведущий трансляции</li>
+                <li><strong>Приглашенные эксперты</strong> из числа учителей и выпускников</li>
+            </ul>
+            
+            <p><strong>История:</strong> В 2024 году жюри понадобилось только один раз — в номинации "Пара года", где голоса разделились ровно пополам.</p>
+        </div>
+        <div class="popup-text-control">
+            <button class="button button-md button-color-accent xx-popup-close">Закрыть</button>
+        </div>
+    </div>
+</template>
+
+<template id="news-nominations">
+    <div class="popup-text">
+        <h2 class="title-h1">Текущие результаты голосования</h2>
+        <div class="text" style="text-align: left;">
+            <p><strong>Обновлено:</strong> 29 декабря 2025, 19:20</p>
+            <p><strong>Всего голосов:</strong> 9 номинаций × 34 голоса = 306 голосов</p>
+            
+            <div class="voting-info" style="overflow-x: auto;">
+                <!-- BLOBIK KING -->
+                <div class="nomination-title">BLOBIK KING</div>
+                <div class="vote-count">34 ответа</div>
+                <div class="result-item">
+                    <div class="result-name">Иван Кончев (великий и неповторимый)</div>
+                    <div class="result-votes">13</div>
+                    <div class="result-percent">38.2%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Ароян Гагик КОРОЛЬ КОРОЛЕЙ</div>
+                    <div class="result-votes">12</div>
+                    <div class="result-percent">35.3%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Тимофей ЛОХ</div>
+                    <div class="result-votes">9</div>
+                    <div class="result-percent">26.5%</div>
+                </div>
+                
+                <!-- BLOBIK QUEEN -->
+                <div class="nomination-title" style="margin-top: 20px;">BLOBIK QUEEN</div>
+                <div class="vote-count">34 ответа</div>
+                <div class="result-item">
+                    <div class="result-name">Клочкова Маша</div>
+                    <div class="result-votes">7</div>
+                    <div class="result-percent">20.6%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Анисимова Полина</div>
+                    <div class="result-votes">6</div>
+                    <div class="result-percent">17.6%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Тулаева Вера</div>
+                    <div class="result-votes">5</div>
+                    <div class="result-percent">14.7%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Данаджи Маша</div>
+                    <div class="result-votes">4</div>
+                    <div class="result-percent">11.8%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Курбанова Сабина</div>
+                    <div class="result-votes">4</div>
+                    <div class="result-percent">11.8%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Софья Шпунт</div>
+                    <div class="result-votes">3</div>
+                    <div class="result-percent">8.8%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Тычинина Лиза</div>
+                    <div class="result-votes">3</div>
+                    <div class="result-percent">8.8%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Курбанова Эльза</div>
+                    <div class="result-votes">1</div>
+                    <div class="result-percent">2.9%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Биркина Дарья</div>
+                    <div class="result-votes">1</div>
+                    <div class="result-percent">2.9%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Киселёва Злата</div>
+                    <div class="result-votes">0</div>
+                    <div class="result-percent">0%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Луговская Катя</div>
+                    <div class="result-votes">0</div>
+                    <div class="result-percent">0%</div>
+                </div>
+                
+                <!-- Позор года -->
+                <div class="nomination-title" style="margin-top: 20px;">Позор года</div>
+                <div class="vote-count">34 ответа</div>
+                <div class="result-item">
+                    <div class="result-name">Паламарчук Тимофей</div>
+                    <div class="result-votes">13</div>
+                    <div class="result-percent">38.2%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Ароян Гагик</div>
+                    <div class="result-votes">5</div>
+                    <div class="result-percent">14.7%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Анисимова Полина</div>
+                    <div class="result-votes">4</div>
+                    <div class="result-percent">11.8%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Иван Кончев</div>
+                    <div class="result-votes">3</div>
+                    <div class="result-percent">8.8%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Курбанова Сабина</div>
+                    <div class="result-votes">2</div>
+                    <div class="result-percent">5.9%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Луговская Катя</div>
+                    <div class="result-votes">2</div>
+                    <div class="result-percent">5.9%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Клочкова Маша</div>
+                    <div class="result-votes">1</div>
+                    <div class="result-percent">2.9%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Данаджи Маша</div>
+                    <div class="result-votes">1</div>
+                    <div class="result-percent">2.9%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Софья Шпунт</div>
+                    <div class="result-votes">1</div>
+                    <div class="result-percent">2.9%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Тычинина Лиза</div>
+                    <div class="result-votes">1</div>
+                    <div class="result-percent">2.9%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Тулаева Вера</div>
+                    <div class="result-votes">1</div>
+                    <div class="result-percent">2.9%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Курбанова Эльза</div>
+                    <div class="result-votes">0</div>
+                    <div class="result-percent">0%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Биркина Дарья</div>
+                    <div class="result-votes">0</div>
+                    <div class="result-percent">0%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Киселёва Злата</div>
+                    <div class="result-votes">0</div>
+                    <div class="result-percent">0%</div>
+                </div>
+            </div>
+            
+            <!-- Продолжение в следующем блоке -->
+            <div class="voting-info" style="overflow-x: auto; margin-top: 20px;">
+                <!-- Завоз года -->
+                <div class="nomination-title">Завоз года</div>
+                <div class="vote-count">34 ответа</div>
+                <div class="result-item">
+                    <div class="result-name">Ароян Гагик</div>
+                    <div class="result-votes">14</div>
+                    <div class="result-percent">41.2%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Иван Кончев</div>
+                    <div class="result-votes">4</div>
+                    <div class="result-percent">11.8%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Софья Шпунт</div>
+                    <div class="result-votes">4</div>
+                    <div class="result-percent">11.8%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Тулаева Вера</div>
+                    <div class="result-votes">4</div>
+                    <div class="result-percent">11.8%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Паламарчук Тимофей</div>
+                    <div class="result-votes">4</div>
+                    <div class="result-percent">11.8%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Данаджи Маша</div>
+                    <div class="result-votes">1</div>
+                    <div class="result-percent">2.9%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Курбанова Сабина</div>
+                    <div class="result-votes">1</div>
+                    <div class="result-percent">2.9%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Тычинина Лиза</div>
+                    <div class="result-votes">1</div>
+                    <div class="result-percent">2.9%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Анисимова Полина</div>
+                    <div class="result-votes">1</div>
+                    <div class="result-percent">2.9%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Клочкова Маша</div>
+                    <div class="result-votes">0</div>
+                    <div class="result-percent">0%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Курбанова Эльза</div>
+                    <div class="result-votes">0</div>
+                    <div class="result-percent">0%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Биркина Дарья</div>
+                    <div class="result-votes">0</div>
+                    <div class="result-percent">0%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Киселёва Злата</div>
+                    <div class="result-votes">0</div>
+                    <div class="result-percent">0%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Луговская Катя</div>
+                    <div class="result-votes">0</div>
+                    <div class="result-percent">0%</div>
+                </div>
+                
+                <!-- Стиль года -->
+                <div class="nomination-title" style="margin-top: 20px;">Стиль года</div>
+                <div class="vote-count">34 ответа</div>
+                <div class="result-item">
+                    <div class="result-name">Софья Шпунт</div>
+                    <div class="result-votes">14</div>
+                    <div class="result-percent">41.2%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Тулаева Вера</div>
+                    <div class="result-votes">5</div>
+                    <div class="result-percent">14.7%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Курбанова Эльза</div>
+                    <div class="result-votes">3</div>
+                    <div class="result-percent">8.8%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Анисимова Полина</div>
+                    <div class="result-votes">3</div>
+                    <div class="result-percent">8.8%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Тычинина Лиза</div>
+                    <div class="result-votes">3</div>
+                    <div class="result-percent">8.8%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Курбанова Сабина</div>
+                    <div class="result-votes">2</div>
+                    <div class="result-percent">5.9%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Киселёва Злата</div>
+                    <div class="result-votes">2</div>
+                    <div class="result-percent">5.9%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Биркина Дарья</div>
+                    <div class="result-votes">1</div>
+                    <div class="result-percent">2.9%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Паламарчук Тимофей</div>
+                    <div class="result-votes">1</div>
+                    <div class="result-percent">2.9%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Клочкова Маша</div>
+                    <div class="result-votes">0</div>
+                    <div class="result-percent">0%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Кончев Иван</div>
+                    <div class="result-votes">0</div>
+                    <div class="result-percent">0%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Ароян Гагик</div>
+                    <div class="result-votes">0</div>
+                    <div class="result-percent">0%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Луговская Катя</div>
+                    <div class="result-votes">0</div>
+                    <div class="result-percent">0%</div>
+                </div>
+                
+                <!-- Сквад года -->
+                <div class="nomination-title" style="margin-top: 20px;">Сквад года</div>
+                <div class="vote-count">34 ответа</div>
+                <div class="result-item">
+                    <div class="result-name">Кончев Иван, Ароян Гагик, Клочкова Маша</div>
+                    <div class="result-votes">19</div>
+                    <div class="result-percent">55.9%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Луговская Катя, Данаджи Маша, Киселёва Злата</div>
+                    <div class="result-votes">9</div>
+                    <div class="result-percent">26.5%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Курбанова Эльза, Биркина Дарья</div>
+                    <div class="result-votes">6</div>
+                    <div class="result-percent">17.6%</div>
+                </div>
+                
+                <!-- Пара года -->
+                <div class="nomination-title" style="margin-top: 20px;">Пара года</div>
+                <div class="vote-count">34 ответа</div>
+                <div class="result-item">
+                    <div class="result-name">Кончев Иван и Клочкова Маша</div>
+                    <div class="result-votes">18</div>
+                    <div class="result-percent">52.9%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Тычинина Лиза и Артём Волков</div>
+                    <div class="result-votes">14</div>
+                    <div class="result-percent">41.2%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Вера и Тимофей</div>
+                    <div class="result-votes">2</div>
+                    <div class="result-percent">5.9%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-name">Луговская Катя и Даня (вроде)</div>
+                    <div class="result-votes">0</div>
+                    <div class="result-percent">0%</div>
+                </div>
+                
+                <!-- Певец года -->
+                <div class="nomination-title" style="margin-top: 20px;">Певец года</div>
+                <div class="vote-count">34 ответа</div>
+                <div class="result-item">
+                    <div class="result-name">Ароян Гагик</div>
+                    <div class="result-votes">34</div>
+                    <div class="result-percent">100%</div>
+                </div>
+                
+                <!-- Организаторы года -->
+                <div class="nomination-title" style="margin-top: 20px;">Организаторы года</div>
+                <div class="vote-count">34 ответа</div>
+                <div class="result-item">
+                    <div class="result-name">Курбанова Эльза и Биркина Дарья</div>
+                    <div class="result-votes">34</div>
+                    <div class="result-percent">100%</div>
+                </div>
+            </div>
+            
+            <div class="voting-info">
+                <p><strong>Важно:</strong> Это промежуточные результаты! Голосование продолжается до 30 декабря 21:00. Ваш голос может изменить расстановку сил!</p>
+                <p>В случае равного количества голосов победителя определит экспертное жюри своим решающим голосом.</p>
+            </div>
+        </div>
+        <div class="popup-text-control">
+            <button class="button button-md button-color-accent xx-popup-close">Закрыть</button>
+        </div>
+    </div>
+</template>
+
+</body>
+</html>
