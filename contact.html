@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Контакты BLOBIK AWARDS. Свяжитесь с нами для получения информации о премии, партнерстве и сотрудничестве.">
+    <meta name="keywords" content="BLOBIK AWARDS, контакты, обратная связь, связь с организаторами">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <title>Контакты BLOBIK AWARDS 2025</title>
+    
+    <!-- Подключение скриптов -->
+    <script src="styles/20240221/new2024/js/jquery-3.7.1.min.js"></script>
+    <script src="styles/20240221/new2024/js/burger.js"></script>
+    <script src="styles/new2/js/jquery.jqmodal.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrender/1.0.13/jsrender.min.js" integrity="sha512-T93uOawQ+FrEdyCPaWrQtppurbLm8SISu2QnHyddM0fGXKX9Amyirwibe1wGYbsW2F8lLzhOM/2+d3Zo94ljRQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="styles/20240221/new2024/js/base.js"></script>
+    <link href="styles/20240221/new2024/css/base.css" media="screen" rel="stylesheet">
+    
+    <style>
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100%;
+            position: relative;
+        }
+        
+        .wrapper {
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100%;
+        }
+        
+        .section-wrapper {
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-top: 40px;
+        }
+        
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .contact-form {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .contact-item {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .contact-title {
+            color: #ff3366;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .contact-details {
+            color: #fff;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        
+        .contact-details a {
+            color: #fff;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255, 51, 102, 0.5);
+            transition: border-color 0.3s;
+        }
+        
+        .contact-details a:hover {
+            border-color: #ff3366;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            color: #fff;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+        
+        .form-required {
+            color: #ff3366;
+        }
+        
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            color: #fff;
+            font-size: 16px;
+            box-sizing: border-box;
+            transition: all 0.3s;
+        }
+        
+        .form-input:focus, .form-textarea:focus {
+            outline: none;
+            border-color: #ff3366;
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .file-upload {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #888;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .checkbox-input {
+            margin-top: 5px;
+        }
+        
+        .checkbox-label {
+            font-size: 14px;
+            color: #fff;
+            line-height: 1.4;
+        }
+        
+        .checkbox-label a {
+            color: #ff3366;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255, 51, 102, 0.5);
+        }
+        
+        .checkbox-label a:hover {
+            border-color: #ff3366;
+        }
+        
+        .form-submit {
+            margin-top: 30px;
+        }
+        
+        .social-contacts {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 51, 102, 0.2);
+            border-radius: 50%;
+            color: #ff3366;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .social-icon:hover {
+            background: #ff3366;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 768px) {
+            .contact-container {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .contact-info, .contact-form {
+                width: 100%;
+            }
+        }
+        
+        .back-to-main {
+            display: inline-block;
+            margin-top: 40px;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .contact-header {
+            text-align: center;
+            padding-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+<script>
+    $(function() {
+        var $document = $(document);
+        var $body = $('body');
+
+        // Инициализация попапов (модальных окон)
+        (function() {
+            var $popup = $('#popup');
+            var $popupContent = $popup.find('.x-popup-window-block');
+            var bodyClass = 'x-modal-fade x-modal-opened';
+
+            $popup.jqm({
+                onShow: function(h) {
+                    var selector = $(h.t).attr('data-selector');
+                    var url = $(h.t).attr('data-url');
+
+                    h.c.data = {};
+                    h.c.data.popupClass = h.t.getAttribute('data-popup-class') || 'x-popup-text';
+                    $popup.addClass(h.c.data.popupClass);
+
+                    $body.addClass(bodyClass);
+                    h.w.show();
+
+                    if(url) {
+                        $popupContent.html('Загрузка...').load(url);
+                    } else {
+                        $popupContent.html($(selector)[0].content.cloneNode(true));
+                    }
+                },
+                onHide: function(h) {
+                    h.w.hide();
+                    $popup.removeClass(h.c.data.popupClass);
+                    $popupContent.html('');
+                    $body.removeClass(bodyClass);
+                },
+                overlay: 0
+            });
+            $popup.on('click', '.xx-popup-close', function() {
+                $popup.jqmHide();
+                return false;
+            });
+            $document.on('click', '.x-open-popup', function() {
+                $popup.jqmShow(this);
+                return false;
+            });
+        })();
+        
+        // Обработка формы обратной связи
+        $('#contactForm').on('submit', function(e) {
+            e.preventDefault();
+            
+            // Простая валидация
+            var name = $('#name').val().trim();
+            var email = $('#email').val().trim();
+            var message = $('#message').val().trim();
+            var agree = $('#agree').is(':checked');
+            
+            if (!name) {
+                alert('Пожалуйста, введите ваше имя и фамилию');
+                return;
+            }
+            
+            if (!email) {
+                alert('Пожалуйста, введите ваш email');
+                return;
+            }
+            
+            if (!message) {
+                alert('Пожалуйста, введите ваше сообщение');
+                return;
+            }
+            
+            if (!agree) {
+                alert('Пожалуйста, дайте согласие на обработку персональных данных');
+                return;
+            }
+            
+            // Здесь обычно отправка формы на сервер
+            // Для демо просто показываем сообщение об успехе
+            alert('Спасибо за ваше сообщение! Мы свяжемся с вами в ближайшее время.');
+            
+            // Сброс формы
+            $(this)[0].reset();
+        });
+    });
+</script>
+
+<!-- Контейнер для модальных окон -->
+<div class="x-popup" id="popup" style="display: none;">
+    <div class="x-popup-window">
+        <div class="x-popup-close xx-popup-close"></div>
+        <div class="x-popup-window-wrapper">
+            <div class="x-popup-window-block"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Счетчики аналитики -->
+<div class="counter">
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-T7N7SDW');</script>
+    <!-- End Google Tag Manager -->
+    <!-- oko -->
+    <script>
+    !function(s,a,u,r,o,n){s[r]=s[r]||function(){(s[r].q=s[r].q||[]).push(arguments)},s[r].l=1*new Date;o=a.createElement(u),n=a.getElementsByTagName(u)[0];o.async=1;o.src="https://oko.muz-tv.ru/t.js";n.parentNode.insertBefore(o,n)}(window,document,"script","oko");
+    oko('init', 'OC-1003-01');
+    </script>
+</div>
+
+<!-- Основная разметка сайта -->
+<div class="wrapper">
+    <header class="header">
+        <div class="section-wrapper">
+            <div class="header-frame">
+                <nav class="header-menu">
+                    <ul class="menu">
+                        <li class="menu-item"><a href="index.html" class="menu-item-url">главная</a></li>
+                        <li class="menu-item"><a href="index.html#about" class="menu-item-url">о премии 2025</a></li>
+                        <li class="menu-item"><a href="news.html" class="menu-item-url">новости премии</a></li>
+                        <li class="menu-item"><a href="index.html#history" class="menu-item-url">история</a></li>
+                        <li class="menu-item"><a href="contact.html" class="menu-item-url">контакты</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="content">
+        <!-- Заголовок страницы контактов -->
+        <section class="section main-head" style="background-image: url('BLOBIK_AWARD.png'); background-position: center; min-height: 300px;">
+            <div class="section-wrapper">
+                <div class="contact-header" style="text-align: center; padding-top: 80px;">
+                    <h1 class="title-grand text-gradient">КОНТАКТЫ</h1>
+                    <div class="text" style="color: #fff; max-width: 600px; margin: 20px auto; font-size: 18px;">
+                        Свяжитесь с организаторами BLOBIK AWARDS 2025
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="content-cols">
+            <div class="section-wrapper">
+                <div class="content-cols-main">
+                    <section class="section mix-section">
+                        <div class="contact-container">
+                            <!-- Левая колонка - контактная информация -->
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <span class="contact-title">Организатор премии</span>
+                                    <div class="contact-details">
+                                        ООО «BLOBIK - AWARDS»
+                                    </div>
+                                </div>
+                                
+                                <div class="contact-item">
+                                    <span class="contact-title">Контактное лицо</span>
+                                    <div class="contact-details">
+                                        Иван Кончев<br>
+                                        Основатель и главный организатор
+                                    </div>
+                                </div>
+                                
+                                <div class="contact-item">
+                                    <span class="contact-title">Телефон</span>
+                                    <div class="contact-details">
+                                        <a href="tel:+79778840784">+7 (977) 884-07-84</a>
+                                    </div>
+                                </div>
+                                
+                                <div class="contact-item">
+                                    <span class="contact-title">Электронная почта</span>
+                                    <div class="contact-details">
+                                        По всем вопросам:<br>
+                                        <a href="mailto:konchev.ivan@vk.com">konchev.ivan@vk.com</a><br><br>
+                                        
+                                        По вопросам партнерства:<br>
+                                        <a href="mailto:partners@blobikawards.ru">partners@blobikawards.ru</a><br><br>
+                                        
+                                        По вопросам СМИ и аккредитации:<br>
+                                        <a href="mailto:press@blobikawards.ru">press@blobikawards.ru</a>
+                                    </div>
+                                </div>
+                                
+                                <div class="contact-item">
+                                    <span class="contact-title">Социальные сети</span>
+                                    <div class="contact-details">
+                                        Следите за новостями премии в социальных сетях:
+                                        <div class="social-contacts">
+                                            <a href="https://t.me/BLOBIKAWARDS" class="social-icon" target="_blank" title="Telegram">
+                                                <i class="icon-tg"></i>
+                                            </a>
+                                            <a href="https://telegra.ph/Ups-404-12-19" class="social-icon" target="_blank" title="ВКонтакте">
+                                                <i class="icon-vk"></i>
+                                            </a>
+                                            <a href="https://telegra.ph/Ups-404-12-19" class="social-icon" target="_blank" title="YouTube">
+                                                <i class="icon-yt"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="contact-item">
+                                    <span class="contact-title">Юридическая информация</span>
+                                    <div class="contact-details">
+                                        <a href="https://telegra.ph/POLITIKA-KONFIDENCIALNOSTI-BLOBIK---AWARDS-12-11" target="_blank">Политика конфиденциальности</a><br>
+                                        <a href="https://telegra.ph/POLZOVATELSKOE-SOGLASHENIE-BLOBIK---AWARDS-12-11" target="_blank">Пользовательское соглашение</a><br>
+                                        <a href="https://telegra.ph/SOGLASIE-NA-OBRABOTKU-PERS-DANNYH-BLOBIK---AWARDS-12-11" target="_blank">Согласие на обработку персональных данных</a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Правая колонка - форма обратной связи -->
+                            <div class="contact-form">
+                                <h2 class="title-h2" style="color: #ff3366; margin-bottom: 25px;">Обратная связь</h2>
+                                <p class="text" style="margin-bottom: 25px;">Есть вопросы или предложения? Напишите нам, и мы обязательно ответим!</p>
+                                
+                                <form id="contactForm">
+                                    <div class="form-group">
+                                        <label class="form-label" for="name">
+                                            Фамилия и имя <span class="form-required">*</span>
+                                        </label>
+                                        <input type="text" id="name" class="form-input" placeholder="Иванов Иван" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label" for="email">
+                                            E-mail <span class="form-required">*</span>
+                                        </label>
+                                        <input type="email" id="email" class="form-input" placeholder="you@example.com" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label" for="subject">
+                                            Тема сообщения
+                                        </label>
+                                        <select id="subject" class="form-input">
+                                            <option value="">Выберите тему</option>
+                                            <option value="partnership">Партнерство и спонсорство</option>
+                                            <option value="media">СМИ и аккредитация</option>
+                                            <option value="questions">Вопросы о голосовании</option>
+                                            <option value="technical">Технические вопросы</option>
+                                            <option value="other">Другое</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label" for="message">
+                                            Сообщение <span class="form-required">*</span>
+                                        </label>
+                                        <textarea id="message" class="form-textarea" placeholder="Введите ваше сообщение..." required></textarea>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label" for="attachment">
+                                            Прикрепить файл (необязательно)
+                                        </label>
+                                        <input type="file" id="attachment" class="form-input">
+                                        <div class="file-upload">
+                                            Максимальный размер: 10 МБ<br>
+                                            Допустимые форматы: jpg, png, pdf, doc, docx
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="checkbox-group">
+                                        <input type="checkbox" id="agree" class="checkbox-input" required>
+                                        <label for="agree" class="checkbox-label">
+                                            Я даю согласие на обработку персональных данных в соответствии с 
+                                            <a href="https://telegra.ph/SOGLASIE-NA-OBRABOTKU-PERS-DANNYH-BLOBIK---AWARDS-12-11" target="_blank">политикой конфиденциальности</a>
+                                        </label>
+                                    </div>
+                                    
+                                    <div class="form-submit">
+                                        <button type="submit" class="button button-color-accent" style="width: 100%;">
+                                            Отправить сообщение
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        
+                        <!-- Кнопка возврата на главную -->
+                        <div class="back-to-main">
+                            <a href="index.html" class="button button-color-accent">
+                                <i class="icon-arrow-left" style="margin-right: 8px;"></i> Вернуться на главную
+                            </a>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Подвал сайта -->
+    <footer class="footer">
+        <div class="section-wrapper">
+            <div class="footer-text">
+                <small>
+                    ООО «BLOBIK - AWARDS» <br><br>
+                    konchev.ivan@vk.com<br>
+                    + 7(977) 884-07-84
+                </small>
+            </div>
+            <div class="footer-menu">
+                <ul class="menu">
+                    <li class="menu-item"><a href="contact.html">контакты</a></li>
+                    <li class="menu-item"><a href="news.html">новости</a></li>
+                </ul>
+                <ul class="menu">
+                    <li class="menu-item"><a href="https://telegra.ph/POLITIKA-KONFIDENCIALNOSTI-BLOBIK---AWARDS-12-11" target="_blank">ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ</a></li>
+                    <li class="menu-item"><a href="https://telegra.ph/POLZOVATELSKOE-SOGLASHENIE-BLOBIK---AWARDS-12-11" target="_blank">ПОЛЬЗОВАТЕЛЬСКОЕ СОГЛАШЕНИЕ</a></li>
+                    <li class="menu-item"><a href="https://telegra.ph/SOGLASIE-NA-OBRABOTKU-PERS-DANNYH-BLOBIK---AWARDS-12-11" target="_blank">СОГЛАСИЕ НА ОБРАБОТКУ ПЕРС. ДАННЫХ</a></li>
+                </ul>
+            </div>
+            <div class="socials">
+                <div class="elements-list">
+                    <div class="elements-list-item"><a href="https://telegra.ph/Ups-404-12-19" class="icon-ok" target="_blank" title="Одноклассники"></a></div>
+                    <div class="elements-list-item"><a href="https://t.me/BLOBIKAWARDS" class="icon-tg" target="_blank" title="Telegram"></a></div>
+                    <div class="elements-list-item"><a href="https://telegra.ph/Ups-404-12-19" class="icon-vk" target="_blank" title="ВКонтакте"></a></div>
+                    <div class="elements-list-item"><a href="https://telegra.ph/Ups-404-12-19" class="icon-dzen" target="_blank" title="Яндекс.Дзен"></a></div>
+                    <div class="elements-list-item"><a href="https://telegra.ph/Ups-404-12-19" class="icon-yt" target="_blank" title="YouTube"></a></div>
+                    <div class="elements-list-item"><a href="https://telegra.ph/Ups-404-12-19" class="icon-vb" target="_blank" title="Viber"></a></div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+
+</body>
+</html>
