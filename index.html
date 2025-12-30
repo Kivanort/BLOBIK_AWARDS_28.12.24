@@ -68,10 +68,27 @@
         
         .online-player iframe {
             max-width: 100%;
+            width: 100% !important;
+            height: 450px !important;
         }
         
         .swiper-wrapper, .swiper-slide {
             max-width: 100%;
+        }
+        
+        /* Стили для модального окна с записью */
+        .stream-modal iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+            border-radius: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .online-player iframe,
+            .stream-modal iframe {
+                height: 300px !important;
+            }
         }
     </style>
 </head>
@@ -229,7 +246,7 @@
         </div>
         <h2 class="title-h1">Спасибо за Вашу заявку!</h2>
         <div class="text">Скоро Вам будет отправлено письмо с информацией о старте продаж билетов.<br>До встречи на Премию BLOBIK AWARDS 2024!</div>
-        <div class="notice-control"><a href="https://live.vkvideo.ru/strim_vf" class="button button-md" target="_blank">Как это было</a></div>
+        <div class="notice-control"><a href="#" class="button button-md x-open-popup" data-selector="#stream-recording">Как это было</a></div>
     </div>
     <form class="form" id="email-form">
         <div class="form-row">
@@ -290,7 +307,6 @@
         <div class="popup-text-control">
             <button class="button button-md button-color-accent xx-popup-close">Закрыть</button>
         </div>
-    </div>
 </template>
 <template id="finished-voting">
     <div class="popup-text">
@@ -300,7 +316,27 @@
         </div>
     </div>
 </template>
-<!-- УДАЛЕН шаблон #shareVotingTemplate, так как он не используется -->
+
+<!-- НОВЫЙ ШАБЛОН: Запись стрима с награждением -->
+<template id="stream-recording">
+    <div class="popup-text stream-modal">
+        <h2 class="title-h1">Запись церемонии награждения BLOBIK AWARDS 25</h2>
+        <div class="text" style="text-align: center; margin-bottom: 20px;">
+            <p>Полная запись грандиозного финала премии. Смотрите, как объявляли победителей в прямом эфире!</p>
+        </div>
+        <div style="width: 100%; max-width: 900px; margin: 0 auto;">
+            <iframe src="https://live.vkvideo.ru/app/embed/strim_vf/d5e4b5bf-acfc-4bc1-965c-6d5013108641?tab=video&tc=889" frameborder="0" allowfullscreen="true" scrolling="no" style="width: 100%; height: 500px; border-radius: 10px;"></iframe>
+        </div>
+        <div class="text" style="margin-top: 20px; text-align: center;">
+            <p><strong>Дата трансляции:</strong> 30 декабря 2025, 21:00</p>
+            <p><strong>Ведущие:</strong> Иван Кончев и Ароян Гагик</p>
+            <p><strong>Длительность:</strong> Полная запись церемонии</p>
+        </div>
+        <div class="popup-text-control" style="margin-top: 30px;">
+            <button class="button button-md button-color-accent xx-popup-close">Закрыть</button>
+        </div>
+    </div>
+</template>
 
 <!-- Счетчики аналитики (оставлены без изменений) -->
 <div class="counter">
@@ -358,7 +394,7 @@
                 <div class="main-head-control">
                     <!-- Кнопка покупки билетов закомментирована -->
                     <!-- <button class="button button-color-accent x-tickets-widget-button">купить билет</button> -->
-                    <a href="https://live.vkvideo.ru/strim_vf" target="_blank" class="button button-color-accent">смотреть</a>
+                    <a href="#" class="button button-color-accent x-open-popup" data-selector="#stream-recording">смотреть запись</a>
                 </div>
             </div>
         </section>
@@ -369,11 +405,20 @@
                     <!-- Секция с трансляцией -->
                     <section class="section mix-section">
                         <div class="section-head">
-                            <h2 class="title-grand text-gradient">Премия BLOBIK 2025</h2>
+                            <h2 class="title-grand text-gradient">Запись церемонии награждения</h2>
                         </div>
                         <div class="online-player online-player-max">
-                            <!-- НОВАЯ ВСТАВКА ДЛЯ ПРЯМОГО ЭФИРА -->
-                            <iframe src="https://live.vkvideo.ru/app/embed/strim_vf" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620" style="max-width: 100%;"></iframe>
+                            <!-- ПРЕДПРОСМОТР ЗАПИСИ С КНОПКОЙ -->
+                            <div style="text-align: center; background: rgba(0,0,0,0.3); padding: 40px; border-radius: 10px;">
+                                <h3 class="title-h2" style="margin-bottom: 20px;">Грандиозный финал BLOBIK AWARDS 25</h3>
+                                <p style="margin-bottom: 30px; font-size: 18px;">Посмотрите полную запись церемонии объявления победителей с прямым эфиром от Ивана Кончева и Арояна Гагика</p>
+                                <a href="#" class="button button-color-accent x-open-popup" data-selector="#stream-recording" style="font-size: 18px; padding: 15px 30px;">
+                                    <i class="icon-play" style="margin-right: 10px;"></i> Смотреть запись
+                                </a>
+                                <div style="margin-top: 30px; color: #888;">
+                                    <p><strong>Длительность:</strong> Полная запись • <strong>Дата:</strong> 30.12.2025</p>
+                                </div>
+                            </div>
                         </div>
                     </section>
 
@@ -494,7 +539,7 @@
                         <div class="article">
                             <div class="article-wrapper">
                                 <p>Ежегодная премия, на которой собираются легенды нашего класса. Стань частью истории и выбери тех, кто по-настоящему достоин стать победителем BLOBIK 2025.</p>
-                                <p><a href="https://live.vkvideo.ru/strim_vf" class="button button-color-accent" target="_blank">как это было</a></p>
+                                <p><a href="#" class="button button-color-accent x-open-popup" data-selector="#stream-recording">как это было</a></p>
                             </div>
                         </div>
                     </section>
