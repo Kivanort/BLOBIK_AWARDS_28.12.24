@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Голосование BLOBIK AWARDS 2025. Проголосуйте за лучших в вашем кругу друзей!">
+    <meta name="keywords" content="BLOBIK AWARDS, голосование, премия, друзья, онлайн голосование">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <title>Голосование BLOBIK AWARDS 2025</title>
+    
+    <!-- Подключение скриптов -->
+    <script src="styles/20240221/new2024/js/jquery-3.7.1.min.js"></script>
+    <script src="styles/20240221/new2024/js/burger.js"></script>
+    <script src="styles/new2/js/jquery.jqmodal.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrender/1.0.13/jsrender.min.js" integrity="sha512-T93uOawQ+FrEdyCPaWrQtppurbLm8SISu2QnHyddM0fGXKX9Amyirwibe1wGYbsW2F8lLzhOM/2+d3Zo94ljRQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="styles/20240221/new2024/js/base.js"></script>
+    <link href="styles/20240221/new2024/css/base.css" media="screen" rel="stylesheet">
+    
+    <style>
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100%;
+            position: relative;
+        }
+        
+        .wrapper {
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100%;
+        }
+        
+        .section-wrapper {
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+        
+        /* Стили для голосования */
+        .voting-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .voting-nomination {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 51, 102, 0.2);
+            transition: all 0.3s;
+        }
+        
+        .voting-nomination.active {
+            border-color: #ff3366;
+            box-shadow: 0 0 20px rgba(255, 51, 102, 0.2);
+        }
+        
+        .nomination-title {
+            color: #ff3366;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .candidates-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .candidate-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            text-align: center;
+        }
+        
+        .candidate-item:hover {
+            background: rgba(255, 51, 102, 0.15);
+            transform: translateY(-2px);
+        }
+        
+        .candidate-item.selected {
+            background: rgba(255, 51, 102, 0.25);
+            border-color: #ff3366;
+            box-shadow: 0 0 10px rgba(255, 51, 102, 0.3);
+        }
+        
+        .candidate-name {
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+        
+        .candidate-description {
+            font-size: 14px;
+            color: #aaa;
+            margin-top: 5px;
+        }
+        
+        .vote-button {
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin: 40px auto;
+            padding: 15px 30px;
+            font-size: 18px;
+        }
+        
+        .vote-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .voting-progress {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+        
+        .progress-text {
+            color: #fff;
+            font-size: 16px;
+        }
+        
+        .progress-bar {
+            flex-grow: 1;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            margin: 0 20px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff3366, #ff6b9d);
+            border-radius: 5px;
+            width: 0%;
+            transition: width 0.5s ease-in-out;
+        }
+        
+        .voting-rules {
+            background: rgba(255, 51, 102, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 30px 0;
+        }
+        
+        .voting-rules h3 {
+            color: #ff3366;
+            margin-top: 0;
+        }
+        
+        .voting-rules ul {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+        
+        .voting-rules li {
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        
+        .already-voted {
+            text-align: center;
+            padding: 40px;
+            background: rgba(0, 255, 0, 0.1);
+            border-radius: 10px;
+            border: 2px solid #00ff00;
+        }
+        
+        .already-voted h2 {
+            color: #00ff00;
+        }
+        
+        .results-link {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+        }
+        
+        @media (max-width: 768px) {
+            .candidates-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .voting-progress {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .progress-bar {
+                width: 100%;
+                margin: 10px 0;
+            }
+        }
+        
+        .back-to-main {
+            display: inline-block;
+            margin-top: 40px;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .voting-header {
+            text-align: center;
+            padding-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+<script>
+    // Данные номинаций и кандидатов
+    const nominationsData = {
+        "blobik-king": {
+            title: "BLOBIK KING",
+            candidates: [
+                { id: "king1", name: "Ароян Гагик", description: "КОРОЛЬ КОРОЛЕЙ" },
+                { id: "king2", name: "Иван Кончев", description: "Великий и неповторимый" },
+                { id: "king3", name: "Тимофей", description: "ЛОХ" }
+            ]
+        },
+        "blobik-queen": {
+            title: "BLOBIK QUEEN",
+            candidates: [
+                { id: "queen1", name: "Анисимова Полина", description: "" },
+                { id: "queen2", name: "Клочкова Маша", description: "" },
+                { id: "queen3", name: "Софья Шпунт", description: "" },
+                { id: "queen4", name: "Курбанова Сабина", description: "" },
+                { id: "queen5", name: "Данаджи Маша", description: "" },
+                { id: "queen6", name: "Тулаева Вера", description: "" },
+                { id: "queen7", name: "Тычинина Лиза", description: "" },
+                { id: "queen8", name: "Киселёва Злата", description: "" },
+                { id: "queen9", name: "Курбанова Эльза", description: "" },
+                { id: "queen10", name: "Биркина Дарья", description: "" },
+                { id: "queen11", name: "Луговская Катя", description: "" }
+            ]
+        },
+        "squad-year": {
+            title: "Сквад года",
+            candidates: [
+                { id: "squad1", name: "Кончев Иван, Ароян Гагик, Клочкова Маша", description: "Легендарное трио" },
+                { id: "squad2", name: "Луговская Катя, Данаджи Маша, Киселёва Злата", description: "Девчачий сквад" },
+                { id: "squad3", name: "Курбанова Эльза, Биркина Дарья", description: "Неразлучные" }
+            ]
+        },
+        "import-year": {
+            title: "Завоз года",
+            candidates: [
+                { id: "import1", name: "Ароян Гагик", description: "" },
+                { id: "import2", name: "Иван Кончев", description: "" },
+                { id: "import3", name: "Паламарчук Тимофей", description: "" },
+                { id: "import4", name: "Тулаева Вера", description: "" },
+                { id: "import5", name: "Курбанова Сабина", description: "" },
+                { id: "import6", name: "Софья Шпунт", description: "" },
+                { id: "import7", name: "Анисимова Полина", description: "" },
+                { id: "import8", name: "Данаджи Маша", description: "" },
+                { id: "import9", name: "Тычинина Лиза", description: "" },
+                { id: "import10", name: "Клочкова Маша", description: "" }
+            ]
+        },
+        "organizers-year": {
+            title: "Организаторы года",
+            candidates: [
+                { id: "org1", name: "Курбанова Эльза и Биркина Дарья", description: "" }
+            ]
+        },
+        "shame-year": {
+            title: "Позор года",
+            candidates: [
+                { id: "shame1", name: "Паламарчук Тимофей", description: "" },
+                { id: "shame2", name: "Курбанова Сабина", description: "" },
+                { id: "shame3", name: "Ароян Гагик", description: "" },
+                { id: "shame4", name: "Иван Кончев", description: "" },
+                { id: "shame5", name: "Анисимова Полина", description: "" },
+                { id: "shame6", name: "Софья Шпунт", description: "" },
+                { id: "shame7", name: "Луговская Катя", description: "" },
+                { id: "shame8", name: "Тычинина Лиза", description: "" },
+                { id: "shame9", name: "Тулаева Вера", description: "" },
+                { id: "shame10", name: "Клочкова Маша", description: "" },
+                { id: "shame11", name: "Данаджи Маша", description: "" },
+                { id: "shame12", name: "Курбанова Эльза", description: "" },
+                { id: "shame13", name: "Биркина Дарья", description: "" },
+                { id: "shame14", name: "Киселёва Злата", description: "" }
+            ]
+        },
+        "couple-year": {
+            title: "Пара года",
+            candidates: [
+                { id: "couple1", name: "Кончев Иван и Клочкова Маша", description: "" },
+                { id: "couple2", name: "Тычинина Лиза и Артём Волков", description: "" },
+                { id: "couple3", name: "Вера и Тимофей", description: "" },
+                { id: "couple4", name: "Луговская Катя и Даня", description: "Вроде" }
+            ]
+        },
+        "singer-year": {
+            title: "Певец года",
+            candidates: [
+                { id: "singer1", name: "Ароян Гагик", description: "" }
+            ]
+        },
+        "style-year": {
+            title: "Стиль года",
+            candidates: [
+                { id: "style1", name: "Софья Шпунт", description: "" },
+                { id: "style2", name: "Киселёва Злата", description: "" },
+                { id: "style3", name: "Анисимова Полина", description: "" },
+                { id: "style4", name: "Тулаева Вера", description: "" },
+                { id: "style5", name: "Курбанова Сабина", description: "" },
+                { id: "style6", name: "Курбанова Эльза", description: "" },
+                { id: "style7", name: "Ароян Гагик", description: "" },
+                { id: "style8", name: "Тычинина Лиза", description: "" },
+                { id: "style9", name: "Биркина Дарья", description: "" },
+                { id: "style10", name: "Паламарчук Тимофей", description: "" },
+                { id: "style11", name: "Луговская Катя", description: "" },
+                { id: "style12", name: "Клочкова Маша", description: "" }
+            ]
+        }
+    };
+
+    // Ключи для localStorage
+    const VOTES_KEY = 'blobik_awards_votes_2025';
+    const USER_VOTED_KEY = 'blobik_user_voted_2025';
+
+    $(function() {
+        var $document = $(document);
+        var $body = $('body');
+
+        // Инициализация попапов
+        (function() {
+            var $popup = $('#popup');
+            var $popupContent = $popup.find('.x-popup-window-block');
+            var bodyClass = 'x-modal-fade x-modal-opened';
+
+            $popup.jqm({
+                onShow: function(h) {
+                    var selector = $(h.t).attr('data-selector');
+                    var url = $(h.t).attr('data-url');
+
+                    h.c.data = {};
+                    h.c.data.popupClass = h.t.getAttribute('data-popup-class') || 'x-popup-text';
+                    $popup.addClass(h.c.data.popupClass);
+
+                    $body.addClass(bodyClass);
+                    h.w.show();
+
+                    if(url) {
+                        $popupContent.html('Загрузка...').load(url);
+                    } else {
+                        $popupContent.html($(selector)[0].content.cloneNode(true));
+                    }
+                },
+                onHide: function(h) {
+                    h.w.hide();
+                    $popup.removeClass(h.c.data.popupClass);
+                    $popupContent.html('');
+                    $body.removeClass(bodyClass);
+                },
+                overlay: 0
+            });
+            $popup.on('click', '.xx-popup-close', function() {
+                $popup.jqmHide();
+                return false;
+            });
+            $document.on('click', '.x-open-popup', function() {
+                $popup.jqmShow(this);
+                return false;
+            });
+        })();
+        
+        // Проверяем, голосовал ли уже пользователь
+        const hasVoted = localStorage.getItem(USER_VOTED_KEY);
+        if (hasVoted === 'true') {
+            showAlreadyVotedScreen();
+        } else {
+            initializeVoting();
+        }
+        
+        function initializeVoting() {
+            // Создаем интерфейс голосования
+            const $container = $('.voting-container');
+            const nominations = Object.keys(nominationsData);
+            
+            // Создаем элементы номинаций
+            nominations.forEach((nominationId, index) => {
+                const nomination = nominationsData[nominationId];
+                const $nominationDiv = $(`
+                    <div class="voting-nomination" data-nomination="${nominationId}">
+                        <div class="nomination-title">${nomination.title}</div>
+                        <div class="candidates-list" id="candidates-${nominationId}"></div>
+                    </div>
+                `);
+                
+                $container.append($nominationDiv);
+                
+                // Добавляем кандидатов
+                const $candidatesList = $(`#candidates-${nominationId}`);
+                nomination.candidates.forEach(candidate => {
+                    const $candidate = $(`
+                        <div class="candidate-item" data-candidate-id="${candidate.id}">
+                            <div class="candidate-name">${candidate.name}</div>
+                            ${candidate.description ? `<div class="candidate-description">${candidate.description}</div>` : ''}
+                        </div>
+                    `);
+                    
+                    $candidate.on('click', function() {
+                        // Снимаем выделение у всех в этой номинации
+                        $(this).parent().find('.candidate-item').removeClass('selected');
+                        // Выделяем выбранного
+                        $(this).addClass('selected');
+                        
+                        // Сохраняем выбор
+                        saveSelection(nominationId, candidate.id);
+                        updateProgress();
+                    });
+                    
+                    $candidatesList.append($candidate);
+                });
+            });
+            
+            // Добавляем кнопку голосования
+            const $voteButton = $(`
+                <button class="button button-color-accent vote-button" id="submit-vote">
+                    ОТПРАВИТЬ ГОЛОС
+                </button>
+            `);
+            
+            $container.append($voteButton);
+            
+            // Добавляем прогресс
+            const $progress = $(`
+                <div class="voting-progress">
+                    <div class="progress-text" id="progress-text">0/9</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                    <div class="progress-text">Заполните все номинации</div>
+                </div>
+            `);
+            
+            $container.prepend($progress);
+            
+            // Добавляем правила
+            const $rules = $(`
+                <div class="voting-rules">
+                    <h3>📝 Правила голосования:</h3>
+                    <ul>
+                        <li>Выберите одного кандидата в каждой из 9 номинаций</li>
+                        <li>Голосование анонимное — ваши выборы не будут видны другим</li>
+                        <li>Проголосовать можно только один раз с этого устройства</li>
+                        <li>Голосование определяет победителей BLOBIK AWARDS 2025</li>
+                        <li>В случае равного количества голосов победителя определит экспертное жюри</li>
+                    </ul>
+                    <p style="color: #ff3366; font-weight: bold;">Ваш голос очень важен! Выбирайте тех, кто действительно этого достоин!</p>
+                </div>
+            `);
+            
+            $container.prepend($rules);
+            
+            // Обработка отправки голоса
+            $('#submit-vote').on('click', submitVote);
+            
+            // Загружаем сохраненные выборы
+            loadSelections();
+            updateProgress();
+        }
+        
+        function saveSelection(nominationId, candidateId) {
+            let selections = JSON.parse(localStorage.getItem('blobik_selections') || '{}');
+            selections[nominationId] = candidateId;
+            localStorage.setItem('blobik_selections', JSON.stringify(selections));
+        }
+        
+        function loadSelections() {
+            const selections = JSON.parse(localStorage.getItem('blobik_selections') || '{}');
+            Object.keys(selections).forEach(nominationId => {
+                const candidateId = selections[nominationId];
+                $(`.candidate-item[data-candidate-id="${candidateId}"]`).addClass('selected');
+            });
+        }
+        
+        function updateProgress() {
+            const selections = JSON.parse(localStorage.getItem('blobik_selections') || '{}');
+            const filledNominations = Object.keys(selections).length;
+            const totalNominations = Object.keys(nominationsData).length;
+            
+            const percentage = (filledNominations / totalNominations) * 100;
+            $('#progress-fill').css('width', percentage + '%');
+            $('#progress-text').text(`${filledNominations}/${totalNominations}`);
+            
+            // Активируем/деактивируем кнопку
+            if (filledNominations === totalNominations) {
+                $('#submit-vote').prop('disabled', false);
+                $('#progress-text').html('<strong>Всё готово! Можно голосовать!</strong>');
+            } else {
+                $('#submit-vote').prop('disabled', true);
+            }
+        }
+        
+        function submitVote() {
+            const selections = JSON.parse(localStorage.getItem('blobik_selections') || '{}');
+            
+            // Проверяем, что все номинации заполнены
+            if (Object.keys(selections).length !== Object.keys(nominationsData).length) {
+                alert('Пожалуйста, выберите кандидатов во всех номинациях!');
+                return;
+            }
+            
+            // Загружаем существующие голоса
+            let votes = JSON.parse(localStorage.getItem(VOTES_KEY) || '{}');
+            
+            // Добавляем новые голоса
+            Object.keys(selections).forEach(nominationId => {
+                const candidateId = selections[nominationId];
+                
+                if (!votes[nominationId]) {
+                    votes[nominationId] = {};
+                }
+                
+                if (!votes[nominationId][candidateId]) {
+                    votes[nominationId][candidateId] = 0;
+                }
+                
+                votes[nominationId][candidateId] += 1;
+            });
+            
+            // Сохраняем обновленные голоса
+            localStorage.setItem(VOTES_KEY, JSON.stringify(votes));
+            
+            // Помечаем, что пользователь проголосовал
+            localStorage.setItem(USER_VOTED_KEY, 'true');
+            
+            // Очищаем временные выборы
+            localStorage.removeItem('blobik_selections');
+            
+            // Показываем экран благодарности
+            showThankYouScreen();
+        }
+        
+        function showAlreadyVotedScreen() {
+            const $container = $('.voting-container');
+            $container.html(`
+                <div class="already-voted">
+                    <h2>🎉 Вы уже проголосовали!</h2>
+                    <p>Спасибо за участие в голосовании BLOBIK AWARDS 2025!</p>
+                    <p>Ваш голос учтён и повлияет на результаты премии.</p>
+                    <p>Итоги голосования будут объявлены на церемонии награждения.</p>
+                    <div style="margin-top: 30px;">
+                        <a href="results.html" class="button button-color-accent results-link">
+                            Посмотреть текущие результаты
+                        </a>
+                    </div>
+                </div>
+                <div class="back-to-main">
+                    <a href="index.html" class="button">
+                        <i class="icon-arrow-left" style="margin-right: 8px;"></i> Вернуться на главную
+                    </a>
+                </div>
+            `);
+        }
+        
+        function showThankYouScreen() {
+            const $container = $('.voting-container');
+            $container.html(`
+                <div class="already-voted">
+                    <h2>🎉 Спасибо за ваш голос!</h2>
+                    <p>Ваш голос успешно учтён в голосовании BLOBIK AWARDS 2025!</p>
+                    <p>Именно такие голоса, как ваш, определяют победителей премии.</p>
+                    <p>Следите за новостями — итоги будут объявлены на церемонии награждения.</p>
+                    <div style="margin-top: 30px;">
+                        <a href="results.html" class="button button-color-accent results-link">
+                            Посмотреть текущие результаты
+                        </a>
+                    </div>
+                </div>
+                <div class="back-to-main">
+                    <a href="index.html" class="button">
+                        <i class="icon-arrow-left" style="margin-right: 8px;"></i> Вернуться на главную
+                    </a>
+                </div>
+            `);
+        }
+    });
+</script>
+
+<!-- Контейнер для модальных окон -->
+<div class="x-popup" id="popup" style="display: none;">
+    <div class="x-popup-window">
+        <div class="x-popup-close xx-popup-close"></div>
+        <div class="x-popup-window-wrapper">
+            <div class="x-popup-window-block"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Счетчики аналитики -->
+<div class="counter">
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-T7N7SDW');</script>
+    <!-- End Google Tag Manager -->
+    <!-- oko -->
+    <script>
+    !function(s,a,u,r,o,n){s[r]=s[r]||function(){(s[r].q=s[r].q||[]).push(arguments)},s[r].l=1*new Date;o=a.createElement(u),n=a.getElementsByTagName(u)[0];o.async=1;o.src="https://oko.muz-tv.ru/t.js";n.parentNode.insertBefore(o,n)}(window,document,"script","oko");
+    oko('init', 'OC-1003-01');
+    </script>
+</div>
+
+<!-- Основная разметка сайта -->
+<div class="wrapper">
+    <header class="header">
+        <div class="section-wrapper">
+            <div class="header-frame">
+                <nav class="header-menu">
+                    <ul class="menu">
+                        <li class="menu-item"><a href="index.html" class="menu-item-url">главная</a></li>
+                        <li class="menu-item"><a href="index.html#about" class="menu-item-url">о премии 2025</a></li>
+                        <li class="menu-item"><a href="news.html" class="menu-item-url">новости премии</a></li>
+                        <li class="menu-item"><a href="index.html#history" class="menu-item-url">история</a></li>
+                        <li class="menu-item"><a href="voting.html" class="menu-item-url">голосование</a></li>
+                        <li class="menu-item"><a href="contact.html" class="menu-item-url">контакты</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="content">
+        <!-- Заголовок страницы голосования -->
+        <section class="section main-head" style="background-image: url('BLOBIK_AWARD.png'); background-position: center; min-height: 300px;">
+            <div class="section-wrapper">
+                <div class="voting-header" style="text-align: center; padding-top: 80px;">
+                    <h1 class="title-grand text-gradient">ГОЛОСОВАНИЕ</h1>
+                    <div class="text" style="color: #fff; max-width: 600px; margin: 20px auto; font-size: 18px;">
+                        Ваш голос определит победителей BLOBIK AWARDS 2025!
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="content-cols">
+            <div class="section-wrapper">
+                <div class="content-cols-main">
+                    <!-- Контейнер для голосования (заполняется JavaScript) -->
+                    <section class="section mix-section">
+                        <div class="voting-container">
+                            <!-- Здесь будет динамически создаваться интерфейс голосования -->
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Подвал сайта -->
+    <footer class="footer">
+        <div class="section-wrapper">
+            <div class="footer-text">
+                <small>
+                    ООО «BLOBIK - AWARDS» <br><br>
+                    konchev.ivan@vk.com<br>
+                    + 7(977) 884-07-84
+                </small>
+            </div>
+            <div class="footer-menu">
+                <ul class="menu">
+                    <li class="menu-item"><a href="contact.html">контакты</a></li>
+                    <li class="menu-item"><a href="news.html">новости</a></li>
+                    <li class="menu-item"><a href="voting.html">голосование</a></li>
+                    <li class="menu-item"><a href="results.html">результаты</a></li>
+                </ul>
+                <ul class="menu">
+                    <li class="menu-item"><a href="https://telegra.ph/POLITIKA-KONFIDENCIALNOSTI-BLOBIK---AWARDS-12-11" target="_blank">ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ</a></li>
+                    <li class="menu-item"><a href="https://telegra.ph/POLZOVATELSKOE-SOGLASHENIE-BLOBIK---AWARDS-12-11" target="_blank">ПОЛЬЗОВАТЕЛЬСКОЕ СОГЛАШЕНИЕ</a></li>
+                    <li class="menu-item"><a href="https://telegra.ph/SOGLASIE-NA-OBRABOTKU-PERS-DANNYH-BLOBIK---AWARDS-12-11" target="_blank">СОГЛАСИЕ НА ОБРАБОТКУ ПЕРС. ДАННЫХ</a></li>
+                </ul>
+            </div>
+            <div class="socials">
+                <div class="elements-list">
+                    <div class="elements-list-item"><a href="https://telegra.ph/Ups-404-12-19" class="icon-ok" target="_blank" title="Одноклассники"></a></div>
+                    <div class="elements-list-item"><a href="https://t.me/BLOBIKAWARDS" class="icon-tg" target="_blank" title="Telegram"></a></div>
+                    <div class="elements-list-item"><a href="https://telegra.ph/Ups-404-12-19" class="icon-vk" target="_blank" title="ВКонтакте"></a></div>
+                    <div class="elements-list-item"><a href="https://telegra.ph/Ups-404-12-19" class="icon-dzen" target="_blank" title="Яндекс.Дзен"></a></div>
+                    <div class="elements-list-item"><a href="https://telegra.ph/Ups-404-12-19" class="icon-yt" target="_blank" title="YouTube"></a></div>
+                    <div class="elements-list-item"><a href="https://telegra.ph/Ups-404-12-19" class="icon-vb" target="_blank" title="Viber"></a></div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+
+</body>
+</html>
