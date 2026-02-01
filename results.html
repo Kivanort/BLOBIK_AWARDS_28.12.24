@@ -9,19 +9,25 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
+    <link rel="manifest" href="manifest.json">
     <title>Результаты BLOBIK AWARDS 2025</title>
     
     <!-- Подключение скриптов -->
     <script src="styles/20240221/new2024/js/jquery-3.7.1.min.js"></script>
     <script src="styles/20240221/new2024/js/burger.js"></script>
-    <script src="styles/20240221/new2024/js/swiper.min.js"></script> <!-- Добавлено -->
+    <script src="styles/20240221/new2024/js/swiper.min.js"></script>
     <script src="styles/new2/js/jquery.jqmodal.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrender/1.0.13/jsrender.min.js" integrity="sha512-T93uOawQ+FrEdyCPaWrQtppurbLm8SISu2QnHyddM0fGXKX9Amyirwibe1wGYbsW2F8lLzhOM/2+d3Zo94ljRQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="styles/20240221/new2024/js/base.js"></script>
     <link href="styles/20240221/new2024/css/base.css" media="screen" rel="stylesheet">
     
     <style>
+        /* Сброс стилей и базовые настройки */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         html, body {
             overflow-x: hidden;
             width: 100%;
@@ -29,6 +35,7 @@
             position: relative;
             background: #000;
             color: #fff;
+            font-family: 'Arial', sans-serif;
         }
         
         .wrapper {
@@ -36,12 +43,114 @@
             width: 100%;
             max-width: 100%;
             background: #000;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Шапка сайта */
+        .header {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 51, 102, 0.3);
         }
         
         .section-wrapper {
             width: 100%;
-            max-width: 100%;
-            box-sizing: border-box;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .header-frame {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .header-menu {
+            width: 100%;
+        }
+        
+        .menu {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .menu-item {
+            position: relative;
+        }
+        
+        .menu-item-url {
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 10px 0;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .menu-item-url:hover {
+            color: #ff3366;
+        }
+        
+        .menu-item-url:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #ff3366;
+            transition: width 0.3s;
+        }
+        
+        .menu-item-url:hover:after {
+            width: 100%;
+        }
+        
+        /* Основной контент */
+        .content {
+            flex: 1;
+            background: #000;
+        }
+        
+        .main-head {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url('BLOBIK_AWARD.png');
+            background-size: cover;
+            background-position: center;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 60px 20px;
+        }
+        
+        .title-grand {
+            font-size: 3.5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #ff3366, #ff6b9d, #ff3366);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .text {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 800px;
+            margin: 0 auto;
         }
         
         /* Стили для результатов */
@@ -265,6 +374,14 @@
                 align-items: flex-start;
                 gap: 10px;
             }
+            
+            .title-grand {
+                font-size: 2.5rem;
+            }
+            
+            .menu {
+                gap: 15px;
+            }
         }
         
         .share-results {
@@ -304,6 +421,7 @@
             cursor: pointer;
             margin-left: 10px;
             color: #ff3366;
+            display: inline-block;
         }
         
         /* Анимация для кнопки обновления */
@@ -330,6 +448,7 @@
             transition: all 0.3s;
             cursor: pointer;
             text-align: center;
+            font-size: 14px;
         }
         
         .button:hover {
@@ -378,6 +497,74 @@
         .icon-link:before {
             content: "🔗";
             font-style: normal;
+        }
+        
+        /* Подвал сайта */
+        .footer {
+            background: rgba(0, 0, 0, 0.95);
+            padding: 40px 0;
+            margin-top: 60px;
+            border-top: 1px solid rgba(255, 51, 102, 0.3);
+        }
+        
+        .footer-text {
+            color: #888;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        
+        .footer-menu {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-menu .menu {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        
+        .footer-menu .menu-item a {
+            color: #aaa;
+            text-decoration: none;
+            font-size: 12px;
+            transition: color 0.3s;
+        }
+        
+        .footer-menu .menu-item a:hover {
+            color: #ff3366;
+        }
+        
+        .socials {
+            margin-top: 20px;
+        }
+        
+        .elements-list {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .elements-list-item a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .elements-list-item a:hover {
+            background: #ff3366;
+            transform: translateY(-3px);
         }
     </style>
 </head>
@@ -714,35 +901,41 @@
             $('#share-copy').on('click', function(e) {
                 e.preventDefault();
                 const url = window.location.href;
-                navigator.clipboard.writeText(url).then(() => {
-                    alert('Ссылка скопирована в буфер обмена!');
-                }).catch(() => {
-                    // Fallback для старых браузеров
-                    const tempInput = document.createElement('input');
-                    tempInput.value = url;
-                    document.body.appendChild(tempInput);
-                    tempInput.select();
-                    document.execCommand('copy');
-                    document.body.removeChild(tempInput);
-                    alert('Ссылка скопирована в буфер обмена!');
-                });
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(url).then(() => {
+                        alert('Ссылка скопирована в буфер обмена!');
+                    }).catch(() => {
+                        copyToClipboardFallback(url);
+                    });
+                } else {
+                    copyToClipboardFallback(url);
+                }
             });
+            
+            function copyToClipboardFallback(text) {
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                textArea.style.position = 'fixed';
+                textArea.style.opacity = '0';
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                
+                try {
+                    document.execCommand('copy');
+                    alert('Ссылка скопирована в буфер обмена!');
+                } catch (err) {
+                    alert('Не удалось скопировать ссылку. Скопируйте её вручную: ' + text);
+                }
+                
+                document.body.removeChild(textArea);
+            }
         }
         
         // Инициализация при загрузке
         loadAndDisplayResults();
     });
 </script>
-
-<!-- Контейнер для модальных окон -->
-<div class="x-popup" id="popup" style="display: none;">
-    <div class="x-popup-window">
-        <div class="x-popup-close xx-popup-close"></div>
-        <div class="x-popup-window-wrapper">
-            <div class="x-popup-window-block"></div>
-        </div>
-    </div>
-</div>
 
 <!-- Основная разметка сайта -->
 <div class="wrapper">
@@ -765,11 +958,11 @@
 
     <main class="content">
         <!-- Заголовок страницы результатов -->
-        <section class="section main-head" style="background-image: url('BLOBIK_AWARD.png'); background-position: center; min-height: 300px;">
+        <section class="section main-head">
             <div class="section-wrapper">
-                <div class="results-header" style="text-align: center; padding-top: 80px;">
-                    <h1 class="title-grand text-gradient">РЕЗУЛЬТАТЫ</h1>
-                    <div class="text" style="color: #fff; max-width: 600px; margin: 20px auto; font-size: 18px;">
+                <div class="results-header">
+                    <h1 class="title-grand">РЕЗУЛЬТАТЫ</h1>
+                    <div class="text">
                         Текущие результаты голосования BLOBIK AWARDS 2025
                     </div>
                 </div>
