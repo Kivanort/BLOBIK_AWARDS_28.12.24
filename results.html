@@ -15,6 +15,7 @@
     <!-- Подключение скриптов -->
     <script src="styles/20240221/new2024/js/jquery-3.7.1.min.js"></script>
     <script src="styles/20240221/new2024/js/burger.js"></script>
+    <script src="styles/20240221/new2024/js/swiper.min.js"></script> <!-- Добавлено -->
     <script src="styles/new2/js/jquery.jqmodal.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrender/1.0.13/jsrender.min.js" integrity="sha512-T93uOawQ+FrEdyCPaWrQtppurbLm8SISu2QnHyddM0fGXKX9Amyirwibe1wGYbsW2F8lLzhOM/2+d3Zo94ljRQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="styles/20240221/new2024/js/base.js"></script>
@@ -26,12 +27,15 @@
             width: 100%;
             max-width: 100%;
             position: relative;
+            background: #000;
+            color: #fff;
         }
         
         .wrapper {
             overflow-x: hidden;
             width: 100%;
             max-width: 100%;
+            background: #000;
         }
         
         .section-wrapper {
@@ -200,6 +204,13 @@
             margin-bottom: 20px;
         }
         
+        .no-votes {
+            text-align: center;
+            color: #888;
+            padding: 30px;
+            font-style: italic;
+        }
+        
         .back-to-main {
             display: inline-block;
             margin-top: 40px;
@@ -248,6 +259,12 @@
                 flex-direction: column;
                 align-items: center;
             }
+            
+            .nomination-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
         }
         
         .share-results {
@@ -287,6 +304,80 @@
             cursor: pointer;
             margin-left: 10px;
             color: #ff3366;
+        }
+        
+        /* Анимация для кнопки обновления */
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .rotating {
+            animation: rotate 1s linear infinite;
+        }
+        
+        /* Стили для кнопок */
+        .button {
+            display: inline-block;
+            padding: 12px 24px;
+            background: rgba(255, 51, 102, 0.2);
+            border: 2px solid #ff3366;
+            border-radius: 5px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: all 0.3s;
+            cursor: pointer;
+            text-align: center;
+        }
+        
+        .button:hover {
+            background: #ff3366;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 51, 102, 0.3);
+        }
+        
+        .button-color-accent {
+            background: #ff3366;
+        }
+        
+        .button-color-accent:hover {
+            background: #ff6b9d;
+            border-color: #ff6b9d;
+        }
+        
+        /* Стили для иконок */
+        .icon-refresh:before {
+            content: "🔄";
+            font-style: normal;
+        }
+        
+        .icon-vote:before {
+            content: "🗳️";
+            font-style: normal;
+        }
+        
+        .icon-arrow-left:before {
+            content: "←";
+            font-style: normal;
+        }
+        
+        .icon-vk:before {
+            content: "VK";
+            font-style: normal;
+            font-weight: bold;
+        }
+        
+        .icon-tg:before {
+            content: "TG";
+            font-style: normal;
+            font-weight: bold;
+        }
+        
+        .icon-link:before {
+            content: "🔗";
+            font-style: normal;
         }
     </style>
 </head>
@@ -405,60 +496,15 @@
     const USER_VOTED_KEY = 'blobik_user_voted_2025';
 
     $(function() {
-        var $document = $(document);
-        var $body = $('body');
-
-        // Инициализация попапов
-        (function() {
-            var $popup = $('#popup');
-            var $popupContent = $popup.find('.x-popup-window-block');
-            var bodyClass = 'x-modal-fade x-modal-opened';
-
-            $popup.jqm({
-                onShow: function(h) {
-                    var selector = $(h.t).attr('data-selector');
-                    var url = $(h.t).attr('data-url');
-
-                    h.c.data = {};
-                    h.c.data.popupClass = h.t.getAttribute('data-popup-class') || 'x-popup-text';
-                    $popup.addClass(h.c.data.popupClass);
-
-                    $body.addClass(bodyClass);
-                    h.w.show();
-
-                    if(url) {
-                        $popupContent.html('Загрузка...').load(url);
-                    } else {
-                        $popupContent.html($(selector)[0].content.cloneNode(true));
-                    }
-                },
-                onHide: function(h) {
-                    h.w.hide();
-                    $popup.removeClass(h.c.data.popupClass);
-                    $popupContent.html('');
-                    $body.removeClass(bodyClass);
-                },
-                overlay: 0
-            });
-            $popup.on('click', '.xx-popup-close', function() {
-                $popup.jqmHide();
-                return false;
-            });
-            $document.on('click', '.x-open-popup', function() {
-                $popup.jqmShow(this);
-                return false;
-            });
-        })();
-        
         // Загружаем и отображаем результаты
         loadAndDisplayResults();
         
         // Обработчик обновления результатов
         $('#refresh-results').on('click', function() {
             loadAndDisplayResults();
-            $(this).find('i').addClass('rotating');
+            $(this).addClass('rotating');
             setTimeout(() => {
-                $(this).find('i').removeClass('rotating');
+                $(this).removeClass('rotating');
             }, 1000);
         });
         
@@ -515,7 +561,10 @@
             $('#total-votes').text(totalVotes);
             $('#total-nominations').text(nominationsCount);
             $('#total-voters').text(totalVoters);
-            $('#last-update').text(new Date().toLocaleTimeString('ru-RU'));
+            $('#last-update').text(new Date().toLocaleTimeString('ru-RU', { 
+                hour: '2-digit', 
+                minute: '2-digit' 
+            }));
         }
         
         function displayNominationResults(votes) {
@@ -605,6 +654,7 @@
         function showNoResults() {
             const $container = $('.results-container');
             $container.find('.nomination-results').remove();
+            $container.find('.share-results').remove();
             
             const $noResults = $(`
                 <div class="no-results">
@@ -623,6 +673,9 @@
         }
         
         function addShareButtons() {
+            // Удаляем предыдущие кнопки "поделиться", если они есть
+            $('.share-results').remove();
+            
             const $shareSection = $('<div class="share-results"></div>');
             
             $shareSection.html(`
@@ -663,9 +716,21 @@
                 const url = window.location.href;
                 navigator.clipboard.writeText(url).then(() => {
                     alert('Ссылка скопирована в буфер обмена!');
+                }).catch(() => {
+                    // Fallback для старых браузеров
+                    const tempInput = document.createElement('input');
+                    tempInput.value = url;
+                    document.body.appendChild(tempInput);
+                    tempInput.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(tempInput);
+                    alert('Ссылка скопирована в буфер обмена!');
                 });
             });
         }
+        
+        // Инициализация при загрузке
+        loadAndDisplayResults();
     });
 </script>
 
@@ -676,22 +741,7 @@
         <div class="x-popup-window-wrapper">
             <div class="x-popup-window-block"></div>
         </div>
-</div>
-
-<!-- Счетчики аналитики -->
-<div class="counter">
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-T7N7SDW');</script>
-    <!-- End Google Tag Manager -->
-    <!-- oko -->
-    <script>
-    !function(s,a,u,r,o,n){s[r]=s[r]||function(){(s[r].q=s[r].q||[]).push(arguments)},s[r].l=1*new Date;o=a.createElement(u),n=a.getElementsByTagName(u)[0];o.async=1;o.src="https://oko.muz-tv.ru/t.js";n.parentNode.insertBefore(o,n)}(window,document,"script","oko");
-    oko('init', 'OC-1003-01');
-    </script>
+    </div>
 </div>
 
 <!-- Основная разметка сайта -->
